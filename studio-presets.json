@@ -1,4 +1,15 @@
 {
+  "参会准备（DeepSeek，合成会议资料）": {
+    "mode": "deepseek",
+    "meeting": { "title": "发布评审会议", "agenda": "核对移动端工具上线风险、负责人及回滚预案", "startAt": "2026-11-03T10:00:00+08:00" },
+    "notes": [{ "id": "release-042", "text": "合成验收资料：负责人林舟；移动端工具回传超时阈值为15秒，超过则停止本轮操作；发布前必须准备回滚开关。" }]
+  },
+  "信息巡检（DeepSeek，合成变更事件）": {
+    "mode": "deepseek",
+    "observation": { "sourceId": "release-status", "title": "移动工具发布状态", "content": "合成事件：上线时间从18:00推迟到20:00，新增阻断项：设备结果回传超时。" },
+    "previous": { "sourceId": "release-status", "title": "移动工具发布状态", "content": "合成基线：计划18:00上线，无阻断项。" },
+    "notes": [{ "id": "policy-731", "text": "合成验收规则RULE-731：上线延期超过30分钟或出现阻断项时建议提醒；仅文案修订保持安静。负责人林舟。" }]
+  },
   "延吉三日游（模拟，不联网）": {
     "config": { "destination": "延吉", "days": 3 },
     "mode": "mock"

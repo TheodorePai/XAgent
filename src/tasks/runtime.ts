@@ -8,22 +8,12 @@ import { taskView } from './view.js';
 
 export class TaskRuntime {
   readonly agents = new Map<string, Agent>();
-  private scopes = new Map<string, Scope>();
   private active = new Map<string, { owner: string; agentId: string; controller: AbortController; promise: Promise<void> }>();
   private closing = false;
   private timer: NodeJS.Timeout;
   constructor(readonly store: TaskStore, mastra: Mastra) {
-    const scope = (context: RequestContext) => {
-      const value = this.scopes.get(String(context.get('taskRunId')));
-      if (!value) throw new Error('TRUSTED_SCOPE_REQUIRED');
-      return value;
-    };
     for (const definition of store.definitions.values()) {
-      const mock = definition.fixture();
-      const agent = definition.createAgent({ scope, model: ({ requestContext }) => scope(requestContext).task.mode === 'mock' ? mock : {
-        id: `deepseek/${process.env.DEEPSEEK_MODEL || 'deepseek-flash'}` as `${string}/${string}`,
-        apiKey: process.env.DEEPSEEK_API_KEY!, api: 'chat' as const,
-        url: process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1' } });
+      const agent = definition.createAgent();
       this.agents.set(definition.id, agent); mastra.addAgent(agent);
     }
     this.store.interruptRuns();
@@ -44,14 +34,14 @@ export class TaskRuntime {
   }
   private async run(task: Task, controller: AbortController) {
     const id = randomUUID(), startedAt = new Date().toISOString(), t0 = Date.now();
-    const value: Scope = { runId: id, task, trace: [] }; this.scopes.set(id, value);
+    const value: Scope = { runId: id, task, trace: [] };
     const definition = this.store.definition(task.agentId), agent = this.agents.get(task.agentId)!;
     const record = { id, taskId: task.id, ownerId: task.ownerId, agentId: task.agentId, agentVersion: task.agentVersion,
       revision: task.revision, mode: task.mode, startedAt, trace: value.trace };
     this.store.recordRun({ ...record, status: 'running' });
     let cleanup: (() => Promise<void>) | undefined;
     try {
-      const requestContext = new RequestContext(); requestContext.set('taskRunId', id);
+      const requestContext = new RequestContext();
       cleanup = definition.prepareContext?.(requestContext, value);
       const result = await agent.generate(JSON.stringify(definition.prompt(task)),
         { runId: id, requestContext, maxSteps: definition.limits?.maxSteps || 5, modelSettings: { maxRetries: 0 },
@@ -70,7 +60,7 @@ export class TaskRuntime {
       this.store.recordRun({ ...record, status: 'failed', error: definition.errorCode,
         errorType: error instanceof Error ? error.name : 'Error', endedAt: new Date().toISOString(), elapsedMs: Date.now() - t0 });
     } finally {
-      try { await cleanup?.(); await definition.afterRun?.(value); } finally { this.scopes.delete(id); }
+      await cleanup?.(); await definition.afterRun?.(value);
     }
   }
   cancel(id: string) { this.active.get(id)?.controller.abort(); }

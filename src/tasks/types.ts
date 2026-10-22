@@ -17,10 +17,6 @@ export interface Scope {
   task: Task; searched?: boolean; baselineRead?: boolean; proposal?: Record<string, unknown>;
   trace: { tool: string; sourceIds?: string[] }[];
 }
-export interface DefinitionContext {
-  scope: (context: RequestContext) => Scope;
-  model: ConstructorParameters<typeof Agent>[0]['model'];
-}
 export interface AgentDefinition {
   id: string; version: string; errorCode: string; surfacePrefix: string;
   subscription?: { watchTool: string; stopTool: string; eventType: string };
@@ -32,7 +28,7 @@ export interface AgentDefinition {
   configSchema: z.ZodType<Record<string, unknown>>;
   parseEvent(task: Task, input: unknown): TaskEvent;
   validateOutput(task: Task, input: unknown): Record<string, unknown>;
-  createAgent(context: DefinitionContext): Agent;
+  createAgent(): Agent;
   fixture(): MastraLanguageModelV2Mock;
   prompt(task: Task): unknown;
   display(task: Task): { title: string; summary: string; items: string[]; sourceIds: string[] };
