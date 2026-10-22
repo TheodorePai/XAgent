@@ -1,0 +1,376 @@
+{
+  "timestamp": "2026-10-22T09:39:09.664Z",
+  "sourceCommit": "0524c76",
+  "mode": "deepseek",
+  "model": "deepseek-flash",
+  "entrypoint": "Mastra standard HTTP /api/agents/travel-assistant/generate",
+  "passed": true,
+  "status": 200,
+  "finishReason": "stop",
+  "usage": {
+    "inputTokens": 49541,
+    "outputTokens": 4628,
+    "totalTokens": 54169,
+    "reasoningTokens": 1227,
+    "cachedInputTokens": 33792,
+    "raw": {
+      "inputTokens": {
+        "total": 16878,
+        "noCache": 6254,
+        "cacheRead": 10624
+      },
+      "outputTokens": {
+        "total": 960,
+        "text": 960,
+        "reasoning": 0
+      },
+      "raw": {
+        "prompt_tokens": 16878,
+        "completion_tokens": 960,
+        "total_tokens": 17838,
+        "prompt_tokens_details": {
+          "cached_tokens": 10624
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 10624,
+        "prompt_cache_miss_tokens": 6254
+      }
+    }
+  },
+  "response": "我会先搜索延吉的政府及公共来源信息。你的延吉三日游行程已提交完成。整体安排比较轻松，以朝鲜族文化、美食和步行游览为主。\n\n## 三日行程概览\n\n**第1天：市区初识、双语街区与冷面**\n- 上午：把行李放到住处后，步行游览延边大学周边，校门口的双语招牌“网红弹幕墙”适合拍照（校园能否进入需现场确认）\n- 午餐：延吉冷面，荞麦面、冰碗冷面配苹果片、牛肉、泡菜\n- 下午：延边博物馆，了解朝鲜族与延边地方史。这处信息来自网页的读者补充，开放与预约需核实\n- 傍晚至晚上：沿布尔哈通河散步，回来再看招牌亮灯，晚餐吃延吉烧烤\n\n**第2天：民俗园与帽儿山轻徒步**\n- 上午：中国朝鲜族民俗园，看青瓦白墙的传统民居、长鼓舞与农乐舞，也可租朝鲜族服饰拍照（网页写门票约30元，非实时）\n- 午餐：朝鲜族包饭，苏子叶包五花肉、米饭、蒜片、辣酱\n- 下午：打车去帽儿山国家森林公园，走常规步道登顶俯瞰全城，预留约2小时往返\n- 晚餐：参鸡汤，饭后在人民公园一带散步\n\n**第3天：早市、西市场与返程**\n- 清晨：水上市场（网页写约5:00—8:00，需核实），吃打糕、米肠、喝豆浆面\n- 上午：西市场一带买打糕、辣白菜等伴手礼，顺路看看延吉天主教堂外观\n- 中午：石锅拌饭或包饭收尾，按高铁或航班时间提前去延吉西站或朝阳川机场\n\n## 预算估算（非实时报价）\n不含往返大交通，2人3天大致 **1500—3000元**：住宿约120—500元/晚；餐饮人均约50—100元/餐、每日150—300元；公交约1元/次、出租起步约5元（均为网页参考价）。\n\n## 需要你确认或核实的事项\n- 你未提供出发地、具体日期和人数，我按“从国内主要城市高铁或飞机抵达、2人同行、中等舒适型、秋末出行”估算，往返大交通未计入\n- 门票、早市时间、表演场次、博物馆及教堂开放情况均为网页旧信息，出发前请以官方最新公告为准\n- 推荐餐厅来自作者个人体验，未核实营业、排队与价格，不作预订承诺\n- 帽儿山步道开放与防火封山状态需出发前确认\n\n## 来源\n- 腾讯新闻《去吉林的延吉玩了几天，说说我对这座小城的印象》：https://news.qq.com/rain/a/20260503A06UCZ00\n- 搜狐《去吉林的延吉玩了几天…》：https://www.sohu.com/a/881505828_121948409\n- 搜狐《延吉旅游超全攻略》：https://www.sohu.com/a/897484440_122324904\n\n## 图片（来自腾讯新闻延吉游记页面实际加载）\n- https://inews.gtimg.com/news_bt/O8QScZ1t5QqHPn5KrATcojLPrnVxTKjV7REmw9-02toGkAA/641（I-36641e0968bf）\n- https://inews.gtimg.com/news_bt/OXOdldzE1BNdCSZnLs6-Qi99ifdrBgRyCp5v2wqRSoh5AAA/641（I-76db85d8e39f）\n- https://inews.gtimg.com/news_bt/OlSTaBZGcFaajkDoKAF2ebJxuHS5GXgm07fhNi7PCSFg4AA/641（I-85f83e0e5b66）\n- https://inews.gtimg.com/news_bt/OF13iCLIvwUfqkNComesVs4dkJOtPjc_jv56D4zk2bynoAA/641（I-1f960b0d230d）\n\n图片源自网页抓取，标题为页面通用标注，未逐张核验拍摄对象，仅作氛围参考。",
+  "tools": [
+    {
+      "tool": "browserSearch"
+    },
+    {
+      "tool": "browserSearch"
+    },
+    {
+      "tool": "browserSearch"
+    },
+    {
+      "tool": "browserSearch"
+    },
+    {
+      "tool": "browserRead"
+    },
+    {
+      "tool": "browserRead"
+    },
+    {
+      "tool": "browserRead"
+    },
+    {
+      "tool": "browserImages"
+    },
+    {
+      "tool": "submitTripPlan"
+    }
+  ],
+  "artifact": {
+    "output": {
+      "summary": "以“朝鲜族文化+美食+轻松步行”为主线，把延吉市区和帽儿山串成一个不赶路的3日行程：第一天在延边大学一带建立城市印象、尝冷面并夜看双语招牌；第二天集中体验朝鲜族民俗园（服饰、长鼓舞、农乐舞）与帽儿山轻徒步；第三天以水上市场早市和西市场收尾，吃打糕、米肠再返程。景点与美食均来自实际读取的3篇延吉游记页面，步行段以市区为主，跨区移动建议短程打车或公交，时间仅为合理估算。",
+      "assumptions": [
+        "出发地未提供：假设从国内主要城市乘高铁至延吉西站或航班至延吉朝阳川国际机场，往返大交通不计入本计划与预算。",
+        "出行日期未提供：按今天2026-10-22之后的3天安排，偏秋末，实际天气与景区季节状态需出发前核实。",
+        "人数未提供：假设2人同行，便于分摊打车与餐饮。",
+        "预算未提供：按中等舒适型估算，不含往返大交通与购物。",
+        "节奏假设：休闲为主，每天步行控制在约1小时—2小时分段步行，避免连续爬山赶场。",
+        "住宿未提供：假设住在延边大学/百货大楼或人民公园附近，便于步行与打车。"
+      ],
+      "days": [
+        {
+          "day": 1,
+          "title": "延吉市区初识：延边大学、双语街区与冷面",
+          "activities": [
+            {
+              "period": "10:00-12:00（估算）",
+              "plan": "抵达后先到住处放行李，步行逛延边大学周边。页面提到校园内有双语路牌、朝鲜语广播，校门口是双语招牌集中的“网红弹幕墙”，适合慢走拍照；校园是否对游客开放需现场核实，不能进入时在周边街区步行即可。",
+              "sourceIds": [
+                "S-8e76f448fb22",
+                "S-403564c50a87"
+              ]
+            },
+            {
+              "period": "12:00-13:30",
+              "plan": "午餐吃延吉冷面：网页推荐荞麦面、冰碗冷面，配苹果片、牛肉、泡菜；提到的店名有服务大楼冷面（延大店）、顺姬冷面，属作者个人推荐，排队与营业情况需核实。",
+              "sourceIds": [
+                "S-403564c50a87",
+                "S-8e76f448fb22"
+              ]
+            },
+            {
+              "period": "14:00-16:00",
+              "plan": "步行或短程打车到延边博物馆了解朝鲜族与延边地方史。该馆在页面读者补充中被提到“可预约、带身份证现场预约”，开放时间与预约方式需以官方渠道核实，若闭馆改逛附近街区或咖啡馆。",
+              "sourceIds": [
+                "S-8e76f448fb22"
+              ]
+            },
+            {
+              "period": "17:00-20:00",
+              "plan": "傍晚沿布尔哈通河散步，天黑后回到延边大学门口看双语招牌亮灯，再吃一顿延吉烧烤（黄牛肉、明太鱼、板筋等，朝鲜族酱料为特色）。网页提到金博士炭烤、大朴家烤肉，均为参考，不作实时等位与价格承诺。",
+              "sourceIds": [
+                "S-8e76f448fb22",
+                "S-403564c50a87"
+              ]
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "title": "朝鲜族民俗园与帽儿山轻徒步",
+          "activities": [
+            {
+              "period": "09:00-11:30",
+              "plan": "前往中国朝鲜族民俗园，按页面描述可看青瓦白墙的传统民居、长鼓舞与农乐舞表演，也可租朝鲜族服饰拍照；网页写门票约30元（非实时价格，需核实），表演场次以当日公告为准。",
+              "sourceIds": [
+                "S-6de58eda39d3",
+                "S-403564c50a87"
+              ]
+            },
+            {
+              "period": "11:45-13:00",
+              "plan": "午餐吃朝鲜族包饭：苏子叶或白菜叶包五花肉、米饭、蒜片、辣酱，可加生腌酱蟹。网页提到的元奶奶包饭、吴氏包饭仅作参考，价格与营业需核实。",
+              "sourceIds": [
+                "S-403564c50a87"
+              ]
+            },
+            {
+              "period": "14:00-16:30",
+              "plan": "打车到帽儿山国家森林公园，走常规登山步道到山顶俯瞰延吉城区与布尔哈通河。页面称山不高、绿树成荫、爬起来比较舒服，按轻松节奏预留约2小时往返；步道开放与防火封山情况需出发前核实。",
+              "sourceIds": [
+                "S-6de58eda39d3",
+                "S-8e76f448fb22"
+              ]
+            },
+            {
+              "period": "17:30-19:30",
+              "plan": "晚餐喝参鸡汤（鸡腹填糯米、红枣、人参，先喝汤再拆鸡肉蘸椒盐），网页提到张师傅参鸡汤为多年老店，属推荐信息，需核实营业与排队。饭后可在人民公园一带散步后回酒店。",
+              "sourceIds": [
+                "S-403564c50a87",
+                "S-6de58eda39d3"
+              ]
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "title": "水上市场早市、西市场与返程",
+          "activities": [
+            {
+              "period": "06:30-08:30",
+              "plan": "早起逛水上市场（页面写每天约5:00-8:00，时间需核实）：现场打糕、米肠、酱菜、明太鱼，可看打糕捶打过程，顺便吃一碗豆浆面当早餐；早市人多拥挤，注意随身物品。",
+              "sourceIds": [
+                "S-8e76f448fb22",
+                "S-6de58eda39d3"
+              ]
+            },
+            {
+              "period": "09:00-10:30",
+              "plan": "步行至西市场一带逛朝鲜族商品与干货，页面提到西市场一楼现蒸米肠最香，可买打糕、辣白菜等带走；购物比价后再买，避免在景区门口集中采购。",
+              "sourceIds": [
+                "S-403564c50a87",
+                "S-6de58eda39d3"
+              ]
+            },
+            {
+              "period": "10:40-11:40",
+              "plan": "顺路看延吉天主教堂外观（页面称建于1911年，为当地较大基督教活动场所，日落光线好），白天只做短暂停留与拍照，是否可入内需现场核实；随后回酒店退房。",
+              "sourceIds": [
+                "S-8e76f448fb22",
+                "S-403564c50a87"
+              ]
+            },
+            {
+              "period": "12:00-14:30",
+              "plan": "午餐吃石锅拌饭或包饭收尾，按航班或高铁时间提前出发去机场/延吉西站（机场距市区约5公里为页面信息，实际车程与值机时间需自行核实），结束3日行程。",
+              "sourceIds": [
+                "S-6de58eda39d3",
+                "S-403564c50a87"
+              ]
+            }
+          ]
+        }
+      ],
+      "budgetEstimate": "按中等舒适型估算，不含往返大交通：住宿约120—500元/晚（经济型至四星，网页参考区间，需核实）；餐饮人均约50—100元/餐、每日约150—300元；市内公交约1元/次、出租起步约5元（页面参考，非实时）；门票参考民俗园约30元、恐龙博物馆约50元（未安排）。3天2人合计大致1500—3000元，属估算，非实时报价。",
+      "notes": [
+        "资料来源为本轮实际读取的3篇延吉游记（腾讯新闻1篇、搜狐2篇，发布时间2025—2026年），属媒体/个人体验内容，非官方公告。",
+        "文中门票（民俗园约30元等）、公交与出租价格、早市时间（约5:00—8:00）均为网页旧信息，出行前需以景区和交通部门最新公告核实。",
+        "民俗园表演场次、延边博物馆与天主教堂开放及预约要求未核实，可能因季节、维护临时调整。",
+        "推荐餐厅与店铺为原作者个人意见，未做实时营业、排队与价格核验，不作预订或价格承诺。",
+        "天气、红叶期与帽儿山步道开放状态未核实；秋末早晚温差大，需自行查看预报并备保暖衣物。",
+        "图片来自腾讯新闻延吉游记页面实际加载内容，说明为网页标题，未逐张核验拍摄对象，仅作氛围参考。"
+      ],
+      "sourceIds": [
+        "S-8e76f448fb22",
+        "S-403564c50a87",
+        "S-6de58eda39d3"
+      ],
+      "imageIds": [
+        "I-36641e0968bf",
+        "I-76db85d8e39f",
+        "I-85f83e0e5b66",
+        "I-1f960b0d230d"
+      ],
+      "sources": [
+        {
+          "id": "S-8e76f448fb22",
+          "title": "去吉林的延吉玩了几天，说说我对这座小城的印象，全是心里话_腾讯新闻",
+          "url": "https://news.qq.com/rain/a/20260503A06UCZ00",
+          "kind": "page",
+          "fetchedAt": "2026-10-22T09:39:34.001Z"
+        },
+        {
+          "id": "S-403564c50a87",
+          "title": "去吉林的延吉玩了几天，说说我对这座小城的印象，全是心里话_城市_冷面_长春一汽",
+          "url": "https://www.sohu.com/a/881505828_121948409",
+          "kind": "page",
+          "fetchedAt": "2026-10-22T09:39:38.542Z"
+        },
+        {
+          "id": "S-6de58eda39d3",
+          "title": "延吉旅游超全攻略：第一次去延吉应该怎么玩？看完这篇就够了！_打糕_自然_交响",
+          "url": "https://www.sohu.com/a/897484440_122324904",
+          "kind": "page",
+          "fetchedAt": "2026-10-22T09:39:35.993Z"
+        }
+      ],
+      "images": [
+        {
+          "id": "I-36641e0968bf",
+          "url": "https://inews.gtimg.com/news_bt/O8QScZ1t5QqHPn5KrATcojLPrnVxTKjV7REmw9-02toGkAA/641",
+          "sourceId": "S-8e76f448fb22",
+          "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+          "caption": "图片",
+          "width": 960,
+          "height": 719
+        },
+        {
+          "id": "I-76db85d8e39f",
+          "url": "https://inews.gtimg.com/news_bt/OXOdldzE1BNdCSZnLs6-Qi99ifdrBgRyCp5v2wqRSoh5AAA/641",
+          "sourceId": "S-8e76f448fb22",
+          "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+          "caption": "图片",
+          "width": 960,
+          "height": 548
+        },
+        {
+          "id": "I-85f83e0e5b66",
+          "url": "https://inews.gtimg.com/news_bt/OlSTaBZGcFaajkDoKAF2ebJxuHS5GXgm07fhNi7PCSFg4AA/641",
+          "sourceId": "S-8e76f448fb22",
+          "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+          "caption": "图片",
+          "width": 960,
+          "height": 1254
+        },
+        {
+          "id": "I-1f960b0d230d",
+          "url": "https://inews.gtimg.com/news_bt/OF13iCLIvwUfqkNComesVs4dkJOtPjc_jv56D4zk2bynoAA/641",
+          "sourceId": "S-8e76f448fb22",
+          "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+          "caption": "图片",
+          "width": 960,
+          "height": 640
+        }
+      ],
+      "destination": "延吉"
+    },
+    "view": {
+      "publishedRevision": 1,
+      "surfaceId": "travel-preview-86eeeb85-70ca-4558-a95c-bf827a103894",
+      "protocol": "v0.9.1",
+      "messages": [
+        {
+          "version": "v0.9.1",
+          "createSurface": {
+            "surfaceId": "travel-preview-86eeeb85-70ca-4558-a95c-bf827a103894",
+            "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateComponents": {
+            "surfaceId": "travel-preview-86eeeb85-70ca-4558-a95c-bf827a103894",
+            "components": [
+              {
+                "id": "root",
+                "component": "Column",
+                "children": [
+                  "title",
+                  "summary",
+                  "checklist",
+                  "sources"
+                ]
+              },
+              {
+                "id": "title",
+                "component": "Text",
+                "text": {
+                  "path": "/title"
+                },
+                "variant": "h2"
+              },
+              {
+                "id": "summary",
+                "component": "Text",
+                "text": {
+                  "path": "/summary"
+                }
+              },
+              {
+                "id": "checklist",
+                "component": "Text",
+                "text": {
+                  "path": "/checklist"
+                }
+              },
+              {
+                "id": "sources",
+                "component": "Text",
+                "text": {
+                  "path": "/sources"
+                },
+                "variant": "caption"
+              }
+            ]
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateDataModel": {
+            "surfaceId": "travel-preview-86eeeb85-70ca-4558-a95c-bf827a103894",
+            "path": "/",
+            "value": {
+              "title": "延吉出行计划",
+              "summary": "以“朝鲜族文化+美食+轻松步行”为主线，把延吉市区和帽儿山串成一个不赶路的3日行程：第一天在延边大学一带建立城市印象、尝冷面并夜看双语招牌；第二天集中体验朝鲜族民俗园（服饰、长鼓舞、农乐舞）与帽儿山轻徒步；第三天以水上市场早市和西市场收尾，吃打糕、米肠再返程。景点与美食均来自实际读取的3篇延吉游记页面，步行段以市区为主，跨区移动建议短程打车或公交，时间仅为合理估算。",
+              "checklist": "1. 第1天 延吉市区初识：延边大学、双语街区与冷面：10:00-12:00（估算） 抵达后先到住处放行李，步行逛延边大学周边。页面提到校园内有双语路牌、朝鲜语广播，校门口是双语招牌集中的“网红弹幕墙”，适合慢走拍照；校园是否对游客开放需现场核实，不能进入时在周边街区步行即可。；12:00-13:30 午餐吃延吉冷面：网页推荐荞麦面、冰碗冷面，配苹果片、牛肉、泡菜；提到的店名有服务大楼冷面（延大店）、顺姬冷面，属作者个人推荐，排队与营业情况需核实。；14:00-16:00 步行或短程打车到延边博物馆了解朝鲜族与延边地方史。该馆在页面读者补充中被提到“可预约、带身份证现场预约”，开放时间与预约方式需以官方渠道核实，若闭馆改逛附近街区或咖啡馆。；17:00-20:00 傍晚沿布尔哈通河散步，天黑后回到延边大学门口看双语招牌亮灯，再吃一顿延吉烧烤（黄牛肉、明太鱼、板筋等，朝鲜族酱料为特色）。网页提到金博士炭烤、大朴家烤肉，均为参考，不作实时等位与价格承诺。\n2. 第2天 朝鲜族民俗园与帽儿山轻徒步：09:00-11:30 前往中国朝鲜族民俗园，按页面描述可看青瓦白墙的传统民居、长鼓舞与农乐舞表演，也可租朝鲜族服饰拍照；网页写门票约30元（非实时价格，需核实），表演场次以当日公告为准。；11:45-13:00 午餐吃朝鲜族包饭：苏子叶或白菜叶包五花肉、米饭、蒜片、辣酱，可加生腌酱蟹。网页提到的元奶奶包饭、吴氏包饭仅作参考，价格与营业需核实。；14:00-16:30 打车到帽儿山国家森林公园，走常规登山步道到山顶俯瞰延吉城区与布尔哈通河。页面称山不高、绿树成荫、爬起来比较舒服，按轻松节奏预留约2小时往返；步道开放与防火封山情况需出发前核实。；17:30-19:30 晚餐喝参鸡汤（鸡腹填糯米、红枣、人参，先喝汤再拆鸡肉蘸椒盐），网页提到张师傅参鸡汤为多年老店，属推荐信息，需核实营业与排队。饭后可在人民公园一带散步后回酒店。\n3. 第3天 水上市场早市、西市场与返程：06:30-08:30 早起逛水上市场（页面写每天约5:00-8:00，时间需核实）：现场打糕、米肠、酱菜、明太鱼，可看打糕捶打过程，顺便吃一碗豆浆面当早餐；早市人多拥挤，注意随身物品。；09:00-10:30 步行至西市场一带逛朝鲜族商品与干货，页面提到西市场一楼现蒸米肠最香，可买打糕、辣白菜等带走；购物比价后再买，避免在景区门口集中采购。；10:40-11:40 顺路看延吉天主教堂外观（页面称建于1911年，为当地较大基督教活动场所，日落光线好），白天只做短暂停留与拍照，是否可入内需现场核实；随后回酒店退房。；12:00-14:30 午餐吃石锅拌饭或包饭收尾，按航班或高铁时间提前出发去机场/延吉西站（机场距市区约5公里为页面信息，实际车程与值机时间需自行核实），结束3日行程。",
+              "sources": "S-8e76f448fb22, S-403564c50a87, S-6de58eda39d3",
+              "revision": 1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "checks": {
+    "realModel": true,
+    "realBrowser": true,
+    "pages": 3,
+    "days": 3,
+    "images": 4,
+    "a2uiMessages": 3
+  },
+  "remainingBrowserPids": [],
+  "elapsedMs": 52221,
+  "productionDataUnchanged": true,
+  "productionTaskCount": 14,
+  "productionActiveTasks": 0,
+  "productionServiceHealthy": true,
+  "environmentNotes": [
+    "Initial Studio bundling exceeded Node default heap; no model call was made in that attempt.",
+    "Built with a 768 MiB Node heap and one build worker, then ran generated Mastra API directly without development watcher.",
+    "The successful real request ran under a 768 MiB container limit with an isolated data directory; model credentials stayed on the server."
+  ]
+}

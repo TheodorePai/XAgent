@@ -64,8 +64,22 @@ Studio CLI / Memory 是开发依赖；现有 Docker 部署继续运行任务 API
 
 2026-10-22：`npm.cmd test` 共 34 项通过，其中 8 项为本次新增的原生 Agent / Studio 入口测试。标准 HTTP 验收通过：5 次工具调用、3 天行程、2 张模拟图片、3 条 A2UI 消息，默认正式任务文件摘要未变化。结构化报告见 [studio-verification.json](studio-verification.json)。
 
-通过实际 Studio 页面发送了两轮规划要求，均显示 5 个成功工具步骤和对应回复；展开 SubmitTripPlan 可见完整 artifact，刷新页面后历史仍保留。此轮是 mock 验收，没有重跑 DeepSeek 或真实 Chromium，也没有修改服务器部署。界面记录：
+通过实际 Studio 页面发送了两轮规划要求，均显示 5 个成功工具步骤和对应回复；展开 SubmitTripPlan 可见完整 artifact，刷新页面后历史仍保留。上述首轮是 mock 验收；随后补做的真实验证见下节。界面记录：
 
 ![Studio 中的出行助手模拟回复](studio-preview.png)
+
+## 改造后的真实验证
+
+2026-10-22 在 tencent-server 的独立验证目录、隔离数据和临时容器中，使用提交 `0524c76` 的源码和锁文件构建标准 Mastra 服务。密钥通过服务器已有的 env 文件注入临时容器，没有复制回本机或写入报告。
+
+通过 `POST /api/agents/travel-assistant/generate` 执行一轮 `mode=deepseek`：DeepSeek `deepseek-flash` 实际调用 AgentBrowser / Chromium。共 4 次搜索、3 次页面读取、1 次图片整理、1 次计划提交；耗时 52.221 秒，得到 3 天行程、3 个来源页面、4 张网页加载图片及 3 条通过校验的 A2UI 消息。Mastra 汇总用量为 54,169 tokens。模型最终回复及原始结果见 [真实验证报告](studio-real-verification.json)、[可读行程](yanji-studio-real.md)。
+
+3 个来源页面来自腾讯和搜狐，其中两个页面转载了同一篇文章；这证明真实调用链可运行，不代表旅行信息已由三个独立来源交叉核验。图片说明来自网页，未逐张目视核验。
+
+请求结束后检查临时容器的 `/proc`，未发现 Chromium / agent-browser 残留进程。正式服务的 14 个任务、运行记录及数据库内容摘要与验证前一致，活跃任务和运行中记录均为 0。验证容器均已停止并移除；正式服务未更新或重启。
+
+首次启动遇到 Studio 构建超过 Node 默认约 512 MiB 堆上限，尚未发出模型请求。随后在独立构建进程中使用 768 MiB 堆、单构建并发完成构建，再直接运行 `.mastra/output/index.mjs`，不同时保留开发构建监听器。成功的真实请求运行在 768 MiB 容器预算内；应区分开发构建开销与 Agent API 的运行开销。
+
+真实验证脚本是 `scripts/verify-studio-real.mjs`，供带有 Chromium、服务器端密钥和标准 Mastra 服务的隔离容器执行；默认只请求本机 4411 端口、只运行一轮，不会暗中回退 mock。报告写入容器 `/app/data/studio-real-verification.json`。复现时应使用独立数据目录，不指向正式任务数据。
 
 参考：[Studio](https://mastra.ai/docs/studio/overview)、[RequestContext](https://mastra.ai/docs/server/request-context)、[Processors](https://mastra.ai/docs/agents/processors)。
