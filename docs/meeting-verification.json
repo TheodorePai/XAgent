@@ -1,0 +1,974 @@
+{
+  "verifiedAt": "2026-10-22T02:23:14.927314+00:00",
+  "mode": "deepseek",
+  "device": "simulated-calendar",
+  "retrieval": "task-scoped-fixture-library",
+  "rendererTested": false,
+  "checks": [
+    {
+      "name": "one_agent_two_users_four_isolated_tasks",
+      "passed": true,
+      "outputs": [
+        {
+          "taskId": "19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "brief": {
+            "summary": "本次会议「预算会-0-0」（2026-10-30 10:00）议程为核对预算上限并制定准备清单。检索到的唯一授权资料明确：本次预算上限为 31 万元，独特编号 ONLY-U0-T0-b75152（编号按原样保留以便核对）。会前建议：请以 31 万元作为唯一上限口径，会上先确认该数额是否仍为最终版，再逐项核对拟列支出是否超限；资料库中暂无其他预算明细或分项数据，分项拆分与超支应对方案需会前由相关同事补充提供，无法据此编造具体条目。涉及外部系统提交或付款的操作不在本次准备范围内。",
+            "checklist": [
+              "准备材料时引用预算上限 31 万元，并标注独特编号 ONLY-U0-T0-b75152，确保与资料原文一致",
+              "会前向财务/预算归口人确认 31 万元是否为最终审批上限，若已调整需带新版依据",
+              "汇总拟提交的支出或预算分项，逐项标注金额并合计，与 31 万元上限对照检查",
+              "对可能超限的部分准备压缩或延后方案，并注明对应金额",
+              "整理资料缺口清单：目前仅有上限数据，缺少明细与历史执行数，会上说明补充计划",
+              "会前发出议程与核对表给参会人，,明确需逐项确认的责任人",
+              "会议记录中保留编号 ONLY-U0-T0-b75152 与 31 万元数额，便于会后核对"
+            ],
+            "sourceIds": [
+              "ONLY-U0-T0-b75152"
+            ]
+          },
+          "run": {
+            "id": "a36a1a43-0f8b-4308-9e31-b24c3ad815d3",
+            "taskId": "19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+            "ownerId": "alice",
+            "agentId": "meeting-prep",
+            "agentVersion": "1",
+            "revision": 1,
+            "mode": "deepseek",
+            "startedAt": "2026-10-22T02:23:15.071Z",
+            "trace": [
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "ONLY-U0-T0-b75152"
+                ]
+              },
+              {
+                "tool": "submitBrief",
+                "sourceIds": [
+                  "ONLY-U0-T0-b75152"
+                ]
+              }
+            ],
+            "status": "completed",
+            "mastraRunId": "a36a1a43-0f8b-4308-9e31-b24c3ad815d3",
+            "endedAt": "2026-10-22T02:23:20.836Z",
+            "elapsedMs": 5765,
+            "usage": {
+              "inputTokens": 3101,
+              "outputTokens": 831,
+              "totalTokens": 3932,
+              "reasoningTokens": 80,
+              "cachedInputTokens": 1664,
+              "raw": {
+                "inputTokens": {
+                  "total": 1411,
+                  "noCache": 515,
+                  "cacheRead": 896
+                },
+                "outputTokens": {
+                  "total": 288,
+                  "text": 288,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 1411,
+                  "completion_tokens": 288,
+                  "total_tokens": 1699,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 896
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 896,
+                  "prompt_cache_miss_tokens": 515
+                }
+              }
+            }
+          }
+        },
+        {
+          "taskId": "ec48824a-69f0-4308-a7f7-04d8847c9e4d",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "brief": {
+            "summary": "本次「预算会-0-1」将于 2026-10-30 10:00 召开，议程为「核对预算上限并制定准备清单」。检索到的授权资料仅有一条：资料中载明本次预算上限为 32 万元，并给出独特编号 ONLY-U0-T1-ec9089（编号应原样保留以便会上核对）。会前建议：以 32 万元为唯一上限基准，围绕该额度准备分项预算与核对口径；会议开场先由资料编号 ONLY-U0-T1-ec9089 核对上限数额（32 万元）是否与会前确认版本一致，再逐项对照准备清单确认材料是否齐备。注意：本任务资料库仅返回该 1 条资料，未提供预算明细、分项科目或历史对比数据，相关议题需在会上或由与会人补充，不要臆测具体分项金额。",
+            "checklist": [
+              "确认并携带资料编号 ONLY-U0-T1-ec9089，会上原样引用以便核对",
+              "以 32 万元为上限整理预算表，标注各分项合计与上限的差额",
+              "核对预算表各分项加总是否等于或不超过 32 万元，列出超限/结余情况",
+              "准备准备清单（checklist）本身的纸质或电子版，逐项打勾确认",
+              "标注资料缺口：资料库未提供预算明细与历史数据，提前向相关同事索取",
+              "确认会议时间 2026-10-30 10:00 及参会人，提前发送议程与预算上限 32 万元",
+              "会后记录上限确认结论及待补事项负责人与时限"
+            ],
+            "sourceIds": [
+              "ONLY-U0-T1-ec9089"
+            ]
+          },
+          "run": {
+            "id": "ab880a89-6c76-4579-8129-9c5eaddb2101",
+            "taskId": "ec48824a-69f0-4308-a7f7-04d8847c9e4d",
+            "ownerId": "alice",
+            "agentId": "meeting-prep",
+            "agentVersion": "1",
+            "revision": 1,
+            "mode": "deepseek",
+            "startedAt": "2026-10-22T02:23:20.914Z",
+            "trace": [
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "ONLY-U0-T1-ec9089"
+                ]
+              },
+              {
+                "tool": "submitBrief",
+                "sourceIds": [
+                  "ONLY-U0-T1-ec9089"
+                ]
+              }
+            ],
+            "status": "completed",
+            "mastraRunId": "ab880a89-6c76-4579-8129-9c5eaddb2101",
+            "endedAt": "2026-10-22T02:23:27.344Z",
+            "elapsedMs": 6430,
+            "usage": {
+              "inputTokens": 3167,
+              "outputTokens": 1031,
+              "totalTokens": 4198,
+              "reasoningTokens": 115,
+              "cachedInputTokens": 2176,
+              "raw": {
+                "inputTokens": {
+                  "total": 1474,
+                  "noCache": 578,
+                  "cacheRead": 896
+                },
+                "outputTokens": {
+                  "total": 427,
+                  "text": 427,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 1474,
+                  "completion_tokens": 427,
+                  "total_tokens": 1901,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 896
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 896,
+                  "prompt_cache_miss_tokens": 578
+                }
+              }
+            }
+          }
+        },
+        {
+          "taskId": "01a8e32d-dfdd-4809-8dca-2fdb0cff06d9",
+          "ownerId": "bob",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "brief": {
+            "summary": "本次会议「预算会-1-0」议题为核对预算上限并制定准备清单。授权资料显示：本次预算上限为 41 万元，对应独特编号 ONLY-U1-T0-024026（该编号需原样保留以便核对）。会前建议：以 41 万元为唯一上限基准，逐项核对各项预算申请是否超限，并把编号 ONLY-U1-T0-024026 标注在核对表首行，确保与会各方引用同一版本数据。说明：本次检索仅命中 1 条资料，未提供预算明细科目、历史执行数或审批口径等其他依据，相关讨论需在会上现场确认。",
+            "checklist": [
+              "将编号 ONLY-U1-T0-024026 与预算上限 41 万元原样写入核对表首行，作为唯一基准",
+              "整理本次各部门预算申请数额，逐项比对是否超出 41 万元上限并标注差额",
+              "准备会上待确认事项清单（预算明细科目、历史执行数、审批口径等资料未覆盖内容）",
+              "会议开始前与主持人确认预算上限 41 万元是否为最终版本"
+            ],
+            "sourceIds": [
+              "ONLY-U1-T0-024026"
+            ]
+          },
+          "run": {
+            "id": "51dc53c5-32e5-42b7-a49e-8e40f112d1a6",
+            "taskId": "01a8e32d-dfdd-4809-8dca-2fdb0cff06d9",
+            "ownerId": "bob",
+            "agentId": "meeting-prep",
+            "agentVersion": "1",
+            "revision": 1,
+            "mode": "deepseek",
+            "startedAt": "2026-10-22T02:23:15.171Z",
+            "trace": [
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "ONLY-U1-T0-024026"
+                ]
+              },
+              {
+                "tool": "submitBrief",
+                "sourceIds": [
+                  "ONLY-U1-T0-024026"
+                ]
+              }
+            ],
+            "status": "completed",
+            "mastraRunId": "51dc53c5-32e5-42b7-a49e-8e40f112d1a6",
+            "endedAt": "2026-10-22T02:23:19.306Z",
+            "elapsedMs": 4135,
+            "usage": {
+              "inputTokens": 2986,
+              "outputTokens": 681,
+              "totalTokens": 3667,
+              "reasoningTokens": 47,
+              "cachedInputTokens": 1664,
+              "raw": {
+                "inputTokens": {
+                  "total": 1297,
+                  "noCache": 401,
+                  "cacheRead": 896
+                },
+                "outputTokens": {
+                  "total": 252,
+                  "text": 252,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 1297,
+                  "completion_tokens": 252,
+                  "total_tokens": 1549,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 896
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 896,
+                  "prompt_cache_miss_tokens": 401
+                }
+              }
+            }
+          }
+        },
+        {
+          "taskId": "da98e4c4-d2e0-4e52-85f7-ba289fb69085",
+          "ownerId": "bob",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "brief": {
+            "summary": "本次会议为「预算会-1-1」，时间为 2026-10-30 10:00（+08:00），最新议程为「核对预算上限并制定准备清单」，你的关注点是会前准备与预算上限的核对。\n\n资料检索结果（任务授权资料库）仅有一条相关记录，编号 ONLY-U1-T1-1fdbbf，其中明确本次预算上限为 42 万元。因此会前核心结论是：以 42 万元作为本次预算的硬性上限，会议中所有预算条目须在该额度内核对，编号 ONLY-U1-T1-1fdbbf 建议原样引用以便逐条比对。\n\n会前建议：\n1. 将议程拆为两段推进——前半段核对预算上限（确认 42 万元口径与适用范围），后半段据此形成准备清单，避免两个议题交叉讨论。\n2. 按 42 万元上限准备预算明细，标注各分项金额及合计，并预留可压缩项，便于在上限内快速调整。\n3. 资料库中除上述一条记录外未提供其他预算明细或历史依据，会议事实性数据请以现场确认为准；如需更多支撑材料，请在会前向相关同事索取，不要自行补充外部数据。",
+            "checklist": [
+              "核对并记录本次预算上限 42 万元，确认其口径（是否含税、是否含已发生支出）与适用周期",
+              "在预算表首行标注资料独特编号 ONLY-U1-T1-1fdbbf，供会上原样比对",
+              "整理各分项预算金额并汇总合计，检查是否超出 42 万元，标出超出或临界项",
+              "为每个分项准备 1-2 个可压缩方案，确保调整后仍落在 42 万元以内",
+              "就资料库仅有 1 条记录的情况说明数据缺口，会前向相关同事索取补充预算明细",
+              "按「先核对上限、后定准备清单」的顺序编写会议议程时间分配与推进人",
+              "会前一天发送会议材料与 42 万元上限口径说明，请参会人预读并标注异议",
+              "会后当场确认准备清单的责任人与截止时间，形成可跟踪的待办记录"
+            ],
+            "sourceIds": [
+              "ONLY-U1-T1-1fdbbf"
+            ]
+          },
+          "run": {
+            "id": "e87dee1d-5362-4a11-a23f-1138df2ec52f",
+            "taskId": "da98e4c4-d2e0-4e52-85f7-ba289fb69085",
+            "ownerId": "bob",
+            "agentId": "meeting-prep",
+            "agentVersion": "1",
+            "revision": 1,
+            "mode": "deepseek",
+            "startedAt": "2026-10-22T02:23:19.309Z",
+            "trace": [
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "ONLY-U1-T1-1fdbbf"
+                ]
+              },
+              {
+                "tool": "submitBrief",
+                "sourceIds": [
+                  "ONLY-U1-T1-1fdbbf"
+                ]
+              }
+            ],
+            "status": "completed",
+            "mastraRunId": "e87dee1d-5362-4a11-a23f-1138df2ec52f",
+            "endedAt": "2026-10-22T02:23:26.596Z",
+            "elapsedMs": 7287,
+            "usage": {
+              "inputTokens": 3376,
+              "outputTokens": 1165,
+              "totalTokens": 4541,
+              "reasoningTokens": 199,
+              "cachedInputTokens": 2176,
+              "raw": {
+                "inputTokens": {
+                  "total": 1681,
+                  "noCache": 785,
+                  "cacheRead": 896
+                },
+                "outputTokens": {
+                  "total": 356,
+                  "text": 356,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 1681,
+                  "completion_tokens": 356,
+                  "total_tokens": 2037,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 896
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 896,
+                  "prompt_cache_miss_tokens": 785
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "cross_user_access_and_cross_subscription_token_rejected",
+      "passed": true
+    },
+    {
+      "name": "user_instruction_refreshes_same_surface",
+      "passed": true,
+      "brief": {
+        "summary": "本次会议「预算会-0-0」议题为核对预算上限并制定准备清单。检索到的唯一资料显示：本次预算上限为 31 万元（资料编号 ONLY-U0-T0-b75152）。据此提示主要**预算风险**：上限仅 31 万元，一旦各项支出累计超出即无追加空间，需在会上逐项对齐总额并预留不可预见费用。建议会前把各项预算加总与 31 万元上限做一次比对，标出超出或接近上限的项目，并准备压缩方案。资料库内容有限，未检索到其他预算明细、历史执行数据或供应商报价，相关结论请以会上确认的信息为准。用户要求的“预算风险”关注点及资料编号已在此明确保留。",
+        "checklist": [
+          "按 31 万元上限重新核算各项预算合计，列出与上限的差额",
+          "标注接近或超出上限的单项，并各自准备一版压缩/延期方案",
+          "预留在上限内的不可预见费用比例，确认由谁审批",
+          "整理资料编号 ONLY-U0-T0-b75152 对应的预算上限说明，作为核对依据",
+          "补充缺失的预算明细、历史执行数据与报价材料（本次检索未找到）",
+          "会上确认本次预算上限口径（是否含税、是否含人力）"
+        ],
+        "sourceIds": [
+          "ONLY-U0-T0-b75152"
+        ]
+      },
+      "update": {
+        "publishedRevision": 2,
+        "surfaceId": "meeting-19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+        "protocol": "v0.9.1",
+        "messages": [
+          {
+            "version": "v0.9.1",
+            "updateDataModel": {
+              "surfaceId": "meeting-19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+              "path": "/",
+              "value": {
+                "title": "预算会-0-0",
+                "summary": "本次会议「预算会-0-0」议题为核对预算上限并制定准备清单。检索到的唯一资料显示：本次预算上限为 31 万元（资料编号 ONLY-U0-T0-b75152）。据此提示主要**预算风险**：上限仅 31 万元，一旦各项支出累计超出即无追加空间，需在会上逐项对齐总额并预留不可预见费用。建议会前把各项预算加总与 31 万元上限做一次比对，标出超出或接近上限的项目，并准备压缩方案。资料库内容有限，未检索到其他预算明细、历史执行数据或供应商报价，相关结论请以会上确认的信息为准。用户要求的“预算风险”关注点及资料编号已在此明确保留。",
+                "checklist": "1. 按 31 万元上限重新核算各项预算合计，列出与上限的差额\n2. 标注接近或超出上限的单项，并各自准备一版压缩/延期方案\n3. 预留在上限内的不可预见费用比例，确认由谁审批\n4. 整理资料编号 ONLY-U0-T0-b75152 对应的预算上限说明，作为核对依据\n5. 补充缺失的预算明细、历史执行数据与报价材料（本次检索未找到）\n6. 会上确认本次预算上限口径（是否含税、是否含人力）",
+                "sources": "ONLY-U0-T0-b75152",
+                "revision": 2
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "event_refresh_deduplication_ordering_and_other_tasks_unchanged",
+      "passed": true,
+      "brief": {
+        "summary": "本次预算变更会议（2026-10-30 10:00）在原议程基础上追加议题“费用超支”。现有授权资料仅有 1 条：本次预算上限为 31 万元（编号 ONLY-U0-T0-b75152），可用于核对追加议题。据此，会前应重点评估预算风险：确认当前已发生费用与剩余额度（31 万元上限内）的差距，明确超支事项的金额、原因与责任方。除该条资料外，资料库无更多费用明细或历史预算版本，具体超支数据需在会上由相关人员补充，简报不代为推测。建议会议先由议题提出人说明超支事实，再对照 31 万元上限逐项确认调整方案与后续审批路径。",
+        "checklist": [
+          "会前向议题提出人索取“费用超支”的具体金额、科目与发生原因",
+          "对照预算上限 31 万元（编号 ONLY-U0-T0-b75152）计算剩余额度与缺口",
+          "准备预算调整方案（追加/调减/暂缓）并标注需审批层级",
+          "确认是否有资料库未收录的费用明细，会上补充说明",
+          "会后记录决议、责任人与生效时间，并更新预算台账"
+        ],
+        "sourceIds": [
+          "ONLY-U0-T0-b75152"
+        ]
+      }
+    },
+    {
+      "name": "restart_recovers_committed_event_and_surface_snapshot",
+      "passed": true,
+      "brief": {
+        "summary": "本次「重启后预算会」定于 2026-10-30 10:00（北京时间）召开，最新议程中新增议题「恢复核对」，请在中安排该议题的核对环节。会前核心信息：本次预算上限为 32 万元，资料独特编号 ONLY-U0-T1-ec9089（编号与数额请原样保留以便核对）。用户关注点为预算相关准备，建议会前确认预算上限 32 万元的口径与适用范围，并围绕「恢复核对」议题准备可逐项比对的数据，确保金额与编号能当场一一对应。现有检索到的会议资料仅此一条，未提供更细的预算分项、参会人名单或历史对比数据，建议会前向相关方补充索取，或在会上明确。资料中未包含任何需要执行的外部操作要求，本次仅准备会前材料，不代为执行其他操作。",
+        "checklist": [
+          "确认会议时间 2026-10-30 10:00 与议程，将新增议题「恢复核对」列入议程并排定时间",
+          "核对预算上限 32 万元的口径、适用范围与是否为税前/含税金额",
+          "准备「恢复核对」议题所需的逐项数据清单，便于与 32 万元上限逐条比对",
+          "在摘要及核对表中原样保留独特编号 ONLY-U0-T1-ec9089，避免转录错误",
+          "会前补充索取预算分项明细、参会人名单及上次预算会结论（当前资料未提供）",
+          "准备核对结果记录表，会上记录差异项与后续责任人",
+          "会后按「恢复核对」结论整理待办清单并确认复核人"
+        ],
+        "sourceIds": [
+          "ONLY-U0-T1-ec9089"
+        ]
+      }
+    },
+    {
+      "name": "pause_revokes_subscription_and_rejects_late_event",
+      "passed": true
+    }
+  ],
+  "initialA2ui": {
+    "publishedRevision": 1,
+    "surfaceId": "meeting-19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+    "protocol": "v0.9.1",
+    "messages": [
+      {
+        "version": "v0.9.1",
+        "createSurface": {
+          "surfaceId": "meeting-19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+          "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+        }
+      },
+      {
+        "version": "v0.9.1",
+        "updateComponents": {
+          "surfaceId": "meeting-19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+          "components": [
+            {
+              "id": "root",
+              "component": "Column",
+              "children": [
+                "title",
+                "summary",
+                "checklist",
+                "sources"
+              ]
+            },
+            {
+              "id": "title",
+              "component": "Text",
+              "text": {
+                "path": "/title"
+              },
+              "variant": "h2"
+            },
+            {
+              "id": "summary",
+              "component": "Text",
+              "text": {
+                "path": "/summary"
+              }
+            },
+            {
+              "id": "checklist",
+              "component": "Text",
+              "text": {
+                "path": "/checklist"
+              }
+            },
+            {
+              "id": "sources",
+              "component": "Text",
+              "text": {
+                "path": "/sources"
+              },
+              "variant": "caption"
+            }
+          ]
+        }
+      },
+      {
+        "version": "v0.9.1",
+        "updateDataModel": {
+          "surfaceId": "meeting-19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+          "path": "/",
+          "value": {
+            "title": "预算会-0-0",
+            "summary": "本次会议「预算会-0-0」（2026-10-30 10:00）议程为核对预算上限并制定准备清单。检索到的唯一授权资料明确：本次预算上限为 31 万元，独特编号 ONLY-U0-T0-b75152（编号按原样保留以便核对）。会前建议：请以 31 万元作为唯一上限口径，会上先确认该数额是否仍为最终版，再逐项核对拟列支出是否超限；资料库中暂无其他预算明细或分项数据，分项拆分与超支应对方案需会前由相关同事补充提供，无法据此编造具体条目。涉及外部系统提交或付款的操作不在本次准备范围内。",
+            "checklist": "1. 准备材料时引用预算上限 31 万元，并标注独特编号 ONLY-U0-T0-b75152，确保与资料原文一致\n2. 会前向财务/预算归口人确认 31 万元是否为最终审批上限，若已调整需带新版依据\n3. 汇总拟提交的支出或预算分项，逐项标注金额并合计，与 31 万元上限对照检查\n4. 对可能超限的部分准备压缩或延后方案，并注明对应金额\n5. 整理资料缺口清单：目前仅有上限数据，缺少明细与历史执行数，会上说明补充计划\n6. 会前发出议程与核对表给参会人，,明确需逐项确认的责任人\n7. 会议记录中保留编号 ONLY-U0-T0-b75152 与 31 万元数额，便于会后核对",
+            "sources": "ONLY-U0-T0-b75152",
+            "revision": 1
+          }
+        }
+      }
+    ]
+  },
+  "passed": true,
+  "elapsedSeconds": 32.452,
+  "runtime": {
+    "model": "deepseek-flash",
+    "baseHost": "api.deepseek.com",
+    "node": "v24.22.0"
+  },
+  "finalTasks": [
+    {
+      "id": "19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+      "ownerId": "alice",
+      "agentId": "meeting-prep",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 3,
+      "publishedRevision": 3,
+      "runs": [
+        {
+          "id": "a36a1a43-0f8b-4308-9e31-b24c3ad815d3",
+          "taskId": "19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T02:23:15.071Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "ONLY-U0-T0-b75152"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "ONLY-U0-T0-b75152"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "a36a1a43-0f8b-4308-9e31-b24c3ad815d3",
+          "endedAt": "2026-10-22T02:23:20.836Z",
+          "elapsedMs": 5765,
+          "usage": {
+            "inputTokens": 3101,
+            "outputTokens": 831,
+            "totalTokens": 3932,
+            "reasoningTokens": 80,
+            "cachedInputTokens": 1664,
+            "raw": {
+              "inputTokens": {
+                "total": 1411,
+                "noCache": 515,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 288,
+                "text": 288,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1411,
+                "completion_tokens": 288,
+                "total_tokens": 1699,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 515
+              }
+            }
+          }
+        },
+        {
+          "id": "d1984ac3-da15-44e7-a333-91071675c2a7",
+          "taskId": "19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 2,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T02:23:27.548Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "ONLY-U0-T0-b75152"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "ONLY-U0-T0-b75152"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "d1984ac3-da15-44e7-a333-91071675c2a7",
+          "endedAt": "2026-10-22T02:23:32.859Z",
+          "elapsedMs": 5311,
+          "usage": {
+            "inputTokens": 3062,
+            "outputTokens": 756,
+            "totalTokens": 3818,
+            "reasoningTokens": 105,
+            "cachedInputTokens": 2176,
+            "raw": {
+              "inputTokens": {
+                "total": 1377,
+                "noCache": 481,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 246,
+                "text": 246,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1377,
+                "completion_tokens": 246,
+                "total_tokens": 1623,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 481
+              }
+            }
+          }
+        },
+        {
+          "id": "622f1fd2-ea82-472e-a898-201f41507d71",
+          "taskId": "19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 3,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T02:23:32.969Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "ONLY-U0-T0-b75152"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "ONLY-U0-T0-b75152"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "622f1fd2-ea82-472e-a898-201f41507d71",
+          "endedAt": "2026-10-22T02:23:38.028Z",
+          "elapsedMs": 5059,
+          "usage": {
+            "inputTokens": 3002,
+            "outputTokens": 680,
+            "totalTokens": 3682,
+            "reasoningTokens": 32,
+            "cachedInputTokens": 2176,
+            "raw": {
+              "inputTokens": {
+                "total": 1297,
+                "noCache": 401,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 262,
+                "text": 262,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1297,
+                "completion_tokens": 262,
+                "total_tokens": 1559,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 401
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ec48824a-69f0-4308-a7f7-04d8847c9e4d",
+      "ownerId": "alice",
+      "agentId": "meeting-prep",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 2,
+      "publishedRevision": 2,
+      "runs": [
+        {
+          "id": "ab880a89-6c76-4579-8129-9c5eaddb2101",
+          "taskId": "ec48824a-69f0-4308-a7f7-04d8847c9e4d",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T02:23:20.914Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "ONLY-U0-T1-ec9089"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "ONLY-U0-T1-ec9089"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "ab880a89-6c76-4579-8129-9c5eaddb2101",
+          "endedAt": "2026-10-22T02:23:27.344Z",
+          "elapsedMs": 6430,
+          "usage": {
+            "inputTokens": 3167,
+            "outputTokens": 1031,
+            "totalTokens": 4198,
+            "reasoningTokens": 115,
+            "cachedInputTokens": 2176,
+            "raw": {
+              "inputTokens": {
+                "total": 1474,
+                "noCache": 578,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 427,
+                "text": 427,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1474,
+                "completion_tokens": 427,
+                "total_tokens": 1901,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 578
+              }
+            }
+          }
+        },
+        {
+          "id": "26c85e43-9634-4f27-b69b-448bdac61a7f",
+          "taskId": "ec48824a-69f0-4308-a7f7-04d8847c9e4d",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 2,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T02:23:40.913Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "ONLY-U0-T1-ec9089"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "ONLY-U0-T1-ec9089"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "26c85e43-9634-4f27-b69b-448bdac61a7f",
+          "endedAt": "2026-10-22T02:23:47.333Z",
+          "elapsedMs": 6420,
+          "usage": {
+            "inputTokens": 3127,
+            "outputTokens": 954,
+            "totalTokens": 4081,
+            "reasoningTokens": 70,
+            "cachedInputTokens": 2176,
+            "raw": {
+              "inputTokens": {
+                "total": 1429,
+                "noCache": 533,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 398,
+                "text": 398,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1429,
+                "completion_tokens": 398,
+                "total_tokens": 1827,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 533
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "01a8e32d-dfdd-4809-8dca-2fdb0cff06d9",
+      "ownerId": "bob",
+      "agentId": "meeting-prep",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 1,
+      "publishedRevision": 1,
+      "runs": [
+        {
+          "id": "51dc53c5-32e5-42b7-a49e-8e40f112d1a6",
+          "taskId": "01a8e32d-dfdd-4809-8dca-2fdb0cff06d9",
+          "ownerId": "bob",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T02:23:15.171Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "ONLY-U1-T0-024026"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "ONLY-U1-T0-024026"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "51dc53c5-32e5-42b7-a49e-8e40f112d1a6",
+          "endedAt": "2026-10-22T02:23:19.306Z",
+          "elapsedMs": 4135,
+          "usage": {
+            "inputTokens": 2986,
+            "outputTokens": 681,
+            "totalTokens": 3667,
+            "reasoningTokens": 47,
+            "cachedInputTokens": 1664,
+            "raw": {
+              "inputTokens": {
+                "total": 1297,
+                "noCache": 401,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 252,
+                "text": 252,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1297,
+                "completion_tokens": 252,
+                "total_tokens": 1549,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 401
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "da98e4c4-d2e0-4e52-85f7-ba289fb69085",
+      "ownerId": "bob",
+      "agentId": "meeting-prep",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 1,
+      "publishedRevision": 1,
+      "runs": [
+        {
+          "id": "e87dee1d-5362-4a11-a23f-1138df2ec52f",
+          "taskId": "da98e4c4-d2e0-4e52-85f7-ba289fb69085",
+          "ownerId": "bob",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T02:23:19.309Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "ONLY-U1-T1-1fdbbf"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "ONLY-U1-T1-1fdbbf"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "e87dee1d-5362-4a11-a23f-1138df2ec52f",
+          "endedAt": "2026-10-22T02:23:26.596Z",
+          "elapsedMs": 7287,
+          "usage": {
+            "inputTokens": 3376,
+            "outputTokens": 1165,
+            "totalTokens": 4541,
+            "reasoningTokens": 199,
+            "cachedInputTokens": 2176,
+            "raw": {
+              "inputTokens": {
+                "total": 1681,
+                "noCache": 785,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 356,
+                "text": 356,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1681,
+                "completion_tokens": 356,
+                "total_tokens": 2037,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 785
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "totalRuns": 7
+}

@@ -1,0 +1,30 @@
+services:
+  lab:
+    build: .
+    image: xagent-mastra-lab:0.1.0
+    container_name: xagent-mastra-lab
+    ports:
+      - "127.0.0.1:4391:4391"
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      DATA_DIR: /app/data
+      PORT: 4391
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp:size=192m,mode=1777
+    shm_size: 128m
+    mem_limit: 768m
+    cpus: 1.0
+    pids_limit: 256
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    logging:
+      driver: json-file
+      options:
+        max-size: "8m"
+        max-file: "3"

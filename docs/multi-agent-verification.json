@@ -1,0 +1,890 @@
+{
+  "verifiedAt": "2026-10-22T03:23:51.019869+00:00",
+  "mode": "deepseek",
+  "scope": "server-only",
+  "sources": "synthetic-observations-and-task-local-notes",
+  "notificationsSent": false,
+  "a2uiValidation": "mandatory-before-publication",
+  "passed": true,
+  "checks": [
+    {
+      "name": "two_users_two_agent_types_four_isolated_tasks",
+      "passed": true,
+      "outputs": [
+        {
+          "taskId": "81c08c7c-44b4-4a6f-9f66-6d7c9af6d594",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "output": {
+            "summary": "「服务协调会」（2026-10-30 10:00 开始）需重点澄清一处时间冲突：议程原写“凌晨 02:00 维护，不影响开放时间”，但按授权资料 NOTE-0a7b2fcd，服务每天 10:00 至 18:00 对外开放，而本次会议本身定在 10:00（开放时段起点）召开。因此“不影响开放时间”这一前提不能直接沿用，需在会上确认实际维护窗口与本次会议的排期是否落在开放时段内；如维护确实影响 10:00–18:00 开放时段，资料要求明确提醒并建议调整安排。建议会议开场即核对维护起止时间、受影响服务范围与回退方案，避免以未经确认的“不影响开放”结论推进协调。除上述资料外无其他可用会议材料，未做任何外部检索。",
+            "checklist": [
+              "会上首先确认维护的实际起止时间，核实是否与 10:00–18:00 开放时段重叠（原议程“凌晨 02:00、不影响开放时间”的说法需重新验证）",
+              "核对本次会议 10:00 的开始时间是否会与维护或值守交接冲突，必要时提出改期建议",
+              "请维护负责方说明受影响的服务清单、预计中断时长及影响范围（是否有客户可见影响）",
+              "确认回退/应急方案与故障上报、通知路径，明确各角色值守责任人",
+              "若判定影响开放时段，按资料要求当场提出提醒并给出调整安排（如推迟维护或公告用户）",
+              "会后整理变更结论与遗留待确认项，标注依据资料编号 NOTE-0a7b2fcd"
+            ],
+            "sourceIds": [
+              "NOTE-0a7b2fcd"
+            ]
+          }
+        },
+        {
+          "taskId": "f8c1d54a-4d4f-41e4-aa7a-f6b9b144877e",
+          "ownerId": "alice",
+          "agentId": "information-watch",
+          "output": {
+            "summary": "服务维护公告（SOURCE-14ac5dec）当前内容为原样：原始安排：凌晨 02:00 维护，不影响开放时间。相比上次已发布观察无历史基线可比较，属初次建立基线，故不发送提醒。用户关注点为影响服务可用性的维护变更；结合资料 NOTE-43e17385，服务每天 10:00 至 18:00 对外开放，当前 02:00 的维护窗口与开放时段不重叠，暂未见可用性影响。若后续维护时间落入开放时段，按该资料要求应提醒并建议调整安排。",
+            "change": "initial",
+            "notification": "quiet",
+            "findings": [
+              "本次为首次建立基线，观察与上次发布（无历史记录）相比无变化，按规则不触发提醒。",
+              "当前观察 SOURCE-14ac5dec 的维护安排在凌晨 02:00，与资料 NOTE-43e17385 记载的开放时段 10:00 至 18:00 不重叠，暂不影响服务可用性。",
+              "资料 NOTE-43e17385 明确：维护若影响开放时段则需要提醒并建议调整安排；建议后续持续跟踪维护时间点是否变动。"
+            ],
+            "sourceIds": [
+              "SOURCE-14ac5dec",
+              "NOTE-43e17385"
+            ]
+          }
+        },
+        {
+          "taskId": "c62a39a7-e986-4adb-bf90-032d67ec67cd",
+          "ownerId": "bob",
+          "agentId": "meeting-prep",
+          "output": {
+            "summary": "会议：服务协调会（2026-10-30 10:00 开始）。原始议程称「凌晨 02:00 维护，不影响开放时间」。授权资料（编号 NOTE-c318889b）明确：服务每天 10:00 至 18:00 对外开放，维护若影响开放时段需要提醒并建议调整安排。据此，议程中「不影响开放时间」的结论尚需在会前用实际变更单核实：02:00 的计划维护本身在开放时段之外，但需确认维护是否延长、回滚或连带影响跨入 10:00 之后；尤其本次会议本身安排在 10:00，正处于开放时段起点，会议期间若并行实施高风险变更将直接威胁可用性。建议会前确认维护窗口的实际结束时间与回退方案，识别对 10:00—18:00 开放的影响等级，对构成重要变更的项在会上一一提示并给出调整建议。除上述授权资料外，暂无其他维护记录或变更编号可供引用。",
+            "checklist": [
+              "向维护负责人索取凌晨 02:00 维护的变更单编号、计划起止时间与最坏情况下的结束时间，确认是否跨入 10:00 开放时段",
+              "按 NOTE-c318889b 要求，逐项标注变更对 10:00—18:00 开放时段的影响（无影响／可能影响／确定影响），确定需提醒范围",
+              "确认回退与应急预案、值守人员及升级路径，明确维护未按时完成时的延后或改期决策人",
+              "核对 2026-10-30 10:00 会议时间与开放时段重合带来的风险，确认会中不并行实施高风险变更",
+              "整理需在会上一一提示的重要变更清单及建议调整安排，形成会议决议追踪项"
+            ],
+            "sourceIds": [
+              "NOTE-c318889b"
+            ]
+          }
+        },
+        {
+          "taskId": "6affbc5a-a5cc-4058-9dbe-b1518339c58a",
+          "ownerId": "bob",
+          "agentId": "information-watch",
+          "output": {
+            "summary": "首次建立基线（SOURCE-2d46d675《服务维护公告》）：内容为“原始安排：凌晨 02:00 维护，不影响开放时间。”当前观察与基线一致，变化分类为 initial，无需提醒。结合资料 NOTE-b4c6313b，服务每天 10:00 至 18:00 对外开放，凌晨 02:00 维护落在开放时段之外，按现有信息不影响服务可用性。",
+            "change": "initial",
+            "notification": "quiet",
+            "findings": [
+              "观察 SOURCE-2d46d675 与基线内容完全一致，无新增或修改信息，属初次建立基线。",
+              "时间边界核对：维护 02:00 不在 NOTE-b4c6313b 记载的 10:00–18:00 开放时段内，故当前不构成可用性影响。",
+              "资料 NOTE-b4c6313b 同时给出判定口径：维护一旦覆盖开放时段即需提醒并建议调整安排；后续若出现维护时间改动（如进入 10:00–18:00）或延长、跨时段，应升级为 notify。",
+              "本次仅依据任务内资料判断，未进行外网查询，也未发送任何通知；提醒字段仅为决策结果。"
+            ],
+            "sourceIds": [
+              "SOURCE-2d46d675",
+              "NOTE-b4c6313b"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "cross_user_cross_subscription_cross_source_and_wrong_domain_rejected",
+      "passed": true
+    },
+    {
+      "name": "baseline_comparison_changes_decision_and_duplicates_do_not_rerun",
+      "passed": true,
+      "output": {
+        "summary": "当前观察（SOURCE-14ac5dec，服务维护公告）：维护变更：改为 14:00 至 16:00 停机，影响开放时段。摘要明确包含“停机”。与上次基线（原始安排：凌晨 02:00 维护，不影响开放时间）相比，维护时段由凌晨非开放时间调整至下午 14:00 至 16:00，并明确为停机，已直接影响对外服务可用性。用户关注影响服务可用性的维护变更，因此判定为重要变更并提醒。",
+        "change": "changed",
+        "notification": "notify",
+        "findings": [
+          "变化点：维护时间由 02:00（原不影响开放时间）改为 14:00–16:00，性质由非停机维护变为“停机”，可用性影响由无变为有。",
+          "对照资料 NOTE-43e17385：服务每天 10:00 至 18:00 对外开放，故 14:00–16:00 停机完整落在开放时段内，属于资料明确要求提醒并建议调整安排的情形。",
+          "建议：提前对外公告新的维护窗口，评估是否可挪至 18:00 之后或 10:00 之前，并准备降级或延时补偿方案；如需在开放时段停机，应指定值守与回滚责任人。",
+          "仅依据本任务观察与授权资料判断，未进行任何外部查询或通知发送操作。"
+        ],
+        "sourceIds": [
+          "SOURCE-14ac5dec",
+          "NOTE-43e17385"
+        ]
+      }
+    },
+    {
+      "name": "unchanged_content_advances_result_without_notification",
+      "passed": true,
+      "output": {
+        "summary": "当前观察 SOURCE-14ac5dec《服务维护公告》内容为：“维护变更：改为 14:00 至 16:00 停机，影响开放时段。摘要明确包含‘停机’。” 与上次已发布观察逐字一致，确定性比较结果为 unchanged，未出现新的维护变更信息，因此本次保持静默（quiet）。用户关注点仍为影响服务可用性的维护变更。",
+        "change": "unchanged",
+        "notification": "quiet",
+        "findings": [
+          "确定性比较结果：上次与当前观察内容完全相同（SOURCE-14ac5dec），故 change=unchanged，notification 必须为 quiet。",
+          "按授权资料 NOTE-43e17385，服务每天 10:00 至 18:00 对外开放；当前公告的 14:00 至 16:00 停机与该开放时段重叠，属影响可用性的维护窗口。",
+          "NOTE-43e17385 明确要求：维护影响开放时段时需要提醒并建议调整安排；但该条已在基线中体现，本次无新增变化，提醒条件在此次不变更的情况下不触发，待公告时间或范围发生改动时再评估是否 notify。",
+          "建议：保留该维护窗口记录并核对 14:00–16:00 期间的对外服务安排；若后续公告调整停机时间或扩大影响范围，应升级为 notify。"
+        ],
+        "sourceIds": [
+          "SOURCE-14ac5dec",
+          "NOTE-43e17385"
+        ]
+      }
+    },
+    {
+      "name": "user_instruction_refresh_preserves_baseline_and_other_tasks",
+      "passed": true,
+      "output": {
+        "summary": "当前观察（SOURCE-14ac5dec「服务维护公告」）与上次已发布基线完全一致：维护改为 14:00 至 16:00 停机，影响开放时段，确定性比较结果为 unchanged，故不发起提醒。结合资料 NOTE-43e17385（服务每天 10:00 至 18:00 对外开放），本次停机落在开放时段内。现按要求关注备用方案：建议评估 14:00-16:00 时段的替代安排以维持服务，备用方案待进一步确认；本次仅作记录，未执行任何外部操作。",
+        "change": "unchanged",
+        "notification": "quiet",
+        "findings": [
+          "确定性变化分类为 unchanged：当前观察与上次基线内容逐字相同（均为 SOURCE-14ac5dec 所述 14:00 至 16:00 停机、影响开放时段），按规则无变化必须 quiet。",
+          "检索资料 NOTE-43e17385 明确开放时段为每天 10:00 至 18:00，且维护影响开放时段时需提醒并建议调整安排；该资料编号请保留以便核对。",
+          "本次摘要已原样包含“备用方案”并保留资料编号 NOTE-43e17385，用于后续核对备用安排。",
+          "建议：将 14:00-16:00 停机与 10:00-18:00 开放时段对照，评估在开放时段内的替代服务或延期窗口，形成并确认书面备用方案。",
+          "说明：以上依据仅来自本任务工具返回的观察与测试资料库，未进行互联网查询、未发送通知或执行任何外部操作。"
+        ],
+        "sourceIds": [
+          "SOURCE-14ac5dec",
+          "NOTE-43e17385"
+        ]
+      }
+    },
+    {
+      "name": "meeting_agent_still_refreshes_on_the_shared_runtime",
+      "passed": true,
+      "output": {
+        "summary": "本次「服务协调会」将于 2026-10-30 10:00（+08:00）召开，议程已调整为讨论服务停机风险。结合授权资料 NOTE-0a7b2fcd：服务每天 10:00 至 18:00 对外开放，而本次会议开始时间正好落在开放时段起点，任何维护变更若覆盖开放时段都会直接影响服务可用性。建议会议聚焦影响服务可用性的维护变更，逐项确认维护窗口与开放时段的关系；对落在 10:00—18:00 开放时段内的维护变更作为重要变更重点提醒，并建议调整至开放时段之外或提前安排替代方案。目前仅检索到上述一条资料，其余细节需在会上补充确认。",
+        "checklist": [
+          "按调整后议程梳理本次拟讨论的维护变更清单，标注各自计划窗口与停机时长",
+          "逐个核对维护窗口是否落在服务开放时段 10:00—18:00 内，标出冲突项",
+          "对冲突项列为重要变更，准备调整方案（挪至开放时段外或降级/替代安排）",
+          "确认会议时段（10:00 起）与开放时段重叠，避免会议本身影响值守安排",
+          "准备停机风险的影响面说明：受影响服务、用户、时长与回滚预案",
+          "会上明确各维护变更的责任人与沟通通知方式",
+          "会后按 NOTE-0a7b2fcd 要求形成提醒结论并跟踪执行"
+        ],
+        "sourceIds": [
+          "NOTE-0a7b2fcd"
+        ]
+      }
+    },
+    {
+      "name": "restart_recovers_inspection_event_and_previous_baseline",
+      "passed": true,
+      "output": {
+        "summary": "服务维护公告（SOURCE-2d46d675）由“凌晨 02:00 维护，不影响开放时间”变为“维护改至 15:00 停机”，摘要原样保留“恢复核对”。原安排不影响开放时间，现改为 15:00 停机，落入服务对外开放时段内，可能影响服务可用性，属重要变更，建议提醒。",
+        "change": "changed",
+        "notification": "notify",
+        "findings": [
+          "观察对比：上次为“原始安排：凌晨 02:00 维护，不影响开放时间”，当前为“重启恢复：维护改至 15:00 停机”，维护时间与影响描述均发生变化。",
+          "资料 NOTE-b4c6313b：服务每天 10:00 至 18:00 对外开放；维护影响开放时段时需要提醒并建议调整安排。",
+          "判断依据：15:00 停机处于 10:00-18:00 开放时段内，将造成开放时间内的服务中断，影响服务可用性，故判定为重要变更并使用 notify。",
+          "建议：提前向使用者公告 15:00 停机窗口，评估是否可移至开放时段之外，并按摘要中“恢复核对”要求在重启后完成恢复核对与可用性验证。"
+        ],
+        "sourceIds": [
+          "SOURCE-2d46d675",
+          "NOTE-b4c6313b"
+        ]
+      }
+    },
+    {
+      "name": "pause_and_preexisting_results_preserved",
+      "passed": true,
+      "preexistingTasks": 8
+    }
+  ],
+  "runtime": {
+    "model": "deepseek-flash",
+    "node": "v24.22.0"
+  },
+  "legacyMeetingResultsVerified": 4,
+  "finalTasks": [
+    {
+      "id": "81c08c7c-44b4-4a6f-9f66-6d7c9af6d594",
+      "ownerId": "alice",
+      "agentId": "meeting-prep",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 2,
+      "publishedRevision": 2,
+      "runs": [
+        {
+          "id": "ad556cb7-0768-4c8e-8996-e6cb9175fd72",
+          "taskId": "81c08c7c-44b4-4a6f-9f66-6d7c9af6d594",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:23:51.299Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-0a7b2fcd"
+              ]
+            },
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-0a7b2fcd"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "NOTE-0a7b2fcd"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "ad556cb7-0768-4c8e-8996-e6cb9175fd72",
+          "endedAt": "2026-10-22T03:23:57.810Z",
+          "elapsedMs": 6511,
+          "usage": {
+            "inputTokens": 3397,
+            "outputTokens": 916,
+            "totalTokens": 4313,
+            "reasoningTokens": 102,
+            "cachedInputTokens": 2304,
+            "raw": {
+              "inputTokens": {
+                "total": 1583,
+                "noCache": 559,
+                "cacheRead": 1024
+              },
+              "outputTokens": {
+                "total": 287,
+                "text": 287,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1583,
+                "completion_tokens": 287,
+                "total_tokens": 1870,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1024,
+                "prompt_cache_miss_tokens": 559
+              }
+            }
+          }
+        },
+        {
+          "id": "faf0e1fe-a411-4d9e-8819-7005c8925646",
+          "taskId": "81c08c7c-44b4-4a6f-9f66-6d7c9af6d594",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 2,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:24:19.663Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-0a7b2fcd"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "NOTE-0a7b2fcd"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "faf0e1fe-a411-4d9e-8819-7005c8925646",
+          "endedAt": "2026-10-22T03:24:25.795Z",
+          "elapsedMs": 6132,
+          "usage": {
+            "inputTokens": 3144,
+            "outputTokens": 928,
+            "totalTokens": 4072,
+            "reasoningTokens": 118,
+            "cachedInputTokens": 2176,
+            "raw": {
+              "inputTokens": {
+                "total": 1435,
+                "noCache": 539,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 375,
+                "text": 375,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1435,
+                "completion_tokens": 375,
+                "total_tokens": 1810,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 539
+              }
+            }
+          }
+        }
+      ],
+      "output": {
+        "summary": "本次「服务协调会」将于 2026-10-30 10:00（+08:00）召开，议程已调整为讨论服务停机风险。结合授权资料 NOTE-0a7b2fcd：服务每天 10:00 至 18:00 对外开放，而本次会议开始时间正好落在开放时段起点，任何维护变更若覆盖开放时段都会直接影响服务可用性。建议会议聚焦影响服务可用性的维护变更，逐项确认维护窗口与开放时段的关系；对落在 10:00—18:00 开放时段内的维护变更作为重要变更重点提醒，并建议调整至开放时段之外或提前安排替代方案。目前仅检索到上述一条资料，其余细节需在会上补充确认。",
+        "checklist": [
+          "按调整后议程梳理本次拟讨论的维护变更清单，标注各自计划窗口与停机时长",
+          "逐个核对维护窗口是否落在服务开放时段 10:00—18:00 内，标出冲突项",
+          "对冲突项列为重要变更，准备调整方案（挪至开放时段外或降级/替代安排）",
+          "确认会议时段（10:00 起）与开放时段重叠，避免会议本身影响值守安排",
+          "准备停机风险的影响面说明：受影响服务、用户、时长与回滚预案",
+          "会上明确各维护变更的责任人与沟通通知方式",
+          "会后按 NOTE-0a7b2fcd 要求形成提醒结论并跟踪执行"
+        ],
+        "sourceIds": [
+          "NOTE-0a7b2fcd"
+        ]
+      }
+    },
+    {
+      "id": "f8c1d54a-4d4f-41e4-aa7a-f6b9b144877e",
+      "ownerId": "alice",
+      "agentId": "information-watch",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 4,
+      "publishedRevision": 4,
+      "runs": [
+        {
+          "id": "70da49d2-5e17-4442-a271-97ac15a8f827",
+          "taskId": "f8c1d54a-4d4f-41e4-aa7a-f6b9b144877e",
+          "ownerId": "alice",
+          "agentId": "information-watch",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:23:57.829Z",
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "NOTE-43e17385"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "SOURCE-14ac5dec",
+                "NOTE-43e17385"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "70da49d2-5e17-4442-a271-97ac15a8f827",
+          "endedAt": "2026-10-22T03:24:02.410Z",
+          "elapsedMs": 4581,
+          "usage": {
+            "inputTokens": 3554,
+            "outputTokens": 654,
+            "totalTokens": 4208,
+            "reasoningTokens": 15,
+            "cachedInputTokens": 2816,
+            "raw": {
+              "inputTokens": {
+                "total": 1512,
+                "noCache": 232,
+                "cacheRead": 1280
+              },
+              "outputTokens": {
+                "total": 207,
+                "text": 207,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1512,
+                "completion_tokens": 207,
+                "total_tokens": 1719,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1280
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1280,
+                "prompt_cache_miss_tokens": 232
+              }
+            }
+          }
+        },
+        {
+          "id": "223063d0-b717-4993-a7ee-063942e24ec6",
+          "taskId": "f8c1d54a-4d4f-41e4-aa7a-f6b9b144877e",
+          "ownerId": "alice",
+          "agentId": "information-watch",
+          "agentVersion": "1",
+          "revision": 2,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:24:03.034Z",
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "NOTE-43e17385"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "SOURCE-14ac5dec",
+                "NOTE-43e17385"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "223063d0-b717-4993-a7ee-063942e24ec6",
+          "endedAt": "2026-10-22T03:24:07.791Z",
+          "elapsedMs": 4757,
+          "usage": {
+            "inputTokens": 3798,
+            "outputTokens": 724,
+            "totalTokens": 4522,
+            "reasoningTokens": 49,
+            "cachedInputTokens": 2688,
+            "raw": {
+              "inputTokens": {
+                "total": 1689,
+                "noCache": 537,
+                "cacheRead": 1152
+              },
+              "outputTokens": {
+                "total": 157,
+                "text": 157,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1689,
+                "completion_tokens": 157,
+                "total_tokens": 1846,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1152
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1152,
+                "prompt_cache_miss_tokens": 537
+              }
+            }
+          }
+        },
+        {
+          "id": "53dc1c9d-658c-4765-8e61-523d994ed678",
+          "taskId": "f8c1d54a-4d4f-41e4-aa7a-f6b9b144877e",
+          "ownerId": "alice",
+          "agentId": "information-watch",
+          "agentVersion": "1",
+          "revision": 3,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:24:07.941Z",
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "NOTE-43e17385"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "SOURCE-14ac5dec",
+                "NOTE-43e17385"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "53dc1c9d-658c-4765-8e61-523d994ed678",
+          "endedAt": "2026-10-22T03:24:13.975Z",
+          "elapsedMs": 6034,
+          "usage": {
+            "inputTokens": 3727,
+            "outputTokens": 725,
+            "totalTokens": 4452,
+            "reasoningTokens": 8,
+            "cachedInputTokens": 2816,
+            "raw": {
+              "inputTokens": {
+                "total": 1605,
+                "noCache": 453,
+                "cacheRead": 1152
+              },
+              "outputTokens": {
+                "total": 255,
+                "text": 255,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1605,
+                "completion_tokens": 255,
+                "total_tokens": 1860,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1152
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1152,
+                "prompt_cache_miss_tokens": 453
+              }
+            }
+          }
+        },
+        {
+          "id": "2c89cfc3-b10d-45dd-8041-6ca322f6744e",
+          "taskId": "f8c1d54a-4d4f-41e4-aa7a-f6b9b144877e",
+          "ownerId": "alice",
+          "agentId": "information-watch",
+          "agentVersion": "1",
+          "revision": 4,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:24:14.152Z",
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "NOTE-43e17385"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "SOURCE-14ac5dec",
+                "NOTE-43e17385"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "2c89cfc3-b10d-45dd-8041-6ca322f6744e",
+          "endedAt": "2026-10-22T03:24:19.556Z",
+          "elapsedMs": 5404,
+          "usage": {
+            "inputTokens": 3885,
+            "outputTokens": 782,
+            "totalTokens": 4667,
+            "reasoningTokens": 103,
+            "cachedInputTokens": 2816,
+            "raw": {
+              "inputTokens": {
+                "total": 1756,
+                "noCache": 604,
+                "cacheRead": 1152
+              },
+              "outputTokens": {
+                "total": 156,
+                "text": 156,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1756,
+                "completion_tokens": 156,
+                "total_tokens": 1912,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1152
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1152,
+                "prompt_cache_miss_tokens": 604
+              }
+            }
+          }
+        }
+      ],
+      "output": {
+        "summary": "当前观察（SOURCE-14ac5dec「服务维护公告」）与上次已发布基线完全一致：维护改为 14:00 至 16:00 停机，影响开放时段，确定性比较结果为 unchanged，故不发起提醒。结合资料 NOTE-43e17385（服务每天 10:00 至 18:00 对外开放），本次停机落在开放时段内。现按要求关注备用方案：建议评估 14:00-16:00 时段的替代安排以维持服务，备用方案待进一步确认；本次仅作记录，未执行任何外部操作。",
+        "change": "unchanged",
+        "notification": "quiet",
+        "findings": [
+          "确定性变化分类为 unchanged：当前观察与上次基线内容逐字相同（均为 SOURCE-14ac5dec 所述 14:00 至 16:00 停机、影响开放时段），按规则无变化必须 quiet。",
+          "检索资料 NOTE-43e17385 明确开放时段为每天 10:00 至 18:00，且维护影响开放时段时需提醒并建议调整安排；该资料编号请保留以便核对。",
+          "本次摘要已原样包含“备用方案”并保留资料编号 NOTE-43e17385，用于后续核对备用安排。",
+          "建议：将 14:00-16:00 停机与 10:00-18:00 开放时段对照，评估在开放时段内的替代服务或延期窗口，形成并确认书面备用方案。",
+          "说明：以上依据仅来自本任务工具返回的观察与测试资料库，未进行互联网查询、未发送通知或执行任何外部操作。"
+        ],
+        "sourceIds": [
+          "SOURCE-14ac5dec",
+          "NOTE-43e17385"
+        ]
+      }
+    },
+    {
+      "id": "c62a39a7-e986-4adb-bf90-032d67ec67cd",
+      "ownerId": "bob",
+      "agentId": "meeting-prep",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 1,
+      "publishedRevision": 1,
+      "runs": [
+        {
+          "id": "d778182e-5dbe-4624-9594-3bfd7f780fbe",
+          "taskId": "c62a39a7-e986-4adb-bf90-032d67ec67cd",
+          "ownerId": "bob",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:23:51.303Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-c318889b"
+              ]
+            },
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-c318889b"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "NOTE-c318889b"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "d778182e-5dbe-4624-9594-3bfd7f780fbe",
+          "endedAt": "2026-10-22T03:23:58.173Z",
+          "elapsedMs": 6870,
+          "usage": {
+            "inputTokens": 3470,
+            "outputTokens": 1119,
+            "totalTokens": 4589,
+            "reasoningTokens": 181,
+            "cachedInputTokens": 2304,
+            "raw": {
+              "inputTokens": {
+                "total": 1672,
+                "noCache": 648,
+                "cacheRead": 1024
+              },
+              "outputTokens": {
+                "total": 385,
+                "text": 385,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1672,
+                "completion_tokens": 385,
+                "total_tokens": 2057,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1024,
+                "prompt_cache_miss_tokens": 648
+              }
+            }
+          }
+        }
+      ],
+      "output": {
+        "summary": "会议：服务协调会（2026-10-30 10:00 开始）。原始议程称「凌晨 02:00 维护，不影响开放时间」。授权资料（编号 NOTE-c318889b）明确：服务每天 10:00 至 18:00 对外开放，维护若影响开放时段需要提醒并建议调整安排。据此，议程中「不影响开放时间」的结论尚需在会前用实际变更单核实：02:00 的计划维护本身在开放时段之外，但需确认维护是否延长、回滚或连带影响跨入 10:00 之后；尤其本次会议本身安排在 10:00，正处于开放时段起点，会议期间若并行实施高风险变更将直接威胁可用性。建议会前确认维护窗口的实际结束时间与回退方案，识别对 10:00—18:00 开放的影响等级，对构成重要变更的项在会上一一提示并给出调整建议。除上述授权资料外，暂无其他维护记录或变更编号可供引用。",
+        "checklist": [
+          "向维护负责人索取凌晨 02:00 维护的变更单编号、计划起止时间与最坏情况下的结束时间，确认是否跨入 10:00 开放时段",
+          "按 NOTE-c318889b 要求，逐项标注变更对 10:00—18:00 开放时段的影响（无影响／可能影响／确定影响），确定需提醒范围",
+          "确认回退与应急预案、值守人员及升级路径，明确维护未按时完成时的延后或改期决策人",
+          "核对 2026-10-30 10:00 会议时间与开放时段重合带来的风险，确认会中不并行实施高风险变更",
+          "整理需在会上一一提示的重要变更清单及建议调整安排，形成会议决议追踪项"
+        ],
+        "sourceIds": [
+          "NOTE-c318889b"
+        ]
+      }
+    },
+    {
+      "id": "6affbc5a-a5cc-4058-9dbe-b1518339c58a",
+      "ownerId": "bob",
+      "agentId": "information-watch",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 2,
+      "publishedRevision": 2,
+      "runs": [
+        {
+          "id": "19ca9e4c-d0c0-409e-8063-523864608570",
+          "taskId": "6affbc5a-a5cc-4058-9dbe-b1518339c58a",
+          "ownerId": "bob",
+          "agentId": "information-watch",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:23:58.230Z",
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "NOTE-b4c6313b"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "SOURCE-2d46d675",
+                "NOTE-b4c6313b"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "19ca9e4c-d0c0-409e-8063-523864608570",
+          "endedAt": "2026-10-22T03:24:02.881Z",
+          "elapsedMs": 4651,
+          "usage": {
+            "inputTokens": 3618,
+            "outputTokens": 713,
+            "totalTokens": 4331,
+            "reasoningTokens": 62,
+            "cachedInputTokens": 2560,
+            "raw": {
+              "inputTokens": {
+                "total": 1573,
+                "noCache": 549,
+                "cacheRead": 1024
+              },
+              "outputTokens": {
+                "total": 209,
+                "text": 209,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1573,
+                "completion_tokens": 209,
+                "total_tokens": 1782,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1024,
+                "prompt_cache_miss_tokens": 549
+              }
+            }
+          }
+        },
+        {
+          "id": "1c7c8d3a-0c30-4bfb-8fcb-840c981c921f",
+          "taskId": "6affbc5a-a5cc-4058-9dbe-b1518339c58a",
+          "ownerId": "bob",
+          "agentId": "information-watch",
+          "agentVersion": "1",
+          "revision": 2,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:24:29.227Z",
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "NOTE-b4c6313b"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "SOURCE-2d46d675",
+                "NOTE-b4c6313b"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "1c7c8d3a-0c30-4bfb-8fcb-840c981c921f",
+          "endedAt": "2026-10-22T03:24:36.192Z",
+          "elapsedMs": 6965,
+          "usage": {
+            "inputTokens": 5510,
+            "outputTokens": 1156,
+            "totalTokens": 6666,
+            "reasoningTokens": 65,
+            "cachedInputTokens": 4096,
+            "raw": {
+              "inputTokens": {
+                "total": 1900,
+                "noCache": 492,
+                "cacheRead": 1408
+              },
+              "outputTokens": {
+                "total": 214,
+                "text": 214,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1900,
+                "completion_tokens": 214,
+                "total_tokens": 2114,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1408
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1408,
+                "prompt_cache_miss_tokens": 492
+              }
+            }
+          }
+        }
+      ],
+      "output": {
+        "summary": "服务维护公告（SOURCE-2d46d675）由“凌晨 02:00 维护，不影响开放时间”变为“维护改至 15:00 停机”，摘要原样保留“恢复核对”。原安排不影响开放时间，现改为 15:00 停机，落入服务对外开放时段内，可能影响服务可用性，属重要变更，建议提醒。",
+        "change": "changed",
+        "notification": "notify",
+        "findings": [
+          "观察对比：上次为“原始安排：凌晨 02:00 维护，不影响开放时间”，当前为“重启恢复：维护改至 15:00 停机”，维护时间与影响描述均发生变化。",
+          "资料 NOTE-b4c6313b：服务每天 10:00 至 18:00 对外开放；维护影响开放时段时需要提醒并建议调整安排。",
+          "判断依据：15:00 停机处于 10:00-18:00 开放时段内，将造成开放时间内的服务中断，影响服务可用性，故判定为重要变更并使用 notify。",
+          "建议：提前向使用者公告 15:00 停机窗口，评估是否可移至开放时段之外，并按摘要中“恢复核对”要求在重启后完成恢复核对与可用性验证。"
+        ],
+        "sourceIds": [
+          "SOURCE-2d46d675",
+          "NOTE-b4c6313b"
+        ]
+      }
+    }
+  ],
+  "totalRuns": 9,
+  "elapsedSeconds": 45.233
+}

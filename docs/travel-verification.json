@@ -1,0 +1,381 @@
+{
+  "verifiedAt": "2026-10-22T04:00:07.842268+00:00",
+  "mode": "deepseek",
+  "browser": "@mastra/agent-browser@0.5.4 with headless Chromium",
+  "destination": "延吉",
+  "sources": "live-public-web",
+  "passed": true,
+  "checks": [
+    {
+      "name": "user_request_runs_without_device_subscription",
+      "passed": true,
+      "taskId": "1a5379ef-ef96-4e6f-8a57-9eef75091e8b"
+    },
+    {
+      "name": "real_browser_pages_support_three_day_plan",
+      "passed": true,
+      "sourceCount": 2,
+      "toolCalls": [
+        "browserSearch",
+        "browserSearch",
+        "browserSearch",
+        "browserSearch",
+        "browserSearch",
+        "browserSearch",
+        "browserRead",
+        "browserRead",
+        "browserImages",
+        "submitTripPlan"
+      ]
+    },
+    {
+      "name": "image_metadata_is_bound_to_loaded_source_pages",
+      "passed": true,
+      "imageCount": 3,
+      "images": [
+        {
+          "id": "I-9b86e9046a2f",
+          "url": "https://q0.itc.cn/images01/20250521/2dd34873d53746459b3b1c3d31df2442.jpeg",
+          "sourcePage": "https://www.sohu.com/a/897484440_122324904",
+          "loadedDimensions": [
+            1200,
+            800
+          ]
+        },
+        {
+          "id": "I-36641e0968bf",
+          "url": "https://inews.gtimg.com/news_bt/O8QScZ1t5QqHPn5KrATcojLPrnVxTKjV7REmw9-02toGkAA/641",
+          "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+          "loadedDimensions": [
+            960,
+            719
+          ]
+        },
+        {
+          "id": "I-76db85d8e39f",
+          "url": "https://inews.gtimg.com/news_bt/OXOdldzE1BNdCSZnLs6-Qi99ifdrBgRyCp5v2wqRSoh5AAA/641",
+          "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+          "loadedDimensions": [
+            960,
+            548
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mandatory_a2ui_validation_and_cross_user_isolation",
+      "passed": true
+    },
+    {
+      "name": "preexisting_task_results_unchanged",
+      "passed": true,
+      "tasks": 12
+    }
+  ],
+  "plan": {
+    "summary": "按“城市漫步＋朝鲜族文化＋美食”三条主线安排3天：第一天从延边大学、双语弹幕墙和布尔哈通河认识城市；第二天清晨逛水上市场，再集中体验朝鲜族民俗园与帽儿山；第三天乘高铁短途到图们口岸看边境，回到市区补上恐龙博物馆与烧烤。整体节奏休闲，跨城与门票信息均需出发前核实。",
+    "assumptions": [
+      "未给出发地，默认自行抵达延吉，不含往返大交通",
+      "未给日期，按2026年10月下旬秋末、3天2晚安排，昼夜温差大需备外套",
+      "按1名成人、休闲节奏、中等预算规划",
+      "不含住宿与购物报价；门票、车次与营业时间以现场或官方最新信息为准",
+      "市区活动以步行和短途打车为主，跨城优先考虑高铁"
+    ],
+    "days": [
+      {
+        "day": 1,
+        "title": "城市初识：延边大学、双语街景与河畔夜色",
+        "activities": [
+          {
+            "period": "14:00-16:00",
+            "plan": "先到延边大学一带散步，看看校园周边的朝汉双语路牌与“网红弹幕墙”招牌群；这一带适合慢慢走、拍照，感受城市年轻的一面。入校规定与开放区域需现场确认。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          },
+          {
+            "period": "16:30-17:30",
+            "plan": "前往延吉天主教堂外观打卡，资料称其建于1911年，日落前斜光较适合拍照；内部是否开放及参观礼仪以现场为准。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          },
+          {
+            "period": "18:00-20:30",
+            "plan": "晚餐从延吉冷面、包饭或参鸡汤中选一项，按个人口味点小份多样尝试；饭后沿布尔哈通河散步，作为轻松的收尾。餐价与营业情况待核实。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "title": "朝鲜族文化日：水上市场、民俗园与帽儿山",
+        "activities": [
+          {
+            "period": "05:30-07:30",
+            "plan": "早起逛延吉水上市场（资料称约5:00-8:00，需核实季节调整），看现打打糕、米肠和酱菜，挑几样当早餐；早市人多，注意保管随身物品。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          },
+          {
+            "period": "09:00-12:00",
+            "plan": "到中国朝鲜族民俗园体验传统民居与服饰，关注农乐舞、长鼓舞等表演场次；资料提到门票约30元、下午3-4点光线较好，票价与演出时间均需以官方当日信息核实。",
+            "sourceIds": [
+              "S-6de58eda39d3",
+              "S-8e76f448fb22"
+            ]
+          },
+          {
+            "period": "13:30-16:30",
+            "plan": "登帽儿山国家森林公园，沿步道慢行，在山顶俯瞰延吉城区与布尔哈通河；预留往返与休息时间，穿防滑鞋，具体开放与防火管控需现场确认。",
+            "sourceIds": [
+              "S-6de58eda39d3"
+            ]
+          },
+          {
+            "period": "18:00-20:00",
+            "plan": "晚餐尝试延吉烧烤，搭配朝鲜族小菜；资料推荐黄牛肉、明太鱼等，可按人数少量多次点单，避免浪费，价格以菜单为准。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 3,
+        "title": "边境半日与城市补漏：图们口岸、恐龙博物馆",
+        "activities": [
+          {
+            "period": "08:30-12:00",
+            "plan": "乘高铁短途前往图们口岸（资料称约48公里、车程约15分钟，需核实车次），在铁路国门与界碑附近参观拍照；边境区域请遵守现场标识和工作人员指引，不进入未开放地带。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          },
+          {
+            "period": "14:00-16:00",
+            "plan": "返回延吉后参观延吉恐龙博物馆，资料称有大型恐龙化石展示，适合作为室内补充行程；开放时间、预约方式和票价需提前查询。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          },
+          {
+            "period": "16:30-18:30",
+            "plan": "到西市场一带采购辣白菜、明太鱼等伴手礼，或找一家咖啡馆尝试苹果梨咖啡等本地限定口味；随后按返程时间前往车站或机场，具体车次与营业时间待核实。",
+            "sourceIds": [
+              "S-8e76f448fb22"
+            ]
+          }
+        ]
+      }
+    ],
+    "budgetEstimate": "按资料中的大众消费口径粗估：穷游约150元/人/天，舒适型约300-400元/人/天，含餐饮、市内交通与常规门票，不含住宿和往返大交通。民俗园资料提及门票约30元，图们高铁票价、博物馆票价与餐饮实际价格均需现场或官方渠道核实，不作实时价格承诺。",
+    "notes": [
+      "本次实际读取的两篇资料均为媒体平台旅游文章：搜狐攻略（2025-05-22）与腾讯新闻（2026-05-05），并非政府官网；未能检索到可用的政府页面。",
+      "文中开放时间、表演场次、门票、车程与车次均为资料说法，可能随季节调整，出发前请以景区、铁路及当地官方发布为准。",
+      "10月下旬延吉早晚偏凉，帽儿山步行和边境参观建议穿防风外套与防滑鞋。",
+      "图片取自实际读取的攻略页面，仅作行程氛围参考，未必对应具体每日活动。",
+      "未编造实时票价、天气或预订结果；住宿建议按“延边大学/市中心”与“水上市场”两点之间的区域自行比选。"
+    ],
+    "sourceIds": [
+      "S-6de58eda39d3",
+      "S-8e76f448fb22"
+    ],
+    "imageIds": [
+      "I-9b86e9046a2f",
+      "I-36641e0968bf",
+      "I-76db85d8e39f"
+    ],
+    "sources": [
+      {
+        "id": "S-6de58eda39d3",
+        "title": "延吉旅游超全攻略：第一次去延吉应该怎么玩？看完这篇就够了！_打糕_自然_交响",
+        "url": "https://www.sohu.com/a/897484440_122324904",
+        "kind": "page",
+        "fetchedAt": "2026-10-22T04:00:31.798Z"
+      },
+      {
+        "id": "S-8e76f448fb22",
+        "title": "去吉林的延吉玩了几天，说说我对这座小城的印象，全是心里话_腾讯新闻",
+        "url": "https://news.qq.com/rain/a/20260503A06UCZ00",
+        "kind": "page",
+        "fetchedAt": "2026-10-22T04:00:37.225Z"
+      }
+    ],
+    "images": [
+      {
+        "id": "I-9b86e9046a2f",
+        "url": "https://q0.itc.cn/images01/20250521/2dd34873d53746459b3b1c3d31df2442.jpeg",
+        "sourceId": "S-6de58eda39d3",
+        "sourcePage": "https://www.sohu.com/a/897484440_122324904",
+        "caption": "文章配图-1",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "id": "I-36641e0968bf",
+        "url": "https://inews.gtimg.com/news_bt/O8QScZ1t5QqHPn5KrATcojLPrnVxTKjV7REmw9-02toGkAA/641",
+        "sourceId": "S-8e76f448fb22",
+        "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+        "caption": "图片",
+        "width": 960,
+        "height": 719
+      },
+      {
+        "id": "I-76db85d8e39f",
+        "url": "https://inews.gtimg.com/news_bt/OXOdldzE1BNdCSZnLs6-Qi99ifdrBgRyCp5v2wqRSoh5AAA/641",
+        "sourceId": "S-8e76f448fb22",
+        "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+        "caption": "图片",
+        "width": 960,
+        "height": 548
+      }
+    ],
+    "destination": "延吉"
+  },
+  "runs": [
+    {
+      "id": "315dbe44-3a31-4998-a23e-7a93b1024bcf",
+      "taskId": "1a5379ef-ef96-4e6f-8a57-9eef75091e8b",
+      "ownerId": "alice",
+      "agentId": "travel-assistant",
+      "agentVersion": "1",
+      "revision": 1,
+      "mode": "deepseek",
+      "startedAt": "2026-10-22T04:00:08.372Z",
+      "trace": [
+        {
+          "tool": "browserSearch",
+          "sourceIds": [
+            "S-8e76f448fb22",
+            "S-403564c50a87",
+            "S-6de58eda39d3"
+          ]
+        },
+        {
+          "tool": "browserSearch",
+          "sourceIds": [
+            "S-8e76f448fb22",
+            "S-403564c50a87",
+            "S-6de58eda39d3"
+          ]
+        },
+        {
+          "tool": "browserSearch",
+          "sourceIds": []
+        },
+        {
+          "tool": "browserSearch",
+          "sourceIds": []
+        },
+        {
+          "tool": "browserSearch",
+          "sourceIds": []
+        },
+        {
+          "tool": "browserSearch",
+          "sourceIds": [
+            "S-8e76f448fb22",
+            "S-403564c50a87",
+            "S-6de58eda39d3"
+          ]
+        },
+        {
+          "tool": "browserRead",
+          "sourceIds": [
+            "S-6de58eda39d3"
+          ]
+        },
+        {
+          "tool": "browserRead",
+          "sourceIds": [
+            "S-8e76f448fb22"
+          ]
+        },
+        {
+          "tool": "browserImages"
+        },
+        {
+          "tool": "submitTripPlan",
+          "sourceIds": [
+            "S-6de58eda39d3",
+            "S-8e76f448fb22"
+          ]
+        }
+      ],
+      "status": "completed",
+      "mastraRunId": "315dbe44-3a31-4998-a23e-7a93b1024bcf",
+      "endedAt": "2026-10-22T04:00:57.079Z",
+      "elapsedMs": 48707,
+      "usage": {
+        "inputTokens": 43022,
+        "outputTokens": 3508,
+        "totalTokens": 46530,
+        "reasoningTokens": 1291,
+        "cachedInputTokens": 34688,
+        "raw": {
+          "inputTokens": {
+            "total": 10768,
+            "noCache": 1680,
+            "cacheRead": 9088
+          },
+          "outputTokens": {
+            "total": 176,
+            "text": 176,
+            "reasoning": 0
+          },
+          "raw": {
+            "prompt_tokens": 10768,
+            "completion_tokens": 176,
+            "total_tokens": 10944,
+            "prompt_tokens_details": {
+              "cached_tokens": 9088
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 9088,
+            "prompt_cache_miss_tokens": 1680
+          }
+        }
+      }
+    }
+  ],
+  "finalStatus": "paused",
+  "elapsedSeconds": 49.479,
+  "imageHeadChecks": [
+    {
+      "id": "I-9b86e9046a2f",
+      "status": 200,
+      "contentType": "image/jpeg"
+    },
+    {
+      "id": "I-36641e0968bf",
+      "error": "HTTPError"
+    },
+    {
+      "id": "I-76db85d8e39f",
+      "error": "HTTPError"
+    }
+  ],
+  "imageGetChecks": [
+    {
+      "id": "I-9b86e9046a2f",
+      "status": 206,
+      "contentType": "image/jpeg"
+    },
+    {
+      "id": "I-36641e0968bf",
+      "status": 206,
+      "contentType": "image/jpeg"
+    },
+    {
+      "id": "I-76db85d8e39f",
+      "status": 206,
+      "contentType": "image/jpeg"
+    }
+  ]
+}

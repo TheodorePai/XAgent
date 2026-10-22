@@ -1,0 +1,28 @@
+{
+  "name": "xagent-mastra-device-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node --env-file-if-exists=.env dist/server.js",
+    "dev": "tsx --env-file-if-exists=.env src/server.ts",
+    "test": "npm run build && tsx --test --test-concurrency=1 tests/*.test.ts",
+    "verify": "python scripts/verify.py"
+  },
+  "dependencies": {
+    "@mastra/agent-browser": "0.5.4",
+    "@mastra/core": "1.78.0",
+    "@mastra/libsql": "1.26.2",
+    "ajv": "8.20.0",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  }
+}

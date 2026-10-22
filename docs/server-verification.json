@@ -1,0 +1,42 @@
+{
+  "verifiedAt": "2026-10-21T09:03:11.775129+00:00",
+  "base": "http://127.0.0.1:4391",
+  "mode": "scripted-mock",
+  "deepseekCalled": false,
+  "containerRestartTested": true,
+  "checks": [
+    {
+      "name": "two_device_tools_and_result_driven_continuation",
+      "runId": "b990b79d-bf8a-49ca-ba75-841a8d2ff2ca",
+      "passed": true
+    },
+    {
+      "name": "low_battery_changes_next_tool_selection",
+      "runId": "1c3fdaa0-48d9-481b-bade-dc69a51aff0c",
+      "passed": true
+    },
+    {
+      "name": "suspension_survives_container_restart",
+      "runId": "603e8841-a576-417a-a95d-e1edc0d691bc",
+      "passed": true
+    },
+    {
+      "name": "duplicate_receipt_and_conflicting_result",
+      "passed": true
+    },
+    {
+      "name": "canceled_run_rejects_late_result",
+      "runId": "5fa33f69-35d4-4837-8d84-f19d62836654",
+      "passed": true
+    },
+    {
+      "name": "device_timeout_is_terminal",
+      "runId": "284564a1-a270-435f-9fd6-f96972e67c17",
+      "passed": true
+    },
+    {
+      "name": "missing_deepseek_key_rejected_without_fallback",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "verifiedAt": "2026-10-22T03:22:55.190400+00:00",
+  "mode": "deepseek",
+  "scope": "server-only",
+  "sources": "synthetic-observations-and-task-local-notes",
+  "notificationsSent": false,
+  "a2uiValidation": "mandatory-before-publication",
+  "checks": [],
+  "runtime": {
+    "model": "deepseek-flash",
+    "node": "v24.22.0"
+  },
+  "legacyMeetingResultsVerified": 4,
+  "finalTasks": [
+    {
+      "id": "9a921ed9-3875-4768-96e6-0b9fd6b6b8bb",
+      "ownerId": "alice",
+      "agentId": "meeting-prep",
+      "agentVersion": "1",
+      "mode": "deepseek",
+      "status": "paused",
+      "revision": 1,
+      "publishedRevision": 1,
+      "output": {
+        "summary": "「预算会议」定于 2026-10-30 10:00（+08:00）召开，最新议程为：原始安排凌晨 02:00 维护，不影响开放时间。用户关注点为维护变更对服务可用性的影响，并要求重要变更必须提醒。本次检索仅获取到 1 份授权资料 NOTE-51a634f9，其中说明服务每天 10:00 至 18:00 对外开放，维护影响开放时段时需要提醒并建议调整安排；资料中未包含预算议题或其他变更记录，会议事实也仅以议程原文为准，暂无额外可引用的变更编号。会前建议：按 NOTE-51a634f9 的口径核对 02:00 维护的实际起止时间与回滚预案，确认维护能否在 10:00 开放前结束；会议本身安排在 10:00 即服务开放起点，若维护延后或需二次操作，将直接影响开放时段，应在会上明确提醒并提出调整方案。因资料有限，会上不对外部数据作推测，如需补充预算相关材料请另行提供。",
+        "checklist": [
+          "核对 02:00 维护的实际起止时间、执行人与回滚预案，确认可在 10:00 前完成并留出缓冲",
+          "按 NOTE-51a634f9 明确判定标准：服务每日 10:00-18:00 开放，维护若触及该时段须在会上提醒并建议调整",
+          "确认 10:00 会议时间与服务开放起点重合，评估是否需要安排值守或调整议程节奏",
+          "整理需重点提醒的维护变更清单，并补齐可用于引用的变更编号",
+          "检查预算议题相关材料是否齐备，若缺失请在会前向相关方索取并标注来源"
+        ],
+        "sourceIds": [
+          "NOTE-51a634f9"
+        ]
+      },
+      "runs": [
+        {
+          "id": "417816a7-6404-47ba-bd2c-21d19ab656b2",
+          "taskId": "9a921ed9-3875-4768-96e6-0b9fd6b6b8bb",
+          "ownerId": "alice",
+          "agentId": "meeting-prep",
+          "agentVersion": "1",
+          "revision": 1,
+          "mode": "deepseek",
+          "startedAt": "2026-10-22T03:22:55.463Z",
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-51a634f9"
+              ]
+            },
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-51a634f9"
+              ]
+            },
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "NOTE-51a634f9"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "NOTE-51a634f9"
+              ]
+            }
+          ],
+          "status": "completed",
+          "mastraRunId": "417816a7-6404-47ba-bd2c-21d19ab656b2",
+          "endedAt": "2026-10-22T03:23:03.681Z",
+          "elapsedMs": 8218,
+          "usage": {
+            "inputTokens": 4864,
+            "outputTokens": 1090,
+            "totalTokens": 5954,
+            "reasoningTokens": 283,
+            "cachedInputTokens": 3328,
+            "raw": {
+              "inputTokens": {
+                "total": 1897,
+                "noCache": 617,
+                "cacheRead": 1280
+              },
+              "outputTokens": {
+                "total": 214,
+                "text": 214,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1897,
+                "completion_tokens": 214,
+                "total_tokens": 2111,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1280
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1280,
+                "prompt_cache_miss_tokens": 617
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "totalRuns": 1,
+  "elapsedSeconds": 8.573
+}

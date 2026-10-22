@@ -1,0 +1,28 @@
+{
+  "method": "Physical TypeScript lines including blank lines/comments; line counts describe code size, not measured engineering hours or semantic reuse percentage.",
+  "baselineSourceLines": 783,
+  "currentSourceLines": 1000,
+  "baselineMeetingModuleLines": 359,
+  "sharedTaskModules": {
+    "src/tasks/api.ts": 61,
+    "src/tasks/fixture.ts": 22,
+    "src/tasks/runtime.ts": 76,
+    "src/tasks/store.ts": 136,
+    "src/tasks/tools.ts": 10,
+    "src/tasks/types.ts": 36,
+    "src/tasks/view.ts": 40
+  },
+  "inspectionDefinitionLines": 85,
+  "meetingDefinitionLines": 73,
+  "compatibilityModules": {
+    "src/meeting/api.ts": 1,
+    "src/meeting/runtime.ts": 4,
+    "src/meeting/store.ts": 16,
+    "src/meeting/view.ts": 7
+  },
+  "registryLines": 8,
+  "newTestLines": 154,
+  "newServerVerifierLines": 248,
+  "packageJsonChanged": false,
+  "sharedTaskModuleLines": 381
+}

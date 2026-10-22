@@ -1,0 +1,77 @@
+{
+  "tasks": [
+    {
+      "id": "19df4971-e03e-4381-9b0a-8e37ffa4d8b6",
+      "ownerId": "alice",
+      "revision": 3,
+      "outputHash": "bc9944846ea0d887ee15d1b0911292e3971c9b306fcc6dece61e83dd8b153287"
+    },
+    {
+      "id": "ec48824a-69f0-4308-a7f7-04d8847c9e4d",
+      "ownerId": "alice",
+      "revision": 2,
+      "outputHash": "a010cbd7ae5a0317e039a42ad6b6cb2369d2ec4d7c5aa12aafccd094aa47b609"
+    },
+    {
+      "id": "9a921ed9-3875-4768-96e6-0b9fd6b6b8bb",
+      "ownerId": "alice",
+      "revision": 1,
+      "outputHash": "5c33ed77d207ec9471914838afb85e43b3565420e5297ac7dbbd1785f988cf40"
+    },
+    {
+      "id": "c3a660a4-0539-423f-bfeb-45d40b2e3b56",
+      "ownerId": "alice",
+      "revision": 0,
+      "outputHash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "id": "81c08c7c-44b4-4a6f-9f66-6d7c9af6d594",
+      "ownerId": "alice",
+      "revision": 2,
+      "outputHash": "8036666ce81d7c42a24f3f581fccaa19304a41a8cfd2e205be1500b2d3488b14"
+    },
+    {
+      "id": "f8c1d54a-4d4f-41e4-aa7a-f6b9b144877e",
+      "ownerId": "alice",
+      "revision": 4,
+      "outputHash": "8758354a764b07653d524f4fb1e4af7fdf6c593f3992aa0833cb246b5dd72960"
+    },
+    {
+      "id": "01a8e32d-dfdd-4809-8dca-2fdb0cff06d9",
+      "ownerId": "bob",
+      "revision": 1,
+      "outputHash": "64910944fd330b15797cada25d3140d06481e46fb6f099add388adca2ed1e829"
+    },
+    {
+      "id": "da98e4c4-d2e0-4e52-85f7-ba289fb69085",
+      "ownerId": "bob",
+      "revision": 1,
+      "outputHash": "5a2b304d88b1b89d1015a663a110f14aecccfa3eefd2636a6b65a6b7b70d5550"
+    },
+    {
+      "id": "f23119c6-b284-42cf-8ac2-addd2a266b3c",
+      "ownerId": "bob",
+      "revision": 0,
+      "outputHash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "id": "f0239ccb-211e-403a-acd2-ce1f9d93034b",
+      "ownerId": "bob",
+      "revision": 0,
+      "outputHash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "id": "c62a39a7-e986-4adb-bf90-032d67ec67cd",
+      "ownerId": "bob",
+      "revision": 1,
+      "outputHash": "b02654699953e529451cc6df558061a50553f78d68e60e44b8df24f87f3c71c5"
+    },
+    {
+      "id": "6affbc5a-a5cc-4058-9dbe-b1518339c58a",
+      "ownerId": "bob",
+      "revision": 2,
+      "outputHash": "a89caf24668d0c5fe5103f4d65b213694ce9e34de3024bde587651914af58f9c"
+    }
+  ],
+  "backup": "data/backups/before-travel-20261022T034728Z"
+}

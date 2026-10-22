@@ -1,0 +1,75 @@
+{
+  "verifiedAt": "2026-10-22T03:53:31.485568+00:00",
+  "mode": "deepseek",
+  "browser": "@mastra/agent-browser@0.5.4 with headless Chromium",
+  "destination": "延吉",
+  "sources": "live-public-web",
+  "passed": false,
+  "checks": [],
+  "failedTask": {
+    "name": "延吉三日游真实浏览器验证",
+    "agentId": "travel-assistant",
+    "instruction": "我要去延吉玩三天，想体验朝鲜族文化、美食和城市散步。请实际搜索并阅读政府或公共新闻资料，给出按天计划，并尽量附上相关图片。未指定出发地、日期和预算，请标明假设，不编造实时价格。",
+    "mode": "deepseek",
+    "config": {
+      "destination": "延吉",
+      "days": 3
+    },
+    "notes": [],
+    "id": "4079802f-f835-4c63-8b5b-05e2d818686a",
+    "ownerId": "alice",
+    "agentVersion": "1",
+    "status": "active",
+    "subscription": "not_required",
+    "revision": 1,
+    "publishedRevision": 0,
+    "lastSequence": 0,
+    "createdAt": "2026-10-22T03:53:31.612Z",
+    "updatedAt": "2026-10-22T03:53:42.153Z",
+    "fact": {
+      "eventId": "8efec97e-510d-46c2-926a-249bf8f69c66",
+      "sequence": 1,
+      "observedAt": "2026-10-22T03:53:31.613Z"
+    },
+    "error": "TRAVEL_PLANNING_FAILED",
+    "events": [],
+    "runs": [
+      {
+        "id": "dc5d7c62-fc21-4c52-bd88-0a1f4da273e3",
+        "taskId": "4079802f-f835-4c63-8b5b-05e2d818686a",
+        "ownerId": "alice",
+        "agentId": "travel-assistant",
+        "agentVersion": "1",
+        "revision": 1,
+        "mode": "deepseek",
+        "startedAt": "2026-10-22T03:53:31.658Z",
+        "trace": [],
+        "status": "failed",
+        "error": "TRAVEL_PLANNING_FAILED",
+        "errorType": "Error",
+        "endedAt": "2026-10-22T03:53:42.157Z",
+        "elapsedMs": 10499
+      }
+    ]
+  },
+  "finalStatus": "paused",
+  "runs": [
+    {
+      "id": "dc5d7c62-fc21-4c52-bd88-0a1f4da273e3",
+      "taskId": "4079802f-f835-4c63-8b5b-05e2d818686a",
+      "ownerId": "alice",
+      "agentId": "travel-assistant",
+      "agentVersion": "1",
+      "revision": 1,
+      "mode": "deepseek",
+      "startedAt": "2026-10-22T03:53:31.658Z",
+      "trace": [],
+      "status": "failed",
+      "error": "TRAVEL_PLANNING_FAILED",
+      "errorType": "Error",
+      "endedAt": "2026-10-22T03:53:42.157Z",
+      "elapsedMs": 10499
+    }
+  ],
+  "elapsedSeconds": 10.721
+}

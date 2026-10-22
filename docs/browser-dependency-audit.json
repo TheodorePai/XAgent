@@ -1,0 +1,127 @@
+{
+  "counts": {
+    "info": 0,
+    "low": 0,
+    "moderate": 6,
+    "high": 13,
+    "critical": 0,
+    "total": 19
+  },
+  "packages": [
+    {
+      "name": "@appium/logger",
+      "severity": "moderate",
+      "fixAvailable": true
+    },
+    {
+      "name": "@mastra/agent-browser",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "@mastra/core",
+      "severity": "moderate",
+      "fixAvailable": {
+        "name": "@mastra/core",
+        "version": "1.79.0",
+        "isSemVerMajor": false
+      }
+    },
+    {
+      "name": "@puppeteer/browsers",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "@wdio/config",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "@wdio/utils",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "agent-browser",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "argparse",
+      "severity": "moderate",
+      "fixAvailable": {
+        "name": "@mastra/core",
+        "version": "1.79.0",
+        "isSemVerMajor": false
+      }
+    },
+    {
+      "name": "basic-ftp",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "extract-zip",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "get-uri",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "gray-matter",
+      "severity": "moderate",
+      "fixAvailable": {
+        "name": "@mastra/core",
+        "version": "1.79.0",
+        "isSemVerMajor": false
+      }
+    },
+    {
+      "name": "js-yaml",
+      "severity": "moderate",
+      "fixAvailable": {
+        "name": "@mastra/core",
+        "version": "1.79.0",
+        "isSemVerMajor": false
+      }
+    },
+    {
+      "name": "lodash",
+      "severity": "high",
+      "fixAvailable": true
+    },
+    {
+      "name": "pac-proxy-agent",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "proxy-agent",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "sprintf-js",
+      "severity": "moderate",
+      "fixAvailable": {
+        "name": "@mastra/core",
+        "version": "1.79.0",
+        "isSemVerMajor": false
+      }
+    },
+    {
+      "name": "webdriver",
+      "severity": "high",
+      "fixAvailable": false
+    },
+    {
+      "name": "webdriverio",
+      "severity": "high",
+      "fixAvailable": false
+    }
+  ]
+}
