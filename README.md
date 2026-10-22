@@ -1,5 +1,7 @@
 # XAgent · Mastra 手机工具实验
 
+当前 Studio 已接入出行、参会和信息巡检三个 Agent：[启动与调试](docs/studio.md)、[参会与巡检接入及真实验收](docs/notes-studio.md)。本轮 45 项自动测试通过，并完成 5 次真实 DeepSeek 运行（3 次隔离任务 API、2 次 Studio 页面调用）；设备事件与会议资料为合成测试数据。
+
 新增：[出行助手与原生浏览器工具](docs/travel-assistant.md)。`travel-assistant` 已通过真实 DeepSeek + `@mastra/agent-browser` + Chromium 运行验证，自动生成[延吉三日计划（含来源图片）](docs/yanji-trip.md)；[结构化运行报告](docs/travel-verification.json)。用户请求型任务创建后直接运行，无需设备监测订阅。当前共 3 种 Agent，本地测试 26 项通过。
 
 最新：[第二种 Agent 与服务端复用验证](docs/second-agent-validation.md)已完成。参会 `meeting-prep` 与信息巡检 `information-watch` 共用 `src/tasks/` 的任务、事件、调度、模型和强制输出校验，业务定义在 `src/agents/`。两用户、四任务，最终一轮 9 次真实 DeepSeek 运行、8 组检查通过；本地测试 24 项通过。新增业务可在 registry 登记，保留原会议接口与数据，无客户端渲染开发。

@@ -1,4 +1,6 @@
-# 本地 Mastra Studio：出行助手
+# Mastra Studio：出行、参会与信息巡检
+
+三个 Agent 均可从 Studio 调试。参会和巡检的参数示例、代码入口及真实验收见 [参会与巡检 Studio 接入](notes-studio.md)。服务器当前界面是 http://127.0.0.1:4411（需要 SSH 转发）；下述 4111 是本地开发默认端口。
 
 ## 启动和查看
 
@@ -23,11 +25,11 @@ Studio 使用 `data/studio/mastra.db` 保存调试会话，可刷新页面查看
 
 本地 `.env` 需要 `DEEPSEEK_API_KEY`，并按需设置 `DEEPSEEK_MODEL` / `DEEPSEEK_BASE_URL`。密钥只从服务端环境变量读取，不填入 Studio 上下文。服务器已有的密钥不会自动出现在本机。
 
-真实浏览器需要可用的 Chromium，可通过 `CHROMIUM_PATH` 指定。然后选择「延吉三日游（DeepSeek + 浏览器）」预设运行；会产生实际 API 用量和网页访问。当前原有服务器 Docker 镜像包含 Chromium，本次没有部署或重启该服务器。
+出行助手的真实浏览器需要可用的 Chromium，可通过 `CHROMIUM_PATH` 指定。然后选择「延吉三日游（DeepSeek + 浏览器）」预设运行；会产生实际 API 用量和网页访问。原有服务器 Docker 镜像包含 Chromium；Studio 使用独立容器和数据目录。
 
 ## 代码边界
 
-- `src/mastra/index.ts`：标准 Mastra 入口，仅注册已迁移的出行助手；LibSQL 和 Memory 用于 Studio 会话。
+- `src/mastra/index.ts`：标准 Mastra 入口，注册出行、参会、信息巡检三个 Agent；LibSQL 和 Memory 用于 Studio 会话。
 - `src/agents/travel.ts` 的 `createTravelAgent()`：Studio 和任务系统共用的 Agent、模型选择、指令、处理器和工具。
 - `src/agents/travel-context.ts`：校验配置、建立每次执行的状态、管理资源清理。内部状态是服务端类实例，不接受 JSON 冒充。
 - `src/tools/browser.ts`：只依赖浏览器运行参数，不依赖任务数据库或完整 Task 对象。
@@ -35,7 +37,7 @@ Studio 使用 `data/studio/mastra.db` 保存调试会话，可刷新页面查看
 - `src/tasks/runtime.ts`：继续管理调度、用户并发、取消、运行记录和版本检查后的正式发布。
 - `src/tasks/view.ts` 的 `displayView()`：两种入口共享的 A2UI Schema 强制校验；任务发布前仍再次校验。
 
-原有参会准备和信息监测 Agent 暂未迁移进 Studio，其任务 API 保持可用。没有为本次接入新增通用执行引擎。
+参会和信息巡检也已迁移为独立工厂，工具使用本次执行输入；`src/agents/notes-context.ts` 共用资料检索、执行状态和 artifact 提交逻辑。两者的 `prepareContext()` 把任务事实及已发布基线转换为原生输入；调度器不再向 Agent 注入私有 scope 查找函数或模型。原任务 API 的行为继续保留。
 
 ## 每次执行与历史
 

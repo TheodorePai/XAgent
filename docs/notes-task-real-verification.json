@@ -1,0 +1,225 @@
+{
+  "mode": "deepseek",
+  "sourceCommit": "8cdfff3",
+  "inputs": "synthetic events and notes",
+  "notificationsSent": false,
+  "passed": true,
+  "checks": [
+    {
+      "agentId": "meeting-prep",
+      "revision": 1,
+      "output": {
+        "summary": "本次「发布评审」于 2026-11-03 10:00 开始，议程为：按计划 18:00 上线、当前无阻断项、评审回滚方案。检索资料仅命中 RULE-731（发布规则，负责人林舟），未检索到回滚方案正文、上线检查单或变更记录等支撑材料，相关内容需在会上现场确认，会前不能假定回滚步骤已就绪。\n\n依据 RULE-731：仅在「延期超过 30 分钟」或「出现阻断项」两种情况下建议提醒，因此本次按用户要求只对严重变更发出提醒，普通进度波动不单独提示；若上线时间发生变化，需先确认是否突破 30 分钟门槛。\n\n回滚方面：RULE-731 明确「回滚前应停止新设备调用」，该动作需由负责人在会上确认执行人与时点，会前不做任何外部操作。建议会议聚焦三点：18:00 时间点的可达成性与延期判定口径、阻断项的判定标准、回滚前置条件（停止新设备调用）及决策权限归属。资料编号：RULE-731。",
+        "checklist": [
+          "确认 RULE-731 负责人林舟是否出席，并请其确认当前是否仍无阻断项",
+          "索取并预读回滚方案文档；资料库中未检索到，需会前补齐",
+          "会上明确延期判定口径：超过 30 分钟才算严重变更、触发提醒",
+          "核对 18:00 上线时间点与各环节时间缓冲，评估是否可能突破 30 分钟",
+          "确认回滚前置动作「停止新设备调用」的执行人、触发条件与决策权限",
+          "准备阻断项判定标准清单，避免会上对是否阻断产生分歧",
+          "会后仅对严重变更（延期超 30 分钟或出现阻断项）形成提醒记录"
+        ],
+        "sourceIds": [
+          "RULE-731"
+        ]
+      },
+      "trace": [
+        {
+          "tool": "searchMeetingNotes",
+          "sourceIds": [
+            "RULE-731"
+          ]
+        },
+        {
+          "tool": "searchMeetingNotes",
+          "sourceIds": [
+            "RULE-731"
+          ]
+        },
+        {
+          "tool": "submitBrief",
+          "sourceIds": [
+            "RULE-731"
+          ]
+        }
+      ],
+      "usage": {
+        "inputTokens": 5053,
+        "outputTokens": 1302,
+        "totalTokens": 6355,
+        "reasoningTokens": 247,
+        "cachedInputTokens": 2176,
+        "raw": {
+          "inputTokens": {
+            "total": 3046,
+            "noCache": 1766,
+            "cacheRead": 1280
+          },
+          "outputTokens": {
+            "total": 461,
+            "text": 461,
+            "reasoning": 0
+          },
+          "raw": {
+            "prompt_tokens": 3046,
+            "completion_tokens": 461,
+            "total_tokens": 3507,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 1280,
+            "prompt_cache_miss_tokens": 1766
+          }
+        }
+      },
+      "a2uiMessages": 3
+    },
+    {
+      "agentId": "information-watch",
+      "revision": 1,
+      "output": {
+        "summary": "发布状态（release-status）首次建立基线：计划18:00上线，无阻断项，回滚方案在评审中。上次无基线，故变化为 initial，不构成需提醒的变化。按资料 RULE-731，延期超过30分钟或出现阻断项才建议提醒，当前未触发，故建议静默。摘要保留资料编号 RULE-731。",
+        "change": "initial",
+        "notification": "quiet",
+        "findings": [
+          "当前观察（release-status）：计划18:00上线，无阻断项；回滚方案处于评审阶段，尚未给出结论。",
+          "确定性比较结果为 initial（上次无已发布基线），按规则首次建立基线必须不提醒，本次仅登记基线供后续对比。",
+          "资料 RULE-731 规定：负责人为林舟；延期超过30分钟或出现阻断项建议提醒；回滚前应停止新设备调用。",
+          "本次未出现延期或阻断项，不满足 RULE-731 的提醒条件，也未发生回滚动作，因此建议 notification=quiet。",
+          "后续巡检应重点捕获两类信号：上线时间较18:00推迟超过30分钟，或新增阻断项；若回滚执行，需提示先停止新设备调用（RULE-731）。",
+          "本结论仅基于观察与授权测试资料库，未进行外网查询，notification 仅为提醒建议，不代表已发送通知。"
+        ],
+        "sourceIds": [
+          "release-status",
+          "RULE-731"
+        ]
+      },
+      "trace": [
+        {
+          "tool": "readPreviousObservation"
+        },
+        {
+          "tool": "searchReferenceNotes",
+          "sourceIds": [
+            "RULE-731"
+          ]
+        },
+        {
+          "tool": "submitInspection",
+          "sourceIds": [
+            "release-status",
+            "RULE-731"
+          ]
+        }
+      ],
+      "usage": {
+        "inputTokens": 4854,
+        "outputTokens": 830,
+        "totalTokens": 5684,
+        "reasoningTokens": 37,
+        "cachedInputTokens": 2176,
+        "raw": {
+          "inputTokens": {
+            "total": 2613,
+            "noCache": 1461,
+            "cacheRead": 1152
+          },
+          "outputTokens": {
+            "total": 329,
+            "text": 329,
+            "reasoning": 0
+          },
+          "raw": {
+            "prompt_tokens": 2613,
+            "completion_tokens": 329,
+            "total_tokens": 2942,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 1152,
+            "prompt_cache_miss_tokens": 1461
+          }
+        }
+      },
+      "a2uiMessages": 3
+    },
+    {
+      "agentId": "information-watch",
+      "revision": 2,
+      "output": {
+        "summary": "发布状态发生变化：上次为「计划18:00上线，无阻断项；评审回滚方案」，当前为「上线从18:00推迟到20:00，新增阻断项：设备结果回传超时」。延期2小时且新增阻断项，同时涉及回滚相关话题，判断为严重变更，建议提醒。依据资料编号RULE-731：延期超过30分钟或出现阻断项建议提醒，回滚前应停止新设备调用。来源：观察 release-status、资料 RULE-731。",
+        "change": "changed",
+        "notification": "notify",
+        "findings": [
+          "变化点1（延期）：上线时间由18:00推迟至20:00，延期约120分钟，超过RULE-731设定的30分钟提醒阈值。",
+          "变化点2（阻断项）：原状态为「无阻断项」，现新增阻断项「设备结果回传超时」，同时触发RULE-731的提醒条件（延期超30分钟或出现阻断项）。",
+          "回滚关注：上次观察显示正在「评审回滚方案」；RULE-731规定回滚前应停止新设备调用，而当前阻断项与设备结果回传相关，建议先确认设备调用是否已停止及其对回滚路径的影响。",
+          "责任与核对：RULE-731记录负责人为林舟，建议据此核对20:00新时间点是否已确认、阻断项是否有明确处置结论。",
+          "通知判断：用户要求仅严重变更建议提醒；本次为上线延期2小时并新增阻断项，属严重变更，故按RULE-731建议提醒（notify 仅为决策建议，未实际发送任何通知）。"
+        ],
+        "sourceIds": [
+          "release-status",
+          "RULE-731"
+        ]
+      },
+      "trace": [
+        {
+          "tool": "readPreviousObservation"
+        },
+        {
+          "tool": "searchReferenceNotes",
+          "sourceIds": [
+            "RULE-731"
+          ]
+        },
+        {
+          "tool": "submitInspection",
+          "sourceIds": [
+            "release-status",
+            "RULE-731"
+          ]
+        }
+      ],
+      "usage": {
+        "inputTokens": 5334,
+        "outputTokens": 1046,
+        "totalTokens": 6380,
+        "reasoningTokens": 233,
+        "cachedInputTokens": 3072,
+        "raw": {
+          "inputTokens": {
+            "total": 3030,
+            "noCache": 1750,
+            "cacheRead": 1280
+          },
+          "outputTokens": {
+            "total": 291,
+            "text": 291,
+            "reasoning": 0
+          },
+          "raw": {
+            "prompt_tokens": 3030,
+            "completion_tokens": 291,
+            "total_tokens": 3321,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 1280,
+            "prompt_cache_miss_tokens": 1750
+          }
+        }
+      },
+      "a2uiMessages": 3
+    }
+  ],
+  "elapsedSeconds": 20.345
+}
