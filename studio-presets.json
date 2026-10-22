@@ -1,0 +1,10 @@
+{
+  "延吉三日游（模拟，不联网）": {
+    "config": { "destination": "延吉", "days": 3 },
+    "mode": "mock"
+  },
+  "延吉三日游（DeepSeek + 浏览器）": {
+    "config": { "destination": "延吉", "days": 3 },
+    "mode": "deepseek"
+  }
+}

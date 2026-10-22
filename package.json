@@ -10,6 +10,7 @@
     "build": "tsc",
     "start": "node --env-file-if-exists=.env dist/server.js",
     "dev": "tsx --env-file-if-exists=.env src/server.ts",
+    "studio": "node --env-file-if-exists=.env scripts/studio.mjs",
     "test": "npm run build && tsx --test --test-concurrency=1 tests/*.test.ts",
     "verify": "python scripts/verify.py"
   },
@@ -21,7 +22,9 @@
     "zod": "4.3.6"
   },
   "devDependencies": {
+    "@mastra/memory": "1.39.0",
     "@types/node": "24.10.1",
+    "mastra": "1.35.0",
     "tsx": "4.20.6",
     "typescript": "5.9.3"
   }

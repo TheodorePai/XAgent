@@ -1,6 +1,10 @@
 import { readFileSync } from 'node:fs';
-import { Ajv2020 } from 'ajv/dist/2020.js';
+import { createRequire } from 'node:module';
 import type { Registry, Task } from './types.js';
+
+// Keep the CommonJS subpath intact: the Mastra Windows bundler otherwise
+// externalizes it as "ajv\\dist\\2020.js", which Node's ESM resolver rejects.
+const { Ajv2020 }: typeof import('ajv/dist/2020.js') = createRequire(import.meta.url)('ajv/dist/2020.js');
 
 // Official schemas pinned in REVISION; catalog.json is the selected Basic catalog.
 const base = new URL('../../docs/vendor/a2ui/', import.meta.url);
@@ -17,6 +21,12 @@ export function taskView(task: Task, initial: boolean, definitions: Registry) {
   if (!definition) throw new Error('UNKNOWN_AGENT');
   const display = definition.display(task);
   const surfaceId = `${definition.surfacePrefix}-${task.id}`;
+  return displayView(surfaceId, task.publishedRevision, display, initial);
+}
+
+/** Shared schema gate for task publication and standalone Agent previews. */
+export function displayView(surfaceId: string, revision: number,
+  display: { title: string; summary: string; items: string[]; sourceIds: string[] }, initial = true) {
   const version = 'v0.9.1';
   // Fixed binding tree: future revisions replace the model, never add stale rows.
   const components = [
@@ -33,8 +43,8 @@ export function taskView(task: Task, initial: boolean, definitions: Registry) {
   messages.push({ version, updateDataModel: { surfaceId, path: '/', value: {
     title: display.title, summary: display.summary,
     checklist: display.items.map((v, i) => `${i + 1}. ${v}`).join('\n'),
-    sources: display.sourceIds.join(', '), revision: task.publishedRevision,
+    sources: display.sourceIds.join(', '), revision,
   } } });
   for (const message of messages) if (!validate(message)) throw new Error('A2UI_SCHEMA_INVALID');
-  return { publishedRevision: task.publishedRevision, surfaceId, protocol: version, messages };
+  return { publishedRevision: revision, surfaceId, protocol: version, messages };
 }

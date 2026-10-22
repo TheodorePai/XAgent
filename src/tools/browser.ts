@@ -1,12 +1,15 @@
 import { AgentBrowser } from '@mastra/agent-browser';
 import { lookup } from 'node:dns/promises';
 import { createHash } from 'node:crypto';
-import type { Scope } from '../tasks/types.js';
+export interface BrowserScope {
+  runId: string; mode: 'mock' | 'deepseek'; destination: string;
+  trace: { tool: string; sourceIds?: string[] }[];
+}
 
 export interface WebSource { id: string; title: string; url: string; text: string; kind: 'search' | 'page'; fetchedAt: string }
 export interface WebImage { id: string; url: string; sourceId: string; sourcePage: string; caption: string; width: number; height: number }
 interface Session { browser?: AgentBrowser; sources: Map<string, WebSource>; images: Map<string, WebImage>; calls: number; queue: Promise<unknown> }
-const sessions = new WeakMap<Scope, Session>();
+const sessions = new WeakMap<BrowserScope, Session>();
 const id = (prefix: string, url: string) => prefix + createHash('sha256').update(url).digest('hex').slice(0, 12);
 const contentDomains = ['gov.cn', 'news.cn', 'xinhuanet.com', 'people.com.cn', 'chinanews.com', 'chinanews.com.cn', 'cnr.cn', 'yanjinews.com', 'ybnews.cn', 'sohu.com', 'news.qq.com', 'thepaper.cn', 'ctnews.com.cn', 'ce.cn'];
 export function allowedContentURL(value: string) {
@@ -20,12 +23,12 @@ function publicAddress(value: string) {
     !(p[0] === 169 && p[1] === 254) && !(p[0] === 172 && p[1] >= 16 && p[1] <= 31) &&
     !(p[0] === 192 && p[1] === 168) && !(p[0] === 100 && p[1] >= 64 && p[1] <= 127);
 }
-function session(scope: Scope) {
+function session(scope: BrowserScope) {
   let s = sessions.get(scope);
   if (!s) { s = { sources: new Map(), images: new Map(), calls: 0, queue: Promise.resolve() }; sessions.set(scope, s); }
   return s;
 }
-async function browser(scope: Scope) {
+async function browser(scope: BrowserScope) {
   const s = session(scope);
   if (++s.calls > 8) throw new Error('BROWSER_CALL_BUDGET_EXCEEDED');
   if (!s.browser) {
@@ -52,7 +55,7 @@ async function browser(scope: Scope) {
   }
   return s.browser;
 }
-function source(scope: Scope, title: string, url: string, text: string, kind: WebSource['kind']) {
+function source(scope: BrowserScope, title: string, url: string, text: string, kind: WebSource['kind']) {
   const item = { id: id('S-', url), title: title.slice(0, 200), url, text: text.slice(0, 4500), kind, fetchedAt: new Date().toISOString() };
   const s = session(scope), old = s.sources.get(item.id);
   if (!old || kind === 'page') s.sources.set(item.id, item);
@@ -61,9 +64,9 @@ function source(scope: Scope, title: string, url: string, text: string, kind: We
 const searchScript = `Array.from(document.querySelectorAll('#b_results li.b_algo')).map(n=>({title:n.querySelector('h2')?.textContent||'',url:n.querySelector('h2 a')?.href||'',text:n.querySelector('.b_caption p')?.textContent||n.textContent.slice(0,600)})).slice(0,10)`;
 const pageScript = `({title:document.title,text:(document.querySelector('article')||document.querySelector('.TRS_Editor')||document.querySelector('#zoom')||document.body).innerText.slice(0,4500),images:Array.from(document.images).filter(i=>i.naturalWidth>=300&&i.naturalHeight>=150).slice(0,12).map(i=>({url:i.currentSrc||i.src,caption:i.alt||i.title||document.title,width:i.naturalWidth,height:i.naturalHeight}))})`;
 
-async function doSearch(scope: Scope, query: string) {
-  if (scope.task.mode === 'mock') {
-    const title = String(scope.task.config?.destination) + '旅游资料[MOCK]';
+async function doSearch(scope: BrowserScope, query: string) {
+  if (scope.mode === 'mock') {
+    const title = scope.destination + '旅游资料[MOCK]';
     const results = [1, 2].map(n => source(scope, title, `https://www.jl.gov.cn/mock-travel-${n}`, `${title}，景点${n}，只用于脚本测试。`, 'search'));
     scope.trace.push({ tool: 'browserSearch', sourceIds: results.map(s => s.id) }); return { simulated: true, results };
   }
@@ -84,10 +87,10 @@ async function doSearch(scope: Scope, query: string) {
   scope.trace.push({ tool: 'browserSearch', sourceIds: results.map(s => s.id) });
   return { provider: 'mastra-agent-browser', results: results.slice(0, 6), note: '仅保留政府和指定公共新闻来源；搜索摘要不是网页全文。没有结果时换用带 site:gov.cn 的查询。' };
 }
-async function doRead(scope: Scope, sourceId: string) {
+async function doRead(scope: BrowserScope, sourceId: string) {
   const original = session(scope).sources.get(sourceId);
   if (!original) throw new Error('SOURCE_NOT_DISCOVERED_IN_THIS_RUN');
-  if (scope.task.mode === 'mock') {
+  if (scope.mode === 'mock') {
     const item = source(scope, original.title, original.url, original.text + ' 适合安排步行、美食和文化体验。', 'page');
     const image: WebImage = { id: id('I-', original.url), url: original.url + '.jpg', sourceId, sourcePage: original.url, caption: '[MOCK] 测试图片', width: 800, height: 600 };
     session(scope).images.set(image.id, image); scope.trace.push({ tool: 'browserRead', sourceIds: [sourceId] }); return { simulated: true, ...item };
@@ -112,18 +115,18 @@ async function doRead(scope: Scope, sourceId: string) {
   }
   scope.trace.push({ tool: 'browserRead', sourceIds: [item.id] }); return item;
 }
-export function browserImages(scope: Scope) {
+export function browserImages(scope: BrowserScope) {
   scope.trace.push({ tool: 'browserImages' });
   return { images: [...session(scope).images.values()].slice(0, 8), note: '实际网页加载的图片；caption 来自网页，不代表模型已目视核验。保留 sourcePage，使用授权未另行确认。' };
 }
-export function webEvidence(scope: Scope) { return session(scope); }
-function serial<T>(scope: Scope, action: () => Promise<T>): Promise<T> {
+export function webEvidence(scope: BrowserScope) { return session(scope); }
+function serial<T>(scope: BrowserScope, action: () => Promise<T>): Promise<T> {
   const s = session(scope), next = s.queue.then(action);
   s.queue = next.catch(() => {}); return next;
 }
-export function browserSearch(scope: Scope, query: string) { return serial(scope, () => doSearch(scope, query)); }
-export function browserRead(scope: Scope, sourceId: string) { return serial(scope, () => doRead(scope, sourceId)); }
-export async function closeBrowser(scope: Scope) {
+export function browserSearch(scope: BrowserScope, query: string) { return serial(scope, () => doSearch(scope, query)); }
+export function browserRead(scope: BrowserScope, sourceId: string) { return serial(scope, () => doRead(scope, sourceId)); }
+export async function closeBrowser(scope: BrowserScope) {
   const s = sessions.get(scope); if (s) await s.queue;
   sessions.delete(scope);
   if (s?.browser) await s.browser.close().catch(() => {});

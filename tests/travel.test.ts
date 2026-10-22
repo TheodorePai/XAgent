@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 import { allowedContentURL, browserSearch, browserRead, webEvidence } from '../src/tools/browser.js';
-import type { Scope } from '../src/tasks/types.js';
+import type { BrowserScope } from '../src/tools/browser.js';
 import { TaskStore } from '../src/tasks/store.js';
 import { definitions } from '../src/agents/registry.js';
 
@@ -66,7 +66,7 @@ test('browser evidence cannot cross runs and content navigation excludes unappro
   try {
     const result = store.create('alice', { name: 'travel', instruction: 'x', notes: [], agentId: 'travel-assistant', config: { destination: '延吉', days: 3 } });
     const task = store.task(result.task.id);
-    const one: Scope = { runId: 'one', task, trace: [] }, two: Scope = { runId: 'two', task, trace: [] };
+    const one: BrowserScope = { runId: 'one', mode: task.mode, destination: '延吉', trace: [] }, two: BrowserScope = { ...one, runId: 'two', trace: [] };
     const search = await browserSearch(one, '延吉');
     assert.equal(webEvidence(two).sources.size, 0);
     await assert.rejects(() => browserRead(two, search.results[0].id), /SOURCE_NOT_DISCOVERED/);

@@ -126,6 +126,12 @@ python3 scripts/verify-deepseek.py --restart-container xagent-mastra-lab
 
 该命令自行模拟设备回调，不需要同时启动 `phone-simulator.py`。它会重启本实验容器，并在存在其他活跃实验时拒绝运行。输出保存在 `docs/deepseek-verification.json`，包括真实回复、工具调用事件和耗时；不会读取或输出 key。
 
+## 本地 Studio 调试
+
+执行 `npm.cmd run studio`，打开 http://127.0.0.1:4111。当前已接入「出行助手」；选择 Request context 中的延吉 mock 预设并 Save，即可聊天、检查工具结果和经过校验的行程 JSON。调试会话与正式任务数据独立，原有任务 API 保持可用。
+
+启动、真实模型配置、代码边界及验证说明见 [Studio 使用说明](docs/studio.md)。
+
 ## 设备协议
 
 | 接口 | 用途 |

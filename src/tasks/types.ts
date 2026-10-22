@@ -27,6 +27,8 @@ export interface AgentDefinition {
   initialEvent?(task: Task): TaskEvent;
   limits?: { maxSteps: number; timeoutMs: number; concurrency: number };
   afterRun?(scope: Scope): Promise<void>;
+  /** Adapt a persisted task to an Agent's native context; return a cleanup fallback. */
+  prepareContext?(context: RequestContext, scope: Scope): (() => Promise<void>);
   configSchema: z.ZodType<Record<string, unknown>>;
   parseEvent(task: Task, input: unknown): TaskEvent;
   validateOutput(task: Task, input: unknown): Record<string, unknown>;

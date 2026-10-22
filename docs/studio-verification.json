@@ -1,0 +1,191 @@
+{
+  "timestamp": "2026-10-22T09:10:21.632Z",
+  "mode": "mock",
+  "realModelCalled": false,
+  "realBrowserCalled": false,
+  "status": 200,
+  "elapsedMs": 70,
+  "formalTaskDataUnchanged": true,
+  "tools": [
+    "browserSearch",
+    "browserRead",
+    "browserRead",
+    "browserImages",
+    "submitTripPlan"
+  ],
+  "response": "[MOCK] 延吉3日行程演示\n\n[MOCK] 延吉行程；安排延吉三日游，偏重美食和步行。\n\n**第1天：文化体验**\n- 上午：[MOCK] 测试行程\n\n**第2天：文化体验**\n- 上午：[MOCK] 测试行程\n\n**第3天：文化体验**\n- 上午：[MOCK] 测试行程\n\n这是模拟结果，未调用真实模型或浏览器。完整行程、来源、测试图片和 A2UI 数据见 SubmitTripPlan 的 artifact。",
+  "artifact": {
+    "output": {
+      "summary": "[MOCK] 延吉行程；安排延吉三日游，偏重美食和步行。",
+      "assumptions": [
+        "未指定出发地和日期；不含往返交通"
+      ],
+      "days": [
+        {
+          "day": 1,
+          "title": "文化体验",
+          "activities": [
+            {
+              "period": "上午",
+              "plan": "[MOCK] 测试行程",
+              "sourceIds": [
+                "S-e81fba724617"
+              ]
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "title": "文化体验",
+          "activities": [
+            {
+              "period": "上午",
+              "plan": "[MOCK] 测试行程",
+              "sourceIds": [
+                "S-e81fba724617"
+              ]
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "title": "文化体验",
+          "activities": [
+            {
+              "period": "上午",
+              "plan": "[MOCK] 测试行程",
+              "sourceIds": [
+                "S-e81fba724617"
+              ]
+            }
+          ]
+        }
+      ],
+      "budgetEstimate": "仅为示例，不是实时价格",
+      "notes": [
+        "测试资料，无真实联网"
+      ],
+      "sourceIds": [
+        "S-e81fba724617",
+        "S-689db57e81e2"
+      ],
+      "imageIds": [
+        "I-e81fba724617",
+        "I-689db57e81e2"
+      ],
+      "sources": [
+        {
+          "id": "S-e81fba724617",
+          "title": "延吉旅游资料[MOCK]",
+          "url": "https://www.jl.gov.cn/mock-travel-1",
+          "kind": "page",
+          "fetchedAt": "2026-10-22T09:10:21.606Z"
+        },
+        {
+          "id": "S-689db57e81e2",
+          "title": "延吉旅游资料[MOCK]",
+          "url": "https://www.jl.gov.cn/mock-travel-2",
+          "kind": "page",
+          "fetchedAt": "2026-10-22T09:10:21.611Z"
+        }
+      ],
+      "images": [
+        {
+          "id": "I-e81fba724617",
+          "url": "https://www.jl.gov.cn/mock-travel-1.jpg",
+          "sourceId": "S-e81fba724617",
+          "sourcePage": "https://www.jl.gov.cn/mock-travel-1",
+          "caption": "[MOCK] 测试图片",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "id": "I-689db57e81e2",
+          "url": "https://www.jl.gov.cn/mock-travel-2.jpg",
+          "sourceId": "S-689db57e81e2",
+          "sourcePage": "https://www.jl.gov.cn/mock-travel-2",
+          "caption": "[MOCK] 测试图片",
+          "width": 800,
+          "height": 600
+        }
+      ],
+      "destination": "延吉"
+    },
+    "view": {
+      "publishedRevision": 1,
+      "surfaceId": "travel-preview-75da3fda-fac5-4f2c-afdb-99854ae70617",
+      "protocol": "v0.9.1",
+      "messages": [
+        {
+          "version": "v0.9.1",
+          "createSurface": {
+            "surfaceId": "travel-preview-75da3fda-fac5-4f2c-afdb-99854ae70617",
+            "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateComponents": {
+            "surfaceId": "travel-preview-75da3fda-fac5-4f2c-afdb-99854ae70617",
+            "components": [
+              {
+                "id": "root",
+                "component": "Column",
+                "children": [
+                  "title",
+                  "summary",
+                  "checklist",
+                  "sources"
+                ]
+              },
+              {
+                "id": "title",
+                "component": "Text",
+                "text": {
+                  "path": "/title"
+                },
+                "variant": "h2"
+              },
+              {
+                "id": "summary",
+                "component": "Text",
+                "text": {
+                  "path": "/summary"
+                }
+              },
+              {
+                "id": "checklist",
+                "component": "Text",
+                "text": {
+                  "path": "/checklist"
+                }
+              },
+              {
+                "id": "sources",
+                "component": "Text",
+                "text": {
+                  "path": "/sources"
+                },
+                "variant": "caption"
+              }
+            ]
+          }
+        },
+        {
+          "version": "v0.9.1",
+          "updateDataModel": {
+            "surfaceId": "travel-preview-75da3fda-fac5-4f2c-afdb-99854ae70617",
+            "path": "/",
+            "value": {
+              "title": "延吉出行计划",
+              "summary": "[MOCK] 延吉行程；安排延吉三日游，偏重美食和步行。",
+              "checklist": "1. 第1天 文化体验：上午 [MOCK] 测试行程\n2. 第2天 文化体验：上午 [MOCK] 测试行程\n3. 第3天 文化体验：上午 [MOCK] 测试行程",
+              "sources": "S-e81fba724617, S-689db57e81e2",
+              "revision": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}

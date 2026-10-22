@@ -5,4 +5,5 @@ data/
 *.log
 *.tgz
 .cache/
+.mastra/
 __pycache__/

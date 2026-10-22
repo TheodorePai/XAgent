@@ -49,8 +49,10 @@ export class TaskRuntime {
     const record = { id, taskId: task.id, ownerId: task.ownerId, agentId: task.agentId, agentVersion: task.agentVersion,
       revision: task.revision, mode: task.mode, startedAt, trace: value.trace };
     this.store.recordRun({ ...record, status: 'running' });
+    let cleanup: (() => Promise<void>) | undefined;
     try {
       const requestContext = new RequestContext(); requestContext.set('taskRunId', id);
+      cleanup = definition.prepareContext?.(requestContext, value);
       const result = await agent.generate(JSON.stringify(definition.prompt(task)),
         { runId: id, requestContext, maxSteps: definition.limits?.maxSteps || 5, modelSettings: { maxRetries: 0 },
           abortSignal: AbortSignal.any([controller.signal, AbortSignal.timeout(definition.limits?.timeoutMs || 60000)]) });
@@ -68,7 +70,7 @@ export class TaskRuntime {
       this.store.recordRun({ ...record, status: 'failed', error: definition.errorCode,
         errorType: error instanceof Error ? error.name : 'Error', endedAt: new Date().toISOString(), elapsedMs: Date.now() - t0 });
     } finally {
-      try { await definition.afterRun?.(value); } finally { this.scopes.delete(id); }
+      try { await cleanup?.(); await definition.afterRun?.(value); } finally { this.scopes.delete(id); }
     }
   }
   cancel(id: string) { this.active.get(id)?.controller.abort(); }

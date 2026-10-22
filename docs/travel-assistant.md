@@ -2,6 +2,8 @@
 
 范围：服务端生成计划与图片元数据；不开发客户端、不预订或支付。验证目的地为延吉，默认三天，出发地、日期和预算未指定时在结果中说明假设。
 
+本地出行助手现已支持标准 Mastra Studio 调试，与任务 API 复用 Agent、工具和校验；使用方式及本次 mock 验收见 [studio.md](studio.md)。本文后面的服务器真实验证数据记录的是此前部署版本。
+
 ## 工具是怎样接入的
 
 Mastra 支持两种浏览器接入：原生 Browser Provider，以及通过 MCP 加载浏览器工具。本实验使用官方 `@mastra/agent-browser@0.5.4`，与已有 Core 1.78.0 的 peer 版本范围兼容。它以 Playwright / agent-browser 控制服务器上的无头 Chromium，不需要搜索 API key。
