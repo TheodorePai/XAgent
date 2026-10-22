@@ -82,4 +82,24 @@ Studio CLI / Memory 是开发依赖；现有 Docker 部署继续运行任务 API
 
 真实验证脚本是 `scripts/verify-studio-real.mjs`，供带有 Chromium、服务器端密钥和标准 Mastra 服务的隔离容器执行；默认只请求本机 4411 端口、只运行一轮，不会暗中回退 mock。报告写入容器 `/app/data/studio-real-verification.json`。复现时应使用独立数据目录，不指向正式任务数据。
 
+## Studio 页面真实调用验收
+
+2026-10-22 补做实际浏览器聊天验证：从 Studio 输入框发送延吉三日游要求，使用 `mode=deepseek` 和服务器已有密钥，成功收到 `deepseek-flash` 的流式工具调用及最终中文回复。此前的 HTTP generate 验证不能代替这项界面验证。
+
+本轮共 9 次工具调用：3 次搜索、3 次网页读取、1 次图片整理、2 次计划提交。第一次提交因为每天活动数量及多余字段被 Schema 拒绝，模型根据错误反馈修正，第二次返回 `accepted: true`。最终 artifact 包含 3 天行程、3 个来源页面、4 张网页加载图片和 3 条经过校验的 A2UI 消息；聊天回复提供图片链接，没有内嵌图片预览。刷新后真实会话历史仍保留。报告见 [studio-real-ui-verification.json](studio-real-ui-verification.json)。来源包含转载文章，不代表三个独立来源交叉验证。
+
+![Studio 中真实 DeepSeek 回复](studio-real-ui.png)
+
+第一次界面请求在原 768 MiB 容器中触及 Node 默认堆上限，进程退出；这轮不计通过。重试把独立 Studio 容器调整为 1280 MiB，显式设置 `NODE_OPTIONS=--max-old-space-size=768`，成功完成。请求结束后容器内存约 675 MiB，未发现 Chromium / agent-browser 残留进程；正式服务 14 个任务及运行记录内容摘要未变化。这是单轮成功验证，尚未验证长时间运行或并发容量。
+
+本轮重试明确要求最多搜索三次，再读取页面。原提示词在政府来源无结果时可能反复搜索，不能据此声称默认检索策略已经足够稳定；后续应在工具层为页面读取预留预算并改善无结果反馈。
+
+真实 Studio 保留在服务器容器 `xagent-studio`，仅监听 `127.0.0.1:4411`，使用独立 `data/studio`；密钥仍只在服务器。当前本机通过 SSH 转发访问，原来的本地 `4111` 页面仍是 mock 会话。转发断开后可重新建立：
+
+```powershell
+ssh -N -L 127.0.0.1:4411:127.0.0.1:4411 -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 tencent-server
+```
+
+[打开本次真实会话](http://127.0.0.1:4411/agents/travel-assistant/threads/02ba92f2-2061-4308-b3ec-1f0c16759c8d)。当前浏览器上下文已设为 `{"config":{"destination":"延吉","days":3},"mode":"deepseek"}`。如果重设上下文，在 Request context 编辑器输入后点击 Save，并确认模型显示 DeepSeek；编辑器仅修改 DOM value 不会更新应用状态。
+
 参考：[Studio](https://mastra.ai/docs/studio/overview)、[RequestContext](https://mastra.ai/docs/server/request-context)、[Processors](https://mastra.ai/docs/agents/processors)。
