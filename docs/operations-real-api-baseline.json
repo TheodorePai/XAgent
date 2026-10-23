@@ -1,0 +1,897 @@
+{
+  "clientPassed": false,
+  "reason": "Server completed all six real Agent runs; Windows client aggregation failed decoding UTF-8 as GBK. Fixed in a455332; full mock pipeline and a bounded real request revalidated.",
+  "serverReport": {
+    "runId": "20261023T022556-426400",
+    "sourceCommit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+    "mode": "deepseek",
+    "suite": "all",
+    "startedAt": "2026-10-23T02:25:57.829380+00:00",
+    "passed": true,
+    "uiVerified": false,
+    "limitations": [
+      "API verification does not verify Studio browser chat.",
+      "Events and note libraries are synthetic; no real phone or notification."
+    ],
+    "checks": [
+      {
+        "type": "agent-api",
+        "mode": "deepseek",
+        "requestedCommit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+        "startedAt": "2026-10-23T02:25:57.971Z",
+        "configuredModel": "deepseek-flash",
+        "passed": true,
+        "uiVerified": false,
+        "syntheticInputs": true,
+        "checks": [
+          {
+            "agentId": "meeting-prep",
+            "elapsedMs": 6196,
+            "usage": {
+              "inputTokens": 4180,
+              "outputTokens": 870,
+              "totalTokens": 5050,
+              "reasoningTokens": 7,
+              "cachedInputTokens": 2304,
+              "raw": {
+                "inputTokens": {
+                  "total": 2354,
+                  "noCache": 1458,
+                  "cacheRead": 896
+                },
+                "outputTokens": {
+                  "total": 425,
+                  "text": 425,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 2354,
+                  "completion_tokens": 425,
+                  "total_tokens": 2779,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 896
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 896,
+                  "prompt_cache_miss_tokens": 1458
+                }
+              }
+            },
+            "tools": [
+              {
+                "name": "searchMeetingNotes",
+                "error": false
+              },
+              {
+                "name": "submitBrief",
+                "accepted": true,
+                "error": false
+              }
+            ],
+            "artifact": {
+              "output": {
+                "summary": "发布评审会议（2026-11-03 10:00）议题为核对移动端工具上线风险、负责人及回滚预案。现有资料（release-042）显示：负责人为林舟；移动端工具回传超时阈值为15秒，超过即停止本轮操作；发布前必须准备回滚开关。会前建议：请林舟本人确认15秒阈值的实测数据与超时后的用户提示方案，明确回滚开关的决策人、触发条件与执行时长，并准备超时与回滚两类风险的发生概率和影响面说明。本次仅检索到1份内部合成验收资料，未获得具体版本号、灰度范围、监控指标与上线时间窗等信息，建议在会上一并补齐并要求责任人确认，勿在资料缺失处做推测。",
+                "checklist": [
+                  "确认移动端工具负责人林舟参会，并请其准备15秒超时阈值的压测/线上数据",
+                  "准备超时（>15秒）触发停止本轮操作后的用户提示与重试方案",
+                  "落实回滚开关：指定操作人、触发条件、回滚决策流程与预计耗时",
+                  "补充上线风险清单：按概率与影响面排序，标注15秒超时与回滚相关项",
+                  "补齐资料缺口（版本、灰度范围、监控与告警指标、上线时间窗）并在会上确认",
+                  "准备回滚演练或演练结果记录，作为发布放行依据"
+                ],
+                "sourceIds": [
+                  "release-042"
+                ]
+              },
+              "view": {
+                "publishedRevision": 1,
+                "surfaceId": "meeting-prep-preview-abc5b826-7394-43aa-92ee-cb0198579b51",
+                "protocol": "v0.9.1",
+                "messages": [
+                  {
+                    "version": "v0.9.1",
+                    "createSurface": {
+                      "surfaceId": "meeting-prep-preview-abc5b826-7394-43aa-92ee-cb0198579b51",
+                      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                    }
+                  },
+                  {
+                    "version": "v0.9.1",
+                    "updateComponents": {
+                      "surfaceId": "meeting-prep-preview-abc5b826-7394-43aa-92ee-cb0198579b51",
+                      "components": [
+                        {
+                          "id": "root",
+                          "component": "Column",
+                          "children": [
+                            "title",
+                            "summary",
+                            "checklist",
+                            "sources"
+                          ]
+                        },
+                        {
+                          "id": "title",
+                          "component": "Text",
+                          "text": {
+                            "path": "/title"
+                          },
+                          "variant": "h2"
+                        },
+                        {
+                          "id": "summary",
+                          "component": "Text",
+                          "text": {
+                            "path": "/summary"
+                          }
+                        },
+                        {
+                          "id": "checklist",
+                          "component": "Text",
+                          "text": {
+                            "path": "/checklist"
+                          }
+                        },
+                        {
+                          "id": "sources",
+                          "component": "Text",
+                          "text": {
+                            "path": "/sources"
+                          },
+                          "variant": "caption"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "version": "v0.9.1",
+                    "updateDataModel": {
+                      "surfaceId": "meeting-prep-preview-abc5b826-7394-43aa-92ee-cb0198579b51",
+                      "path": "/",
+                      "value": {
+                        "title": "发布评审会议",
+                        "summary": "发布评审会议（2026-11-03 10:00）议题为核对移动端工具上线风险、负责人及回滚预案。现有资料（release-042）显示：负责人为林舟；移动端工具回传超时阈值为15秒，超过即停止本轮操作；发布前必须准备回滚开关。会前建议：请林舟本人确认15秒阈值的实测数据与超时后的用户提示方案，明确回滚开关的决策人、触发条件与执行时长，并准备超时与回滚两类风险的发生概率和影响面说明。本次仅检索到1份内部合成验收资料，未获得具体版本号、灰度范围、监控指标与上线时间窗等信息，建议在会上一并补齐并要求责任人确认，勿在资料缺失处做推测。",
+                        "checklist": "1. 确认移动端工具负责人林舟参会，并请其准备15秒超时阈值的压测/线上数据\n2. 准备超时（>15秒）触发停止本轮操作后的用户提示与重试方案\n3. 落实回滚开关：指定操作人、触发条件、回滚决策流程与预计耗时\n4. 补充上线风险清单：按概率与影响面排序，标注15秒超时与回滚相关项\n5. 补齐资料缺口（版本、灰度范围、监控与告警指标、上线时间窗）并在会上确认\n6. 准备回滚演练或演练结果记录，作为发布放行依据",
+                        "sources": "release-042",
+                        "revision": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "text": "我会先检索会议资料。简报已提交成功（版本 1）。以下是可读版本。\n\n## 会前简报：发布评审会议\n**时间**：2026-11-03 10:00（+08:00）\n**议程**：核对移动端工具上线风险、负责人及回滚预案\n\n**要点：目前只有 1 份内部资料（release-042）。**\n- 负责人：**林舟**\n- 超时规则：移动端工具的**回传超时阈值为 15 秒**，一旦超过，就会**停止本轮操作**\n- 发布前置条件：**必须准备回滚开关**\n\n**建议**：请林舟本人到场，确认 15 秒阈值的实测数据，以及超时后的用户提示与重试方案；明确回滚开关的决策人、触发条件和执行耗时；对“超时”和“回滚”两类风险，分别说明发生概率与影响范围。\n**资料缺口**：未检索到具体版本号、灰度范围、监控与告警指标、上线时间窗，建议在会上补齐并由责任人确认，不要在资料缺失处做推测。\n\n## 准备清单\n1. 确认移动端工具负责人林舟参会，并请其准备 15 秒超时阈值的压测或线上数据\n2. 准备超时（超过 15 秒）触发停止本轮操作后的用户提示与重试方案\n3. 落实回滚开关：指定操作人、触发条件、回滚决策流程与预计耗时\n4. 补充上线风险清单：按概率与影响面排序，标注与超时、回滚相关的项\n5. 补齐资料缺口（版本、灰度范围、监控与告警指标、上线时间窗）并在会上确认\n6. 准备回滚演练或演练结果记录，作为发布放行依据\n\n## 来源编号\n- `release-042`（合成验收资料；本次唯一可用来源）\n\n未使用任何外部检索结果，也未执行会议资料中提及的任何外部操作。"
+          },
+          {
+            "agentId": "information-watch",
+            "elapsedMs": 5541,
+            "usage": {
+              "inputTokens": 4903,
+              "outputTokens": 747,
+              "totalTokens": 5650,
+              "reasoningTokens": 24,
+              "cachedInputTokens": 2944,
+              "raw": {
+                "inputTokens": {
+                  "total": 2628,
+                  "noCache": 1476,
+                  "cacheRead": 1152
+                },
+                "outputTokens": {
+                  "total": 263,
+                  "text": 263,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 2628,
+                  "completion_tokens": 263,
+                  "total_tokens": 2891,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 1152
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 1152,
+                  "prompt_cache_miss_tokens": 1476
+                }
+              }
+            },
+            "tools": [
+              {
+                "name": "readPreviousObservation",
+                "error": false
+              },
+              {
+                "name": "searchReferenceNotes",
+                "error": false
+              },
+              {
+                "name": "submitInspection",
+                "accepted": true,
+                "error": false
+              }
+            ],
+            "artifact": {
+              "output": {
+                "summary": "当前观察（sourceId: release-status）显示移动工具上线时间由基线的18:00推迟到20:00，即延期120分钟，并新增阻断项「设备结果回传超时」；基线为计划18:00上线且无阻断项。用户关注延期与阻断项、负责人及提醒建议。依据RULE-731（policy-731），延期超过30分钟或出现阻断项时应建议提醒，本次两项条件同时满足，故建议提醒；未发送任何通知。",
+                "change": "changed",
+                "notification": "notify",
+                "findings": [
+                  "确定性比较结果为 changed：release-status 的 content 由「合成基线：计划18:00上线，无阻断项」变为「上线时间从18:00推迟到20:00，新增阻断项：设备结果回传超时」。",
+                  "延期幅度：18:00→20:00，共120分钟，超过 RULE-731（policy-731）规定的30分钟阈值。",
+                  "阻断项：新增「设备结果回传超时」，属 RULE-731 中「出现阻断项」的触发条件，两条触发条件均成立。",
+                  "负责人：按 policy-731 记载为林舟，建议由林舟跟进阻断项处置与上线时间确认。",
+                  "提醒决策：notify。仅为建议提醒，本次未发送通知，也未执行任何外部操作。"
+                ],
+                "sourceIds": [
+                  "release-status",
+                  "policy-731"
+                ]
+              },
+              "view": {
+                "publishedRevision": 1,
+                "surfaceId": "information-watch-preview-f96174bd-9600-42c2-80c0-614e126696aa",
+                "protocol": "v0.9.1",
+                "messages": [
+                  {
+                    "version": "v0.9.1",
+                    "createSurface": {
+                      "surfaceId": "information-watch-preview-f96174bd-9600-42c2-80c0-614e126696aa",
+                      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                    }
+                  },
+                  {
+                    "version": "v0.9.1",
+                    "updateComponents": {
+                      "surfaceId": "information-watch-preview-f96174bd-9600-42c2-80c0-614e126696aa",
+                      "components": [
+                        {
+                          "id": "root",
+                          "component": "Column",
+                          "children": [
+                            "title",
+                            "summary",
+                            "checklist",
+                            "sources"
+                          ]
+                        },
+                        {
+                          "id": "title",
+                          "component": "Text",
+                          "text": {
+                            "path": "/title"
+                          },
+                          "variant": "h2"
+                        },
+                        {
+                          "id": "summary",
+                          "component": "Text",
+                          "text": {
+                            "path": "/summary"
+                          }
+                        },
+                        {
+                          "id": "checklist",
+                          "component": "Text",
+                          "text": {
+                            "path": "/checklist"
+                          }
+                        },
+                        {
+                          "id": "sources",
+                          "component": "Text",
+                          "text": {
+                            "path": "/sources"
+                          },
+                          "variant": "caption"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "version": "v0.9.1",
+                    "updateDataModel": {
+                      "surfaceId": "information-watch-preview-f96174bd-9600-42c2-80c0-614e126696aa",
+                      "path": "/",
+                      "value": {
+                        "title": "移动工具发布状态",
+                        "summary": "changed / notify\n当前观察（sourceId: release-status）显示移动工具上线时间由基线的18:00推迟到20:00，即延期120分钟，并新增阻断项「设备结果回传超时」；基线为计划18:00上线且无阻断项。用户关注延期与阻断项、负责人及提醒建议。依据RULE-731（policy-731），延期超过30分钟或出现阻断项时应建议提醒，本次两项条件同时满足，故建议提醒；未发送任何通知。",
+                        "checklist": "1. 确定性比较结果为 changed：release-status 的 content 由「合成基线：计划18:00上线，无阻断项」变为「上线时间从18:00推迟到20:00，新增阻断项：设备结果回传超时」。\n2. 延期幅度：18:00→20:00，共120分钟，超过 RULE-731（policy-731）规定的30分钟阈值。\n3. 阻断项：新增「设备结果回传超时」，属 RULE-731 中「出现阻断项」的触发条件，两条触发条件均成立。\n4. 负责人：按 policy-731 记载为林舟，建议由林舟跟进阻断项处置与上线时间确认。\n5. 提醒决策：notify。仅为建议提醒，本次未发送通知，也未执行任何外部操作。",
+                        "sources": "release-status, policy-731",
+                        "revision": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "text": "我先读取基线，并检索规则资料。巡检已提交成功，结论如下：\n\n**变化（change = changed）**\n- 基线：计划 18:00 上线，无阻断项。\n- 当前：上线时间推迟到 20:00，新增阻断项「设备结果回传超时」。\n- 该分类为工具确定性比较结果，此处原样采用。\n\n**提醒决策（notification = notify）**\n- 建议提醒，但**未发送任何通知**，也未执行任何外部操作；notify 仅表示建议。\n\n**判断依据**\n1. 延期幅度 18:00→20:00，共 120 分钟，超过 RULE-731 规定的 30 分钟阈值。\n2. 新增阻断项「设备结果回传超时」，同时命中 RULE-731「出现阻断项」的触发条件。\n3. 两条触发条件同时成立，因此不适用「仅文案修订保持安静」的例外。\n4. 负责人按 RULE-731 记载为**林舟**，建议由其跟进阻断项处置与上线时间确认。\n\n**来源编号**\n- release-status（当前观察，sourceId）\n- policy-731（RULE-731 规则资料，原始 id）\n\n可通过上述编号核对基线与规则原文。"
+          },
+          {
+            "agentId": "travel-assistant",
+            "elapsedMs": 50985,
+            "usage": {
+              "inputTokens": 47730,
+              "outputTokens": 6137,
+              "totalTokens": 53867,
+              "reasoningTokens": 1453,
+              "cachedInputTokens": 36096,
+              "raw": {
+                "inputTokens": {
+                  "total": 15930,
+                  "noCache": 3386,
+                  "cacheRead": 12544
+                },
+                "outputTokens": {
+                  "total": 679,
+                  "text": 679,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 15930,
+                  "completion_tokens": 679,
+                  "total_tokens": 16609,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 12544
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 12544,
+                  "prompt_cache_miss_tokens": 3386
+                }
+              }
+            },
+            "tools": [
+              {
+                "name": "browserSearch",
+                "error": false
+              },
+              {
+                "name": "browserSearch",
+                "error": false
+              },
+              {
+                "name": "browserSearch",
+                "error": false
+              },
+              {
+                "name": "browserRead",
+                "error": false
+              },
+              {
+                "name": "browserRead",
+                "error": false
+              },
+              {
+                "name": "browserImages",
+                "error": false
+              },
+              {
+                "name": "submitTripPlan",
+                "error": true
+              },
+              {
+                "name": "submitTripPlan",
+                "accepted": true,
+                "error": false
+              }
+            ],
+            "artifact": {
+              "output": {
+                "summary": "以延吉市区为核心的三日慢游：把朝鲜族文化体验、市井美食与轻量步行串成一条不赶路的线。第一天从民俗园沉浸式体验（韩服、传统民居、打糕/辣白菜）到延边大学网红弹幕墙夜景；第二天早起逛水上市场吃打糕米肠，再到西市场采购、帽儿山只走缓坡林间步道，晚餐用冷面配锅包肉收尾；第三天把节奏放慢，去朝鲜族第一村红旗村看歌舞、做打糕，回城逛西市场买真空特产，以参鸡汤结束。全程每天只安排1—2个主要步行点，长白山、防川这类车程长、体力消耗大的项目未纳入，可按需替换。",
+                "assumptions": [
+                  "未提供出发地、日期与人数，按1—2人、休闲自由行、2026年10月下旬前后出行（参考今天2026-10-23）规划",
+                  "按“轻松步行”偏好，控制单日步行点数量，不安排长白山、防川等长途高强度线路",
+                  "不含往返延吉的大交通费用与预订",
+                  "住宿按市区经济型/舒适型酒店双人间估算，不含实时房价",
+                  "所有营业时间、门票、韩服租赁与体验价格均未核实，行前需以官方渠道确认"
+                ],
+                "days": [
+                  {
+                    "day": 1,
+                    "title": "抵达延吉：朝鲜族民俗园沉浸体验 + 弹幕墙夜景",
+                    "activities": [
+                      {
+                        "period": "14:00-16:30",
+                        "plan": "中国朝鲜族民俗园：换上朝鲜族服饰，在青瓦白墙的传统民居与水车稻田间慢走拍照；可顺带了解长鼓舞、农乐舞与辣白菜腌制、打糕制作等民俗体验（园内外有韩服租赁与化妆编发服务，上午人少光线好，若当天上午到达可调整顺序）。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092",
+                          "S-6de58eda39d3"
+                        ]
+                      },
+                      {
+                        "period": "17:00-18:30",
+                        "plan": "延边大学一带的网红弹幕墙：中韩双语招牌密集，傍晚亮灯后最有氛围，最佳拍摄点在马路对面；买一杯带“延吉”字样的定制杯套咖啡作为打卡道具，注意往来车辆。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092"
+                        ]
+                      },
+                      {
+                        "period": "18:45-20:30",
+                        "plan": "晚餐选特色烤串或啤酒屋（攻略推荐的丰茂烤串一类），两人小份多点、配米酒，步行回住宿点；具体门店与排队情况待核实。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092",
+                          "S-6de58eda39d3"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "day": 2,
+                    "title": "市井早市 + 帽儿山缓坡散步 + 冷面晚餐",
+                    "activities": [
+                      {
+                        "period": "06:30-08:30",
+                        "plan": "延吉水上市场（早市）：空着肚子去，尝现压打糕、米肠、七彩咸菜、江米鸡与汤饭，感受阿妈妮吆喝与热气腾腾的市井气。攻略提示市场约6点到8点最热闹，营业时间需当日核实。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092",
+                          "S-6de58eda39d3"
+                        ]
+                      },
+                      {
+                        "period": "09:30-11:30",
+                        "plan": "西市场：室内特产集中地，一楼食品区可看泡菜、米酒、明太鱼、辣椒酱，支持真空包装便于带走；比早市营业时间长，适合慢慢逛、少量试买。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092"
+                        ]
+                      },
+                      {
+                        "period": "11:40-13:00",
+                        "plan": "午餐选石锅拌饭或全州拌饭，锅巴焦脆、配时令山野菜；餐后在附近休息，为下午步行留体力。",
+                        "sourceIds": [
+                          "S-6de58eda39d3",
+                          "S-b59fe6bb6092"
+                        ]
+                      },
+                      {
+                        "period": "14:30-17:30",
+                        "plan": "帽儿山国家森林公园：城市“绿肺”，沿缓坡林间步道慢走，秋日红叶层叠；不必强求登顶，量力走到观景处即可，山顶可俯瞰延吉城与布尔哈通河。往返打车约20—30分钟，具体交通与开放情况待核实；晚餐可回到市区吃延吉冷面配锅包肉（如服务大楼冷面一类老店，营业时间待核实）。",
+                        "sourceIds": [
+                          "S-6de58eda39d3",
+                          "S-b59fe6bb6092"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "day": 3,
+                    "title": "红旗村朝鲜族村落 + 特产收尾",
+                    "activities": [
+                      {
+                        "period": "09:00-12:00",
+                        "plan": "红旗村（中国朝鲜族第一村）：村内平缓步行，看朝鲜族歌舞表演、体验打糕制作、感受炕屋与村落氛围。距延吉市区需一段车程（约1小时，待核实），建议包车或参加半日游，出发前确认演出场次。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092"
+                        ]
+                      },
+                      {
+                        "period": "12:15-13:30",
+                        "plan": "午餐在村里或返程途中吃朝鲜族包饭/农家菜（攻略推荐元奶奶包饭、吴氏包饭一类），以蔬菜包肉配酱料，口味清淡不重油。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092"
+                        ]
+                      },
+                      {
+                        "period": "14:30-16:00",
+                        "plan": "回城后到西市场补买伴手礼：真空泡菜、米酒、明太鱼、辣椒酱，一楼食品区为核心；适量讲价，注意液体与保鲜品的携带限制。",
+                        "sourceIds": [
+                          "S-b59fe6bb6092"
+                        ]
+                      },
+                      {
+                        "period": "17:00-18:30",
+                        "plan": "以一碗参鸡汤收尾：整鸡填入糯米、红枣、人参慢炖，汤清味甜；饭后在住处周边短距离散步，或提前前往机场/高铁站（行程与候车时间待核实）。",
+                        "sourceIds": [
+                          "S-6de58eda39d3"
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "budgetEstimate": "估算（不含往返大交通，1—2人）：住宿2晚约400—800元/间；餐饮人均约120—200元/天；市内打车与红旗村包车/半日游约150—350元；民俗园门票、韩服租赁与体验约100—250元/人。3天人均合计约1000—1800元，属区间估算，非实时报价，需以官方与门店实际价格核实。",
+                "notes": [
+                  "资料主要来自2025年发布的延吉/延边旅游攻略（含2025年11月更新内容），页面信息可能滞后，景点开放时间、门票、演出场次请出发前通过官方渠道核实。",
+                  "水上市场早市约6:00—8:00最热闹、红旗村演出与民俗园韩服租赁价格均为攻略表述，未核实，可能随季节调整。",
+                  "10月下旬延吉早晚偏凉、山区风大，帽儿山步行建议穿防滑鞋并备外套；具体天气请行前查询。",
+                  "全程不含往返延吉的大交通与住宿预订，也未承诺任何票价、房价或预订成功。",
+                  "若同行者有老人小孩，可将帽儿山改为只走入口段平缓步道，或替换为市区咖啡与市场慢逛。"
+                ],
+                "sourceIds": [
+                  "S-6de58eda39d3",
+                  "S-b59fe6bb6092"
+                ],
+                "imageIds": [
+                  "I-9b86e9046a2f",
+                  "I-cef88daf219b"
+                ],
+                "sources": [
+                  {
+                    "id": "S-6de58eda39d3",
+                    "title": "延吉旅游超全攻略：第一次去延吉应该怎么玩？看完这篇就够了！_打糕_自然_交响",
+                    "url": "https://www.sohu.com/a/897484440_122324904",
+                    "kind": "page",
+                    "fetchedAt": "2026-10-23T02:26:25.359Z"
+                  },
+                  {
+                    "id": "S-b59fe6bb6092",
+                    "title": "延边必打卡的10个景点｜中朝边境的风情画卷，感受不一样的诗和远_延吉_长白_理由",
+                    "url": "https://www.sohu.com/a/952599442_122517634",
+                    "kind": "page",
+                    "fetchedAt": "2026-10-23T02:26:26.219Z"
+                  }
+                ],
+                "images": [
+                  {
+                    "id": "I-9b86e9046a2f",
+                    "url": "https://q0.itc.cn/images01/20250521/2dd34873d53746459b3b1c3d31df2442.jpeg",
+                    "sourceId": "S-6de58eda39d3",
+                    "sourcePage": "https://www.sohu.com/a/897484440_122324904",
+                    "caption": "文章配图-1",
+                    "width": 1200,
+                    "height": 800
+                  },
+                  {
+                    "id": "I-cef88daf219b",
+                    "url": "https://q9.itc.cn/q_70/images03/20251110/36b5db83328d4599acaa62ca39e6e670.jpeg",
+                    "sourceId": "S-b59fe6bb6092",
+                    "sourcePage": "https://www.sohu.com/a/952599442_122517634",
+                    "caption": "文章配图-1",
+                    "width": 640,
+                    "height": 965
+                  }
+                ],
+                "destination": "延吉"
+              },
+              "view": {
+                "publishedRevision": 1,
+                "surfaceId": "travel-preview-43485948-d3f5-42e1-9e98-0fa2a81916cb",
+                "protocol": "v0.9.1",
+                "messages": [
+                  {
+                    "version": "v0.9.1",
+                    "createSurface": {
+                      "surfaceId": "travel-preview-43485948-d3f5-42e1-9e98-0fa2a81916cb",
+                      "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                    }
+                  },
+                  {
+                    "version": "v0.9.1",
+                    "updateComponents": {
+                      "surfaceId": "travel-preview-43485948-d3f5-42e1-9e98-0fa2a81916cb",
+                      "components": [
+                        {
+                          "id": "root",
+                          "component": "Column",
+                          "children": [
+                            "title",
+                            "summary",
+                            "checklist",
+                            "sources"
+                          ]
+                        },
+                        {
+                          "id": "title",
+                          "component": "Text",
+                          "text": {
+                            "path": "/title"
+                          },
+                          "variant": "h2"
+                        },
+                        {
+                          "id": "summary",
+                          "component": "Text",
+                          "text": {
+                            "path": "/summary"
+                          }
+                        },
+                        {
+                          "id": "checklist",
+                          "component": "Text",
+                          "text": {
+                            "path": "/checklist"
+                          }
+                        },
+                        {
+                          "id": "sources",
+                          "component": "Text",
+                          "text": {
+                            "path": "/sources"
+                          },
+                          "variant": "caption"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "version": "v0.9.1",
+                    "updateDataModel": {
+                      "surfaceId": "travel-preview-43485948-d3f5-42e1-9e98-0fa2a81916cb",
+                      "path": "/",
+                      "value": {
+                        "title": "延吉出行计划",
+                        "summary": "以延吉市区为核心的三日慢游：把朝鲜族文化体验、市井美食与轻量步行串成一条不赶路的线。第一天从民俗园沉浸式体验（韩服、传统民居、打糕/辣白菜）到延边大学网红弹幕墙夜景；第二天早起逛水上市场吃打糕米肠，再到西市场采购、帽儿山只走缓坡林间步道，晚餐用冷面配锅包肉收尾；第三天把节奏放慢，去朝鲜族第一村红旗村看歌舞、做打糕，回城逛西市场买真空特产，以参鸡汤结束。全程每天只安排1—2个主要步行点，长白山、防川这类车程长、体力消耗大的项目未纳入，可按需替换。",
+                        "checklist": "1. 第1天 抵达延吉：朝鲜族民俗园沉浸体验 + 弹幕墙夜景：14:00-16:30 中国朝鲜族民俗园：换上朝鲜族服饰，在青瓦白墙的传统民居与水车稻田间慢走拍照；可顺带了解长鼓舞、农乐舞与辣白菜腌制、打糕制作等民俗体验（园内外有韩服租赁与化妆编发服务，上午人少光线好，若当天上午到达可调整顺序）。；17:00-18:30 延边大学一带的网红弹幕墙：中韩双语招牌密集，傍晚亮灯后最有氛围，最佳拍摄点在马路对面；买一杯带“延吉”字样的定制杯套咖啡作为打卡道具，注意往来车辆。；18:45-20:30 晚餐选特色烤串或啤酒屋（攻略推荐的丰茂烤串一类），两人小份多点、配米酒，步行回住宿点；具体门店与排队情况待核实。\n2. 第2天 市井早市 + 帽儿山缓坡散步 + 冷面晚餐：06:30-08:30 延吉水上市场（早市）：空着肚子去，尝现压打糕、米肠、七彩咸菜、江米鸡与汤饭，感受阿妈妮吆喝与热气腾腾的市井气。攻略提示市场约6点到8点最热闹，营业时间需当日核实。；09:30-11:30 西市场：室内特产集中地，一楼食品区可看泡菜、米酒、明太鱼、辣椒酱，支持真空包装便于带走；比早市营业时间长，适合慢慢逛、少量试买。；11:40-13:00 午餐选石锅拌饭或全州拌饭，锅巴焦脆、配时令山野菜；餐后在附近休息，为下午步行留体力。；14:30-17:30 帽儿山国家森林公园：城市“绿肺”，沿缓坡林间步道慢走，秋日红叶层叠；不必强求登顶，量力走到观景处即可，山顶可俯瞰延吉城与布尔哈通河。往返打车约20—30分钟，具体交通与开放情况待核实；晚餐可回到市区吃延吉冷面配锅包肉（如服务大楼冷面一类老店，营业时间待核实）。\n3. 第3天 红旗村朝鲜族村落 + 特产收尾：09:00-12:00 红旗村（中国朝鲜族第一村）：村内平缓步行，看朝鲜族歌舞表演、体验打糕制作、感受炕屋与村落氛围。距延吉市区需一段车程（约1小时，待核实），建议包车或参加半日游，出发前确认演出场次。；12:15-13:30 午餐在村里或返程途中吃朝鲜族包饭/农家菜（攻略推荐元奶奶包饭、吴氏包饭一类），以蔬菜包肉配酱料，口味清淡不重油。；14:30-16:00 回城后到西市场补买伴手礼：真空泡菜、米酒、明太鱼、辣椒酱，一楼食品区为核心；适量讲价，注意液体与保鲜品的携带限制。；17:00-18:30 以一碗参鸡汤收尾：整鸡填入糯米、红枣、人参慢炖，汤清味甜；饭后在住处周边短距离散步，或提前前往机场/高铁站（行程与候车时间待核实）。",
+                        "sources": "S-6de58eda39d3, S-b59fe6bb6092",
+                        "revision": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "text": "我会先按指定的公共来源搜索延吉的旅游信息。延吉三日游计划已提交 ✅\n\n**规划思路**：以延吉市区为核心，围绕朝鲜族文化、市井美食和轻松步行来安排，每天只设 1—2 个主要步行点，避开长白山、防川这类车程长、体力消耗大的线路。\n\n**行程概览**\n\n| 天 | 主题 | 主要内容 |\n|---|---|---|\n| 第 1 天 | 抵达 + 朝鲜族文化 | 14:00 中国朝鲜族民俗园（韩服拍照、传统民居、水车稻田、辣白菜腌制与打糕体验）→ 17:00 延边大学网红弹幕墙夜景 + “延吉”杯套咖啡 → 18:45 烤串和啤酒屋晚餐 |\n| 第 2 天 | 市井早市 + 缓坡散步 | 06:30 在水上市场吃打糕、米肠、七彩咸菜、江米鸡和汤饭 → 09:30 西市场慢逛试买 → 11:40 石锅拌饭或全州拌饭 → 14:30 帽儿山国家森林公园缓坡步道，不强制登顶 → 晚餐延吉冷面配锅包肉 |\n| 第 3 天 | 村落体验 + 收尾 | 09:00 红旗村（朝鲜族第一村：歌舞、打糕制作、村落平缓步行）→ 12:15 朝鲜族包饭 → 14:30 回城去西市场买真空泡菜、米酒、明太鱼 → 17:00 参鸡汤收尾 |\n\n**假设**：未给出发地、日期、人数，按 1—2 人休闲自由行、2026 年 10 月下旬前后；不含往返大交通与住宿预订。\n\n**预算估算**：3 天人均约 1000—1800 元（住宿 2 晚 400—800 元一角、餐饮 120—200 元/天、交通与包车 150—350 元、门票和体验 100—250 元）。这是区间估算，不是实时报价。\n\n**需核实**：资料来源为 2025 年发布的攻略，页面可能已滞后；水上市场早市约 6:00—8:00、红旗村演出场次、民俗园与韩服租赁价格、帽儿山交通均需行前通过官方渠道确认。10 月下旬早晚偏凉，建议穿防滑鞋、备外套，并查询当日天气。\n\n**来源**\n- 延吉旅游超全攻略：https://www.sohu.com/a/897484440_122324904\n- 延边必打卡的 10 个景点：https://www.sohu.com/a/952599442_122517634\n\n**网页加载图片**\n- https://q0.itc.cn/images01/20250521/2dd34873d53746459b3b1c3d31df2442.jpeg\n- https://q9.itc.cn/q_70/images03/20251110/36b5db83328d4599acaa62ca39e6e670.jpeg"
+          }
+        ],
+        "service": {
+          "service": "xagent-studio",
+          "build": {
+            "commit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+            "release": "b06ab3dd12a9-20261023T021357",
+            "runtimeDigest": "a92fab287a7d711de09675daebab454d62c8f396e30a6ed80cf236447db6eb13"
+          },
+          "draining": false,
+          "activeRuns": 0,
+          "deepseekConfigured": true
+        },
+        "remainingBrowserPids": [],
+        "finishedAt": "2026-10-23T02:27:00.769Z"
+      },
+      {
+        "mode": "deepseek",
+        "sourceCommit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+        "inputs": "synthetic events and notes",
+        "notificationsSent": false,
+        "passed": true,
+        "checks": [
+          {
+            "agentId": "meeting-prep",
+            "revision": 1,
+            "output": {
+              "summary": "本次「发布评审」（2026-11-03 10:00 开始）议程为：计划 18:00 上线、当前无阻断项，重点评审回滚方案；会前关注点为延期与回滚风险。可用的会议资料仅有 RULE-731（负责人林舟），其要点为：延期超过 30 分钟或出现阻断项时建议提醒；回滚前应停止新设备调用。除该条外，检索未发现其他议程细节、回滚步骤、时间线或变更记录，建议会上补齐。按用户要求，本次仅对严重变更给出提醒，其余变更不逐一提示。建议：以“18:00 上线时间点是否守住 30 分钟容差线”和“回滚前停止新设备调用是否已写入执行清单”两条作为评审主线，先确认判定责任与升级路径，再确认回滚触发条件与执行顺序。",
+              "checklist": [
+                "确认上线时间线与 30 分钟延期容差：明确谁来计时、何时触发延期提醒，并按 RULE-731 记录实际偏离情况",
+                "请负责人林舟（RULE-731）到会或在会前书面确认当前是否存在阻断项，避免“无阻断项”结论缺乏来源",
+                "核对回滚方案执行顺序，确保“回滚前停止新设备调用”写入清单并明确执行人",
+                "整理论坛级严重变更清单：仅严重变更在会上作为提醒项，其他变更以书面同步，不占用评审时间",
+                "准备回滚触发条件、判定责任人及升级联系人，并确认回滚决策与通知的时限要求",
+                "补充缺失资料：回滚演练/验证结果、历史延期与回滚记录；现有资料不足以覆盖这些内容",
+                "会前与议程相关方确认最新议程是否有变动，并明确本次评审的决策事项与输出物（结论、负责人、时间点）"
+              ],
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            "trace": [
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "RULE-731"
+                ]
+              },
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "RULE-731"
+                ]
+              },
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "RULE-731"
+                ]
+              },
+              {
+                "tool": "searchMeetingNotes",
+                "sourceIds": [
+                  "RULE-731"
+                ]
+              },
+              {
+                "tool": "submitBrief",
+                "sourceIds": [
+                  "RULE-731"
+                ]
+              }
+            ],
+            "usage": {
+              "inputTokens": 6421,
+              "outputTokens": 1239,
+              "totalTokens": 7660,
+              "reasoningTokens": 93,
+              "cachedInputTokens": 3968,
+              "raw": {
+                "inputTokens": {
+                  "total": 3060,
+                  "noCache": 1780,
+                  "cacheRead": 1280
+                },
+                "outputTokens": {
+                  "total": 492,
+                  "text": 492,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 3060,
+                  "completion_tokens": 492,
+                  "total_tokens": 3552,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 1280
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 1280,
+                  "prompt_cache_miss_tokens": 1780
+                }
+              }
+            },
+            "a2uiMessages": 3
+          },
+          {
+            "agentId": "information-watch",
+            "revision": 1,
+            "output": {
+              "summary": "首次建立发布状态基线：计划18:00上线，无阻断项，正在评审回滚方案。按要求关注延期与回滚；依据RULE-731，延期超过30分钟或出现阻断项才建议提醒，当前均未出现，故静默。摘要保留资料编号RULE-731。",
+              "change": "initial",
+              "notification": "quiet",
+              "findings": [
+                "上次无已发布观察，本次为初次基线，change=initial，notification=quiet。",
+                "当前内容：计划18:00上线，无阻断项；评审回滚方案，尚无延期或阻断迹象。",
+                "参考RULE-731（合成规则）：负责人林舟；延期超过30分钟或出现阻断项建议提醒；回滚前应停止新设备调用。",
+                "判定依据：现处于回滚方案评审阶段而非实际回滚，未触发RULE-731提醒条件；若后续出现延期超30分钟、阻断项或执行回滚，建议改为提醒并核实是否已停止新设备调用。"
+              ],
+              "sourceIds": [
+                "release-status",
+                "RULE-731"
+              ]
+            },
+            "trace": [
+              {
+                "tool": "readPreviousObservation"
+              },
+              {
+                "tool": "searchReferenceNotes",
+                "sourceIds": [
+                  "RULE-731"
+                ]
+              },
+              {
+                "tool": "submitInspection",
+                "sourceIds": [
+                  "release-status",
+                  "RULE-731"
+                ]
+              }
+            ],
+            "usage": {
+              "inputTokens": 4600,
+              "outputTokens": 675,
+              "totalTokens": 5275,
+              "reasoningTokens": 17,
+              "cachedInputTokens": 3070,
+              "raw": {
+                "inputTokens": {
+                  "total": 2358,
+                  "noCache": 1206,
+                  "cacheRead": 1152
+                },
+                "outputTokens": {
+                  "total": 273,
+                  "text": 273,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 2358,
+                  "completion_tokens": 273,
+                  "total_tokens": 2631,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 1152
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 1152,
+                  "prompt_cache_miss_tokens": 1206
+                }
+              }
+            },
+            "a2uiMessages": 3
+          },
+          {
+            "agentId": "information-watch",
+            "revision": 2,
+            "output": {
+              "summary": "发布状态发生变更：上线时间由18:00推迟至20:00（延期2小时），并新增阻断项“设备结果回传超时”；原基线为“计划18:00上线，无阻断项；评审回滚方案”。依据资料RULE-731（负责人林舟），延期超过30分钟或出现阻断项应提醒，本次两项同时满足，属严重变更，建议提醒；回滚时须先停止新设备调用。",
+              "change": "changed",
+              "notification": "notify",
+              "findings": [
+                "对比上次已发布观察：上线时间18:00→20:00，延期120分钟，且由“无阻断项”变为新增阻断项“设备结果回传超时”，属确定性分类变化(changed)。",
+                "资料RULE-731明确：负责人林舟；延期超过30分钟或出现阻断项建议提醒。本次延期120分钟并出现阻断项，两个触发条件均满足，故建议notify。",
+                "回滚关注点来自RULE-731：回滚前应停止新设备调用；当前阻断项为设备结果回传超时，建议在回滚评估前先核实该超时范围与设备调用状态。",
+                "判断仅限于本任务观察与授权资料库内容，未使用外部查询，也未实际发送任何通知。"
+              ],
+              "sourceIds": [
+                "release-status",
+                "RULE-731"
+              ]
+            },
+            "trace": [
+              {
+                "tool": "readPreviousObservation"
+              },
+              {
+                "tool": "searchReferenceNotes",
+                "sourceIds": [
+                  "RULE-731"
+                ]
+              },
+              {
+                "tool": "submitInspection",
+                "sourceIds": [
+                  "release-status",
+                  "RULE-731"
+                ]
+              }
+            ],
+            "usage": {
+              "inputTokens": 4912,
+              "outputTokens": 741,
+              "totalTokens": 5653,
+              "reasoningTokens": 36,
+              "cachedInputTokens": 3072,
+              "raw": {
+                "inputTokens": {
+                  "total": 2609,
+                  "noCache": 1457,
+                  "cacheRead": 1152
+                },
+                "outputTokens": {
+                  "total": 260,
+                  "text": 260,
+                  "reasoning": 0
+                },
+                "raw": {
+                  "prompt_tokens": 2609,
+                  "completion_tokens": 260,
+                  "total_tokens": 2869,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 1152
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 1152,
+                  "prompt_cache_miss_tokens": 1457
+                }
+              }
+            },
+            "a2uiMessages": 3
+          }
+        ],
+        "cleanupErrors": [],
+        "elapsedSeconds": 21.186
+      }
+    ],
+    "cleanup": {
+      "taskContainerRemoved": true
+    },
+    "repositoryCommit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+    "service": {
+      "service": "xagent-studio",
+      "build": {
+        "commit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+        "release": "b06ab3dd12a9-20261023T021357",
+        "runtimeDigest": "a92fab287a7d711de09675daebab454d62c8f396e30a6ed80cf236447db6eb13"
+      },
+      "draining": false,
+      "activeRuns": 0,
+      "deepseekConfigured": true
+    },
+    "productionDataUnchanged": true,
+    "elapsedSeconds": 90.733
+  }
+}

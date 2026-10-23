@@ -1,0 +1,648 @@
+{
+  "runId": "20261023T023647-106000",
+  "sourceCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+  "mode": "mock",
+  "suite": "all",
+  "startedAt": "2026-10-23T02:36:47.755913+00:00",
+  "passed": true,
+  "uiVerified": false,
+  "limitations": [
+    "API verification does not verify Studio browser chat.",
+    "Events and note libraries are synthetic; no real phone or notification."
+  ],
+  "checks": [
+    {
+      "type": "agent-api",
+      "mode": "mock",
+      "requestedCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+      "startedAt": "2026-10-23T02:36:47.892Z",
+      "configuredModel": "scripted-fixtures",
+      "passed": true,
+      "uiVerified": false,
+      "syntheticInputs": true,
+      "checks": [
+        {
+          "agentId": "meeting-prep",
+          "elapsedMs": 65,
+          "usage": {
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "totalTokens": 0,
+            "raw": {
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "totalTokens": 0
+            }
+          },
+          "tools": [
+            {
+              "name": "searchMeetingNotes",
+              "error": false
+            },
+            {
+              "name": "submitBrief",
+              "accepted": true,
+              "error": false
+            }
+          ],
+          "artifact": {
+            "output": {
+              "summary": "[MOCK] 发布评审会议：核对移动端工具上线风险、负责人及回滚预案；为发布评审生成简报和清单，关注15秒超时、负责人和回滚，保留来源编号release-042。；合成验收资料：负责人林舟；移动端工具回传超时阈值为15秒，超过则停止本轮操作；发布前必须准备回滚开关。",
+              "checklist": [
+                "按要求准备：为发布评审生成简报和清单，关注15秒超时、负责人和回滚，保留来源编号release-042。"
+              ],
+              "sourceIds": [
+                "release-042"
+              ]
+            },
+            "view": {
+              "publishedRevision": 1,
+              "surfaceId": "meeting-prep-preview-4dfb0a8d-5c27-466d-9093-734fadb571f0",
+              "protocol": "v0.9.1",
+              "messages": [
+                {
+                  "version": "v0.9.1",
+                  "createSurface": {
+                    "surfaceId": "meeting-prep-preview-4dfb0a8d-5c27-466d-9093-734fadb571f0",
+                    "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateComponents": {
+                    "surfaceId": "meeting-prep-preview-4dfb0a8d-5c27-466d-9093-734fadb571f0",
+                    "components": [
+                      {
+                        "id": "root",
+                        "component": "Column",
+                        "children": [
+                          "title",
+                          "summary",
+                          "checklist",
+                          "sources"
+                        ]
+                      },
+                      {
+                        "id": "title",
+                        "component": "Text",
+                        "text": {
+                          "path": "/title"
+                        },
+                        "variant": "h2"
+                      },
+                      {
+                        "id": "summary",
+                        "component": "Text",
+                        "text": {
+                          "path": "/summary"
+                        }
+                      },
+                      {
+                        "id": "checklist",
+                        "component": "Text",
+                        "text": {
+                          "path": "/checklist"
+                        }
+                      },
+                      {
+                        "id": "sources",
+                        "component": "Text",
+                        "text": {
+                          "path": "/sources"
+                        },
+                        "variant": "caption"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateDataModel": {
+                    "surfaceId": "meeting-prep-preview-4dfb0a8d-5c27-466d-9093-734fadb571f0",
+                    "path": "/",
+                    "value": {
+                      "title": "发布评审会议",
+                      "summary": "[MOCK] 发布评审会议：核对移动端工具上线风险、负责人及回滚预案；为发布评审生成简报和清单，关注15秒超时、负责人和回滚，保留来源编号release-042。；合成验收资料：负责人林舟；移动端工具回传超时阈值为15秒，超过则停止本轮操作；发布前必须准备回滚开关。",
+                      "checklist": "1. 按要求准备：为发布评审生成简报和清单，关注15秒超时、负责人和回滚，保留来源编号release-042。",
+                      "sources": "release-042",
+                      "revision": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "text": "[MOCK] [MOCK] 发布评审会议：核对移动端工具上线风险、负责人及回滚预案；为发布评审生成简报和清单，关注15秒超时、负责人和回滚，保留来源编号release-042。；合成验收资料：负责人林舟；移动端工具回传超时阈值为15秒，超过则停止本轮操作；发布前必须准备回滚开关。\n\n- 按要求准备：为发布评审生成简报和清单，关注15秒超时、负责人和回滚，保留来源编号release-042。\n\n来源：release-042"
+        },
+        {
+          "agentId": "information-watch",
+          "elapsedMs": 97,
+          "usage": {
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "totalTokens": 0,
+            "raw": {
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "totalTokens": 0
+            }
+          },
+          "tools": [
+            {
+              "name": "readPreviousObservation",
+              "error": false
+            },
+            {
+              "name": "searchReferenceNotes",
+              "error": false
+            },
+            {
+              "name": "submitInspection",
+              "accepted": true,
+              "error": false
+            }
+          ],
+          "artifact": {
+            "output": {
+              "summary": "[MOCK] 合成事件：上线时间从18:00推迟到20:00，新增阻断项：设备结果回传超时。；按RULE-731比较当前观察与基线，说明延期及阻断项、负责人，给出提醒建议，保留来源编号。不要发送通知。；合成验收规则RULE-731：上线延期超过30分钟或出现阻断项时建议提醒；仅文案修订保持安静。负责人林舟。",
+              "change": "changed",
+              "notification": "notify",
+              "findings": [
+                "内容发生变化"
+              ],
+              "sourceIds": [
+                "release-status",
+                "policy-731"
+              ]
+            },
+            "view": {
+              "publishedRevision": 1,
+              "surfaceId": "information-watch-preview-5de3500e-4242-4416-883e-4a8aab303c33",
+              "protocol": "v0.9.1",
+              "messages": [
+                {
+                  "version": "v0.9.1",
+                  "createSurface": {
+                    "surfaceId": "information-watch-preview-5de3500e-4242-4416-883e-4a8aab303c33",
+                    "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateComponents": {
+                    "surfaceId": "information-watch-preview-5de3500e-4242-4416-883e-4a8aab303c33",
+                    "components": [
+                      {
+                        "id": "root",
+                        "component": "Column",
+                        "children": [
+                          "title",
+                          "summary",
+                          "checklist",
+                          "sources"
+                        ]
+                      },
+                      {
+                        "id": "title",
+                        "component": "Text",
+                        "text": {
+                          "path": "/title"
+                        },
+                        "variant": "h2"
+                      },
+                      {
+                        "id": "summary",
+                        "component": "Text",
+                        "text": {
+                          "path": "/summary"
+                        }
+                      },
+                      {
+                        "id": "checklist",
+                        "component": "Text",
+                        "text": {
+                          "path": "/checklist"
+                        }
+                      },
+                      {
+                        "id": "sources",
+                        "component": "Text",
+                        "text": {
+                          "path": "/sources"
+                        },
+                        "variant": "caption"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateDataModel": {
+                    "surfaceId": "information-watch-preview-5de3500e-4242-4416-883e-4a8aab303c33",
+                    "path": "/",
+                    "value": {
+                      "title": "移动工具发布状态",
+                      "summary": "changed / notify\n[MOCK] 合成事件：上线时间从18:00推迟到20:00，新增阻断项：设备结果回传超时。；按RULE-731比较当前观察与基线，说明延期及阻断项、负责人，给出提醒建议，保留来源编号。不要发送通知。；合成验收规则RULE-731：上线延期超过30分钟或出现阻断项时建议提醒；仅文案修订保持安静。负责人林舟。",
+                      "checklist": "1. 内容发生变化",
+                      "sources": "release-status, policy-731",
+                      "revision": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "text": "[MOCK] changed / notify\n\n[MOCK] 合成事件：上线时间从18:00推迟到20:00，新增阻断项：设备结果回传超时。；按RULE-731比较当前观察与基线，说明延期及阻断项、负责人，给出提醒建议，保留来源编号。不要发送通知。；合成验收规则RULE-731：上线延期超过30分钟或出现阻断项时建议提醒；仅文案修订保持安静。负责人林舟。\n\n- 内容发生变化\n\n来源：release-status, policy-731"
+        },
+        {
+          "agentId": "travel-assistant",
+          "elapsedMs": 113,
+          "usage": {
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "totalTokens": 0,
+            "raw": {
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "totalTokens": 0
+            }
+          },
+          "tools": [
+            {
+              "name": "browserSearch",
+              "error": false
+            },
+            {
+              "name": "browserRead",
+              "error": false
+            },
+            {
+              "name": "browserRead",
+              "error": false
+            },
+            {
+              "name": "browserImages",
+              "error": false
+            },
+            {
+              "name": "submitTripPlan",
+              "accepted": true,
+              "error": false
+            }
+          ],
+          "artifact": {
+            "output": {
+              "summary": "[MOCK] 延吉行程；安排延吉三日游，关注美食、朝鲜族文化和轻松步行。未提供日期和预算，请说明假设。最多搜索三次，然后读取至少两个页面、整理网页加载图片并提交计划；不编造实时价格。",
+              "assumptions": [
+                "未指定出发地和日期；不含往返交通"
+              ],
+              "days": [
+                {
+                  "day": 1,
+                  "title": "文化体验",
+                  "activities": [
+                    {
+                      "period": "上午",
+                      "plan": "[MOCK] 测试行程",
+                      "sourceIds": [
+                        "S-e81fba724617"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "day": 2,
+                  "title": "文化体验",
+                  "activities": [
+                    {
+                      "period": "上午",
+                      "plan": "[MOCK] 测试行程",
+                      "sourceIds": [
+                        "S-e81fba724617"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "day": 3,
+                  "title": "文化体验",
+                  "activities": [
+                    {
+                      "period": "上午",
+                      "plan": "[MOCK] 测试行程",
+                      "sourceIds": [
+                        "S-e81fba724617"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "budgetEstimate": "仅为示例，不是实时价格",
+              "notes": [
+                "测试资料，无真实联网"
+              ],
+              "sourceIds": [
+                "S-e81fba724617",
+                "S-689db57e81e2"
+              ],
+              "imageIds": [
+                "I-e81fba724617",
+                "I-689db57e81e2"
+              ],
+              "sources": [
+                {
+                  "id": "S-e81fba724617",
+                  "title": "延吉旅游资料[MOCK]",
+                  "url": "https://www.jl.gov.cn/mock-travel-1",
+                  "kind": "page",
+                  "fetchedAt": "2026-10-23T02:36:48.174Z"
+                },
+                {
+                  "id": "S-689db57e81e2",
+                  "title": "延吉旅游资料[MOCK]",
+                  "url": "https://www.jl.gov.cn/mock-travel-2",
+                  "kind": "page",
+                  "fetchedAt": "2026-10-23T02:36:48.179Z"
+                }
+              ],
+              "images": [
+                {
+                  "id": "I-e81fba724617",
+                  "url": "https://www.jl.gov.cn/mock-travel-1.jpg",
+                  "sourceId": "S-e81fba724617",
+                  "sourcePage": "https://www.jl.gov.cn/mock-travel-1",
+                  "caption": "[MOCK] 测试图片",
+                  "width": 800,
+                  "height": 600
+                },
+                {
+                  "id": "I-689db57e81e2",
+                  "url": "https://www.jl.gov.cn/mock-travel-2.jpg",
+                  "sourceId": "S-689db57e81e2",
+                  "sourcePage": "https://www.jl.gov.cn/mock-travel-2",
+                  "caption": "[MOCK] 测试图片",
+                  "width": 800,
+                  "height": 600
+                }
+              ],
+              "destination": "延吉"
+            },
+            "view": {
+              "publishedRevision": 1,
+              "surfaceId": "travel-preview-e36283c3-8779-4a64-a29d-52b082204fd3",
+              "protocol": "v0.9.1",
+              "messages": [
+                {
+                  "version": "v0.9.1",
+                  "createSurface": {
+                    "surfaceId": "travel-preview-e36283c3-8779-4a64-a29d-52b082204fd3",
+                    "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateComponents": {
+                    "surfaceId": "travel-preview-e36283c3-8779-4a64-a29d-52b082204fd3",
+                    "components": [
+                      {
+                        "id": "root",
+                        "component": "Column",
+                        "children": [
+                          "title",
+                          "summary",
+                          "checklist",
+                          "sources"
+                        ]
+                      },
+                      {
+                        "id": "title",
+                        "component": "Text",
+                        "text": {
+                          "path": "/title"
+                        },
+                        "variant": "h2"
+                      },
+                      {
+                        "id": "summary",
+                        "component": "Text",
+                        "text": {
+                          "path": "/summary"
+                        }
+                      },
+                      {
+                        "id": "checklist",
+                        "component": "Text",
+                        "text": {
+                          "path": "/checklist"
+                        }
+                      },
+                      {
+                        "id": "sources",
+                        "component": "Text",
+                        "text": {
+                          "path": "/sources"
+                        },
+                        "variant": "caption"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateDataModel": {
+                    "surfaceId": "travel-preview-e36283c3-8779-4a64-a29d-52b082204fd3",
+                    "path": "/",
+                    "value": {
+                      "title": "延吉出行计划",
+                      "summary": "[MOCK] 延吉行程；安排延吉三日游，关注美食、朝鲜族文化和轻松步行。未提供日期和预算，请说明假设。最多搜索三次，然后读取至少两个页面、整理网页加载图片并提交计划；不编造实时价格。",
+                      "checklist": "1. 第1天 文化体验：上午 [MOCK] 测试行程\n2. 第2天 文化体验：上午 [MOCK] 测试行程\n3. 第3天 文化体验：上午 [MOCK] 测试行程",
+                      "sources": "S-e81fba724617, S-689db57e81e2",
+                      "revision": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "text": "[MOCK] 延吉3日行程演示\n\n[MOCK] 延吉行程；安排延吉三日游，关注美食、朝鲜族文化和轻松步行。未提供日期和预算，请说明假设。最多搜索三次，然后读取至少两个页面、整理网页加载图片并提交计划；不编造实时价格。\n\n**第1天：文化体验**\n- 上午：[MOCK] 测试行程\n\n**第2天：文化体验**\n- 上午：[MOCK] 测试行程\n\n**第3天：文化体验**\n- 上午：[MOCK] 测试行程\n\n这是模拟结果，未调用真实模型或浏览器。完整行程、来源、测试图片和 A2UI 数据见 SubmitTripPlan 的 artifact。"
+        }
+      ],
+      "service": {
+        "service": "xagent-studio",
+        "build": {
+          "commit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+          "release": "a45533207a79-20261023T023255",
+          "runtimeDigest": "557766d78eb8a098a94a07e4e41fda8d04a5bef621eabee77530832d60dca0de"
+        },
+        "draining": false,
+        "activeRuns": 0,
+        "deepseekConfigured": true
+      },
+      "remainingBrowserPids": [],
+      "finishedAt": "2026-10-23T02:36:48.215Z"
+    },
+    {
+      "mode": "mock",
+      "sourceCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+      "inputs": "synthetic events and notes",
+      "notificationsSent": false,
+      "passed": true,
+      "checks": [
+        {
+          "agentId": "meeting-prep",
+          "revision": 1,
+          "output": {
+            "summary": "[MOCK] 发布评审：计划18:00上线，无阻断项；评审回滚方案。；关注延期与回滚，摘要保留资料编号RULE-731。仅严重变更建议提醒。；合成规则RULE-731：负责人林舟；延期超过30分钟或出现阻断项建议提醒；回滚前应停止新设备调用。",
+            "checklist": [
+              "按要求准备：关注延期与回滚，摘要保留资料编号RULE-731。仅严重变更建议提醒。"
+            ],
+            "sourceIds": [
+              "RULE-731"
+            ]
+          },
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            }
+          ],
+          "usage": {
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "totalTokens": 0,
+            "raw": {
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "totalTokens": 0
+            }
+          },
+          "a2uiMessages": 3
+        },
+        {
+          "agentId": "information-watch",
+          "revision": 1,
+          "output": {
+            "summary": "[MOCK] 计划18:00上线，无阻断项；评审回滚方案。；关注延期与回滚，摘要保留资料编号RULE-731。仅严重变更建议提醒。；合成规则RULE-731：负责人林舟；延期超过30分钟或出现阻断项建议提醒；回滚前应停止新设备调用。",
+            "change": "initial",
+            "notification": "quiet",
+            "findings": [
+              "无新增变化提醒"
+            ],
+            "sourceIds": [
+              "release-status",
+              "RULE-731"
+            ]
+          },
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "release-status",
+                "RULE-731"
+              ]
+            }
+          ],
+          "usage": {
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "totalTokens": 0,
+            "raw": {
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "totalTokens": 0
+            }
+          },
+          "a2uiMessages": 3
+        },
+        {
+          "agentId": "information-watch",
+          "revision": 2,
+          "output": {
+            "summary": "[MOCK] 上线从18:00推迟到20:00，新增阻断项：设备结果回传超时。；关注延期与回滚，摘要保留资料编号RULE-731。仅严重变更建议提醒。；合成规则RULE-731：负责人林舟；延期超过30分钟或出现阻断项建议提醒；回滚前应停止新设备调用。",
+            "change": "changed",
+            "notification": "notify",
+            "findings": [
+              "内容发生变化"
+            ],
+            "sourceIds": [
+              "release-status",
+              "RULE-731"
+            ]
+          },
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "release-status",
+                "RULE-731"
+              ]
+            }
+          ],
+          "usage": {
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "totalTokens": 0,
+            "raw": {
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "totalTokens": 0
+            }
+          },
+          "a2uiMessages": 3
+        }
+      ],
+      "cleanupErrors": [],
+      "elapsedSeconds": 1.73
+    }
+  ],
+  "cleanup": {
+    "taskContainerRemoved": true
+  },
+  "repositoryCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+  "service": {
+    "service": "xagent-studio",
+    "build": {
+      "commit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+      "release": "a45533207a79-20261023T023255",
+      "runtimeDigest": "557766d78eb8a098a94a07e4e41fda8d04a5bef621eabee77530832d60dca0de"
+    },
+    "draining": false,
+    "activeRuns": 0,
+    "deepseekConfigured": true
+  },
+  "productionDataUnchanged": true,
+  "elapsedSeconds": 6.528,
+  "local": {
+    "type": "local",
+    "passed": true,
+    "elapsedSeconds": 70.61,
+    "realModelCalled": false,
+    "uiVerified": false
+  }
+}

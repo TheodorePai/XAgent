@@ -2,6 +2,8 @@
 
 这些命令只管理 Studio 和隔离测试服务，不升级或重启原任务服务 4391。需要 Node 24、npm、Python 3.12、Git；服务器需已有 SSH 别名 `tencent-server`、Docker、Python 3.12、`ss`，部署用户 UID 1000。DeepSeek 凭据继续使用服务器原有 `/home/ubuntu/xagent-mastra-lab/.env`，不下载至本机。
 
+首次实际构建、版本切换、回退及真实 API / 页面验证见 [验收记录](operations-validation.md)。
+
 ## 统一验证
 
 ```powershell

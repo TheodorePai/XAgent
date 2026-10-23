@@ -2,6 +2,8 @@
 
 开发验证使用 `npm run check`；Studio 独立发布、查询和回退使用 `npm run studio:deploy` / `studio:status` / `studio:rollback`。真实模型须显式指定 `--mode deepseek`。命令、首次接管和页面验收要求见 [运维与统一验证](docs/operations.md)。
 
+最新验收：59 项自动测试通过，统一 CLI、真实 API、三个 Studio 页面、聊天保留及版本回退已验证；失败修复、报告和限制见 [运维验收](docs/operations-validation.md)。
+
 当前 Studio 已接入出行、参会和信息巡检三个 Agent：[启动与调试](docs/studio.md)、[参会与巡检接入及真实验收](docs/notes-studio.md)。本轮 45 项自动测试通过，并完成 5 次真实 DeepSeek 运行（3 次隔离任务 API、2 次 Studio 页面调用）；设备事件与会议资料为合成测试数据。
 
 新增：[出行助手与原生浏览器工具](docs/travel-assistant.md)。`travel-assistant` 已通过真实 DeepSeek + `@mastra/agent-browser` + Chromium 运行验证，自动生成[延吉三日计划（含来源图片）](docs/yanji-trip.md)；[结构化运行报告](docs/travel-verification.json)。用户请求型任务创建后直接运行，无需设备监测订阅。当前共 3 种 Agent，本地测试 26 项通过。

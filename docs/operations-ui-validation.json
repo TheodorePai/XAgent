@@ -1,0 +1,557 @@
+{
+  "sourceCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+  "runtimeDigest": "557766d78eb8a098a94a07e4e41fda8d04a5bef621eabee77530832d60dca0de",
+  "entry": "Actual CUA browser typing and Send button; corroborated by server Memory",
+  "mode": "deepseek",
+  "uiVerified": true,
+  "passed": true,
+  "verifiedAt": "2026-10-23T03:04:05.951178+00:00",
+  "notes": [
+    "Meetings, observations and references are synthetic. No notification was sent.",
+    "Inspection initially remained waiting without a persisted new run. Completed chat tabs were returned to the Agent list and the inspection was retried alone; it then completed. A network-level root cause was not established."
+  ],
+  "checks": [
+    {
+      "agentId": "meeting-prep",
+      "threadId": "ea0d5dff-4605-4537-80a4-154158defea2",
+      "createdAt": "2026-10-23T02:40:43.836Z",
+      "model": {
+        "modelId": "deepseek-flash",
+        "provider": "deepseek"
+      },
+      "tools": [
+        {
+          "name": "searchMeetingNotes",
+          "accepted": null
+        },
+        {
+          "name": "searchMeetingNotes",
+          "accepted": null
+        },
+        {
+          "name": "submitBrief",
+          "accepted": true
+        }
+      ],
+      "artifact": {
+        "output": {
+          "summary": "本次「发布评审会议」（2026-11-03 10:00）议程为核对移动端工具上线风险、负责人及回滚预案。本次检索仅命中一条验收资料（release-042），其中确认三点：负责人为林舟；移动端工具回传超时阈值为15秒，超过即停止本轮操作；发布前必须准备好回滚开关。会前建议：请林舟就15秒超时停止逻辑（触发判定、停止后如何处置）与回滚开关的可用性、操作人逐项口头确认，并把回滚触发条件与决策人写入评审记录。需注意：本次仅为资料核对与简报准备，未执行任何发布、部署、回退或验收操作；除 release-042 外未检索到其他会议资料，其余风险项（如具体回滚步骤、灰度范围）尚无来源支撑，建议会上补充材料后再确认。",
+          "checklist": [
+            "核对15秒超时：确认回传超时阈值为15秒，超时即停止本轮操作，并与负责人确认停止后的处置动作。",
+            "确认负责人：由林舟明确本轮上线及回滚的责任人与决策人，并在会议记录中留名。",
+            "检查回滚开关：确认发布前已准备好回滚开关，现场核对其可用状态与操作人。",
+            "声明边界：本简报不含也未执行任何发布、部署、回退或验收操作，会上按需补充其他风险资料来源。"
+          ],
+          "sourceIds": [
+            "release-042"
+          ]
+        },
+        "view": {
+          "publishedRevision": 1,
+          "surfaceId": "meeting-prep-preview-36252b25-7249-49a9-b789-874c748f9b64",
+          "protocol": "v0.9.1",
+          "messages": [
+            {
+              "version": "v0.9.1",
+              "createSurface": {
+                "surfaceId": "meeting-prep-preview-36252b25-7249-49a9-b789-874c748f9b64",
+                "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateComponents": {
+                "surfaceId": "meeting-prep-preview-36252b25-7249-49a9-b789-874c748f9b64",
+                "components": [
+                  {
+                    "id": "root",
+                    "component": "Column",
+                    "children": [
+                      "title",
+                      "summary",
+                      "checklist",
+                      "sources"
+                    ]
+                  },
+                  {
+                    "id": "title",
+                    "component": "Text",
+                    "text": {
+                      "path": "/title"
+                    },
+                    "variant": "h2"
+                  },
+                  {
+                    "id": "summary",
+                    "component": "Text",
+                    "text": {
+                      "path": "/summary"
+                    }
+                  },
+                  {
+                    "id": "checklist",
+                    "component": "Text",
+                    "text": {
+                      "path": "/checklist"
+                    }
+                  },
+                  {
+                    "id": "sources",
+                    "component": "Text",
+                    "text": {
+                      "path": "/sources"
+                    },
+                    "variant": "caption"
+                  }
+                ]
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateDataModel": {
+                "surfaceId": "meeting-prep-preview-36252b25-7249-49a9-b789-874c748f9b64",
+                "path": "/",
+                "value": {
+                  "title": "发布评审会议",
+                  "summary": "本次「发布评审会议」（2026-11-03 10:00）议程为核对移动端工具上线风险、负责人及回滚预案。本次检索仅命中一条验收资料（release-042），其中确认三点：负责人为林舟；移动端工具回传超时阈值为15秒，超过即停止本轮操作；发布前必须准备好回滚开关。会前建议：请林舟就15秒超时停止逻辑（触发判定、停止后如何处置）与回滚开关的可用性、操作人逐项口头确认，并把回滚触发条件与决策人写入评审记录。需注意：本次仅为资料核对与简报准备，未执行任何发布、部署、回退或验收操作；除 release-042 外未检索到其他会议资料，其余风险项（如具体回滚步骤、灰度范围）尚无来源支撑，建议会上补充材料后再确认。",
+                  "checklist": "1. 核对15秒超时：确认回传超时阈值为15秒，超时即停止本轮操作，并与负责人确认停止后的处置动作。\n2. 确认负责人：由林舟明确本轮上线及回滚的责任人与决策人，并在会议记录中留名。\n3. 检查回滚开关：确认发布前已准备好回滚开关，现场核对其可用状态与操作人。\n4. 声明边界：本简报不含也未执行任何发布、部署、回退或验收操作，会上按需补充其他风险资料来源。",
+                  "sources": "release-042",
+                  "revision": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "text": "简报已提交（版本 revision 1）。以下为可读版本：\n\n## 会前简报｜发布评审会议\n**时间**：2026-11-03 10:00（+08:00）\n**议程**：核对移动端工具上线风险、负责人及回滚预案\n\n本次检索仅命中一条验收资料（来源 **release-042**），其确认三点：\n- **负责人**：林舟\n- **超时阈值**：移动端工具回传超时为 **15 秒**，超过即停止本轮操作\n- **回滚准备**：发布前必须准备好回滚开关\n\n**会前建议**：请林舟就「15 秒超时」的触发判定、超时停止后的处置动作，以及回滚开关的可用性与操作人逐项口头确认；并将回滚触发条件与决策人写入评审记录。\n\n**资料完整性说明**：除 release-042 外未检索到其他会议资料，具体回滚步骤、灰度范围等尚无来源支撑，建议会上补充材料后再确认。本次仅做资料核对与简报准备，**未执行任何发布、部署、回退或验收操作**。\n\n## 准备清单（4 项）\n1. **核对 15 秒超时**：确认回传超时阈值为 15 秒，超时即停止本轮操作，并与负责人确认停止后的处置动作。\n2. **确认负责人**：由林舟明确本轮上线及回滚的责任人与决策人，并在会议记录中留名。\n3. **检查回滚开关**：确认发布前已准备好回滚开关，现场核对其可用状态与操作人。\n4. **说明本次简报的范围**：本简报不含也未执行任何发布、部署、回退或验收操作；其他风险项待会上补充资料。\n\n## 来源编号\n- `release-042`（合成验收资料：负责人林舟；15 秒回传超时停止；发布前须准备回滚开关）",
+      "screenshot": "operations-meeting-ui.png",
+      "screenshotSha256": "b4c4e5ebc1f6be4196403d7b3a1ccee09c4fee0b3bdda978a17c6c6512cffb8e"
+    },
+    {
+      "agentId": "information-watch",
+      "threadId": "ef2639e6-950a-4eee-b7ab-dae0a1ef82f0",
+      "createdAt": "2026-10-23T02:56:33.343Z",
+      "model": {
+        "modelId": "deepseek-flash",
+        "provider": "deepseek"
+      },
+      "tools": [
+        {
+          "name": "readPreviousObservation",
+          "accepted": null
+        },
+        {
+          "name": "searchReferenceNotes",
+          "accepted": null
+        },
+        {
+          "name": "submitInspection",
+          "accepted": true
+        }
+      ],
+      "artifact": {
+        "output": {
+          "summary": "移动工具发布状态（release-status）与基线相比发生变更：上线时间由18:00推迟至20:00，并新增阻断项“设备结果回传超时”；基线为“计划18:00上线，无阻断项”。按RULE-731，延期超过30分钟或出现阻断项均建议提醒，本次两项同时命中，建议notify（仅决策，未发送通知）。",
+          "change": "changed",
+          "notification": "notify",
+          "findings": [
+            "变化：上线时间从18:00推迟到20:00，延期2小时，超出RULE-731的30分钟阈值；同时新增阻断项“设备结果回传超时”。",
+            "依据：RULE-731规定“上线延期超过30分钟或出现阻断项时建议提醒；仅文案修订保持安静”，本次非文案修订且两项条件同时满足。",
+            "影响：阻断项未解除前不具备放行条件，页面验收OPS-20261023需相应顺延并复测设备结果回传链路。",
+            "跟进人：按policy-731，负责人为林舟；建议由其确认阻断项解除时间并重新排定验收窗口。",
+            "来源：观察sourceId=release-status；资料id=policy-731（provided-reference-library）。"
+          ],
+          "sourceIds": [
+            "release-status",
+            "policy-731"
+          ]
+        },
+        "view": {
+          "publishedRevision": 1,
+          "surfaceId": "information-watch-preview-9230bb7b-6e0b-4883-85f7-f642136f8029",
+          "protocol": "v0.9.1",
+          "messages": [
+            {
+              "version": "v0.9.1",
+              "createSurface": {
+                "surfaceId": "information-watch-preview-9230bb7b-6e0b-4883-85f7-f642136f8029",
+                "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateComponents": {
+                "surfaceId": "information-watch-preview-9230bb7b-6e0b-4883-85f7-f642136f8029",
+                "components": [
+                  {
+                    "id": "root",
+                    "component": "Column",
+                    "children": [
+                      "title",
+                      "summary",
+                      "checklist",
+                      "sources"
+                    ]
+                  },
+                  {
+                    "id": "title",
+                    "component": "Text",
+                    "text": {
+                      "path": "/title"
+                    },
+                    "variant": "h2"
+                  },
+                  {
+                    "id": "summary",
+                    "component": "Text",
+                    "text": {
+                      "path": "/summary"
+                    }
+                  },
+                  {
+                    "id": "checklist",
+                    "component": "Text",
+                    "text": {
+                      "path": "/checklist"
+                    }
+                  },
+                  {
+                    "id": "sources",
+                    "component": "Text",
+                    "text": {
+                      "path": "/sources"
+                    },
+                    "variant": "caption"
+                  }
+                ]
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateDataModel": {
+                "surfaceId": "information-watch-preview-9230bb7b-6e0b-4883-85f7-f642136f8029",
+                "path": "/",
+                "value": {
+                  "title": "移动工具发布状态",
+                  "summary": "changed / notify\n移动工具发布状态（release-status）与基线相比发生变更：上线时间由18:00推迟至20:00，并新增阻断项“设备结果回传超时”；基线为“计划18:00上线，无阻断项”。按RULE-731，延期超过30分钟或出现阻断项均建议提醒，本次两项同时命中，建议notify（仅决策，未发送通知）。",
+                  "checklist": "1. 变化：上线时间从18:00推迟到20:00，延期2小时，超出RULE-731的30分钟阈值；同时新增阻断项“设备结果回传超时”。\n2. 依据：RULE-731规定“上线延期超过30分钟或出现阻断项时建议提醒；仅文案修订保持安静”，本次非文案修订且两项条件同时满足。\n3. 影响：阻断项未解除前不具备放行条件，页面验收OPS-20261023需相应顺延并复测设备结果回传链路。\n4. 跟进人：按policy-731，负责人为林舟；建议由其确认阻断项解除时间并重新排定验收窗口。\n5. 来源：观察sourceId=release-status；资料id=policy-731（provided-reference-library）。",
+                  "sources": "release-status, policy-731",
+                  "revision": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "text": "巡检已提交（revision 1），结论如下：\n\n**变化（changed）**\n- 上次基线（release-status）：计划 18:00 上线，无阻断项。\n- 当前观察：上线时间推迟到 20:00，即延期 2 小时；并新增阻断项“设备结果回传超时”。\n\n**提醒决策：建议提醒（notify，仅为决策，未发送任何通知）**\n- 依据 RULE-731（policy-731）：“上线延期超过 30 分钟或出现阻断项时建议提醒；仅文案修订保持安静”。本次延期 2 小时已远超 30 分钟阈值，且同时出现阻断项，两个触发条件都满足，并非仅文案修订。\n\n**影响与建议跟进**\n- 阻断项解除前不具备放行条件，页面验收 OPS-20261023 需相应顺延，并复测设备结果回传链路。\n- 按 policy-731，负责人为**林舟**，建议由其确认阻断项解除时间并重新排定验收窗口。\n\n**来源编号**\n- 观察：release-status\n- 资料：policy-731（provided-reference-library）\n\n**简短结论**：延期 2 小时并新增阻断项，符合 RULE-731 提醒条件，建议提醒负责人林舟跟进；本次仅给出决策，未执行外部通知。",
+      "screenshot": "operations-inspection-ui.png",
+      "screenshotSha256": "6128d12c4653301cf356207c125ea76b83bf8fe0a0fdfb3a7d449a0baf6a3e55"
+    },
+    {
+      "agentId": "travel-assistant",
+      "threadId": "02ba92f2-2061-4308-b3ec-1f0c16759c8d",
+      "createdAt": "2026-10-23T02:49:51.230Z",
+      "model": {
+        "modelId": "deepseek-flash",
+        "provider": "deepseek"
+      },
+      "tools": [
+        {
+          "name": "browserSearch",
+          "accepted": null
+        },
+        {
+          "name": "browserSearch",
+          "accepted": null
+        },
+        {
+          "name": "browserSearch",
+          "accepted": null
+        },
+        {
+          "name": "browserRead",
+          "accepted": null
+        },
+        {
+          "name": "browserRead",
+          "accepted": null
+        },
+        {
+          "name": "browserImages",
+          "accepted": null
+        },
+        {
+          "name": "submitTripPlan",
+          "accepted": true
+        }
+      ],
+      "artifact": {
+        "output": {
+          "summary": "以延吉市区为核心，避开长白山、防川等长途线路，三天分别围绕“市井早餐与朝鲜族民俗园”“博物馆、帽儿山轻徒步与河畔慢行”“校园文化、老建筑与恐龙博物馆”展开，并把冷面、包饭、参鸡汤、打糕、烧烤等朝鲜族风味穿插其中。三次政府来源查询均未得到可读页面，改用工具允许的腾讯新闻、搜狐公开文章核实；票价、营业时间、演出场次和预约要求均需出行前向官方复核。",
+          "assumptions": [
+            "出发地未提供，默认游客自行抵达延吉，不含往返大交通。",
+            "日期未提供，按2026年10月下旬秋季设计；天气、景区开放状态尚未核实。",
+            "人数未提供，预算默认2人、中等舒适型；住宿默认市区2晚。",
+            "偏好轻松步行，单日步行约5—8公里，较远路段以公交或打车代替，文中交通时间为估算。",
+            "默认D1上午前抵达延吉、D3下午可离开，抵离时间可按实际调整。"
+          ],
+          "days": [
+            {
+              "day": 1,
+              "title": "市井早餐、朝鲜族民俗园与双语夜景",
+              "activities": [
+                {
+                  "period": "07:00—08:30",
+                  "plan": "到水上市场吃早餐，尝试现场制作的打糕、米肠、泡菜、江米鸡或明月汤饭。文章称市场约清晨5点至8点营业（另一篇写6点至8点），建议7点前到达；空着肚子少量多样尝试。",
+                  "sourceIds": [
+                    "S-8e76f448fb22",
+                    "S-b59fe6bb6092"
+                  ]
+                },
+                {
+                  "period": "09:00—10:30",
+                  "plan": "步行或短途打车到西市场，逛一楼食品特产区，了解泡菜、米酒、明太鱼、辣椒酱等朝鲜族食材，可作后续伴手礼踩点。此处比早市营业时间长，适合轻松慢逛。",
+                  "sourceIds": [
+                    "S-b59fe6bb6092",
+                    "S-8e76f448fb22"
+                  ]
+                },
+                {
+                  "period": "14:00—17:00",
+                  "plan": "游中国朝鲜族民俗园：看传统民居、水车稻田，体验朝鲜族服饰拍照；文章提到园内有农乐舞、长鼓舞表演，建议提前确认当日场次。下午斜射光线较适合拍照；文章称门票30元，仅作参考，需核实。",
+                  "sourceIds": [
+                    "S-8e76f448fb22",
+                    "S-b59fe6bb6092"
+                  ]
+                },
+                {
+                  "period": "19:00—20:30",
+                  "plan": "到延边大学门口看双语招牌“网红弹幕墙”，夜间亮灯后适合拍照；最佳机位在马路对面，注意来往车辆。晚餐可就近选冷面或包饭，首餐不必安排过重。",
+                  "sourceIds": [
+                    "S-b59fe6bb6092",
+                    "S-8e76f448fb22"
+                  ]
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "title": "博物馆、帽儿山轻徒步与河畔慢行",
+              "activities": [
+                {
+                  "period": "09:00—10:30",
+                  "plan": "先到延边博物馆了解朝鲜族历史与民俗，作为后续街区体验的背景补充。页面读者评论称可预约、带身份证现场预约即可，但这不是官方说明，开放时间与预约规则须以馆方公告为准。",
+                  "sourceIds": [
+                    "S-8e76f448fb22"
+                  ]
+                },
+                {
+                  "period": "11:00—12:30",
+                  "plan": "午餐选一碗延吉冷面：文章推荐荞麦面冰碗冷面，配苹果片、牛肉和泡菜，酸甜辣口味；也可改吃包饭，用苏子叶或白菜叶包五花肉、米饭、蒜片和辣酱。",
+                  "sourceIds": [
+                    "S-8e76f448fb22"
+                  ]
+                },
+                {
+                  "period": "14:00—16:00",
+                  "plan": "帽儿山轻徒步，山不高、绿树成荫，按轻松节奏上下山并在山顶俯瞰延吉市区。该点来自页面读者补充，入口、步道开放情况及往返交通需现场或官方渠道确认。",
+                  "sourceIds": [
+                    "S-8e76f448fb22"
+                  ]
+                },
+                {
+                  "period": "17:00—19:30",
+                  "plan": "傍晚在布尔哈通河边散步，随后体验延吉烧烤或啤酒屋，选黄牛肉、明太鱼等少量多样，搭配朝鲜族酱料。河边散步同样来自读者补充，建议根据天色和体力缩短或取消。",
+                  "sourceIds": [
+                    "S-8e76f448fb22",
+                    "S-b59fe6bb6092"
+                  ]
+                }
+              ]
+            },
+            {
+              "day": 3,
+              "title": "校园文化、老教堂与恐龙博物馆",
+              "activities": [
+                {
+                  "period": "09:00—10:30",
+                  "plan": "慢逛延边大学校园外围及双语路牌一带，感受校园与朝鲜族元素；校园能否对访客开放、需否预约并不确定，若不能入校则改为外围街区散步与拍照。",
+                  "sourceIds": [
+                    "S-8e76f448fb22",
+                    "S-b59fe6bb6092"
+                  ]
+                },
+                {
+                  "period": "11:00—12:00",
+                  "plan": "步行或短途打车到延吉天主教堂看外观。文章称教堂建于1911年，日落时光线最适合拍照；上午前往也能安静看建筑，内部是否开放需现场确认。",
+                  "sourceIds": [
+                    "S-8e76f448fb22"
+                  ]
+                },
+                {
+                  "period": "12:30—14:00",
+                  "plan": "午餐安排参鸡汤或朝鲜打糕：参鸡汤鸡腹填糯米、红枣、人参，先喝汤再拆鸡肉；打糕现场捶打，豆粉香甜、口感软糯。按2人分量点单，避免浪费。",
+                  "sourceIds": [
+                    "S-8e76f448fb22"
+                  ]
+                },
+                {
+                  "period": "14:30—16:30",
+                  "plan": "参观延吉恐龙博物馆，文章称其为东北较大的恐龙化石馆、有巨型延吉龙骨架；适合轻松室内游览，也便于雨天备选。闭馆日、票务与入馆要求需核实后再定。",
+                  "sourceIds": [
+                    "S-8e76f448fb22"
+                  ]
+                }
+              ]
+            }
+          ],
+          "budgetEstimate": "按来源文章“舒适型每人每天约300—400元”作经验估算：2人3天约1800—2400元，涵盖餐饮、市内交通和门票等；原文未说明是否包含住宿。另需计2晚住宿与往返大交通，均为估算，不是实时报价，实际以预订页面为准。",
+          "notes": [
+            "三次政府来源查询未得到可读页面；本计划依据腾讯新闻、搜狐公开文章，属2025—2026年资料，并非文旅部门实时公告。",
+            "民俗园30元门票、市场营业时间、演出场次、博物馆与校园预约规则均来自文章或读者补充，出行前须向官方渠道复核。",
+            "水上市场两篇文章分别写作5—8点和6—8点，建议7点前到，并以现场实际收摊时间为准。",
+            "延边博物馆、帽儿山、布尔哈通河散步信息来自腾讯页面读者评论，权威性有限，已按“待核实”处理。",
+            "图片均为腾讯新闻页面实际加载的配图，网页只给出“图片”等泛化图注，不能保证对应某一具体景点。",
+            "10月下旬延吉早晚温差可能较大，帽儿山与河畔步行需备保暖防风衣物；天气和体感未核实。",
+            "市内交通时间按常见路况估算，未查询实时公交、打车价格或拥堵情况。"
+          ],
+          "sourceIds": [
+            "S-8e76f448fb22",
+            "S-b59fe6bb6092"
+          ],
+          "imageIds": [
+            "I-36641e0968bf",
+            "I-76db85d8e39f",
+            "I-85f83e0e5b66"
+          ],
+          "sources": [
+            {
+              "id": "S-8e76f448fb22",
+              "title": "去吉林的延吉玩了几天，说说我对这座小城的印象，全是心里话_腾讯新闻",
+              "url": "https://news.qq.com/rain/a/20260503A06UCZ00",
+              "kind": "page",
+              "fetchedAt": "2026-10-23T02:50:12.859Z"
+            },
+            {
+              "id": "S-b59fe6bb6092",
+              "title": "延边必打卡的10个景点｜中朝边境的风情画卷，感受不一样的诗和远_延吉_长白_理由",
+              "url": "https://www.sohu.com/a/952599442_122517634",
+              "kind": "page",
+              "fetchedAt": "2026-10-23T02:50:15.092Z"
+            }
+          ],
+          "images": [
+            {
+              "id": "I-36641e0968bf",
+              "url": "https://inews.gtimg.com/news_bt/O8QScZ1t5QqHPn5KrATcojLPrnVxTKjV7REmw9-02toGkAA/641",
+              "sourceId": "S-8e76f448fb22",
+              "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+              "caption": "图片",
+              "width": 960,
+              "height": 719
+            },
+            {
+              "id": "I-76db85d8e39f",
+              "url": "https://inews.gtimg.com/news_bt/OXOdldzE1BNdCSZnLs6-Qi99ifdrBgRyCp5v2wqRSoh5AAA/641",
+              "sourceId": "S-8e76f448fb22",
+              "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+              "caption": "图片",
+              "width": 960,
+              "height": 548
+            },
+            {
+              "id": "I-85f83e0e5b66",
+              "url": "https://inews.gtimg.com/news_bt/OlSTaBZGcFaajkDoKAF2ebJxuHS5GXgm07fhNi7PCSFg4AA/641",
+              "sourceId": "S-8e76f448fb22",
+              "sourcePage": "https://news.qq.com/rain/a/20260503A06UCZ00",
+              "caption": "图片",
+              "width": 960,
+              "height": 1254
+            }
+          ],
+          "destination": "延吉"
+        },
+        "view": {
+          "publishedRevision": 1,
+          "surfaceId": "travel-preview-85e2be10-78ef-47b7-8361-b69bc8d73717",
+          "protocol": "v0.9.1",
+          "messages": [
+            {
+              "version": "v0.9.1",
+              "createSurface": {
+                "surfaceId": "travel-preview-85e2be10-78ef-47b7-8361-b69bc8d73717",
+                "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateComponents": {
+                "surfaceId": "travel-preview-85e2be10-78ef-47b7-8361-b69bc8d73717",
+                "components": [
+                  {
+                    "id": "root",
+                    "component": "Column",
+                    "children": [
+                      "title",
+                      "summary",
+                      "checklist",
+                      "sources"
+                    ]
+                  },
+                  {
+                    "id": "title",
+                    "component": "Text",
+                    "text": {
+                      "path": "/title"
+                    },
+                    "variant": "h2"
+                  },
+                  {
+                    "id": "summary",
+                    "component": "Text",
+                    "text": {
+                      "path": "/summary"
+                    }
+                  },
+                  {
+                    "id": "checklist",
+                    "component": "Text",
+                    "text": {
+                      "path": "/checklist"
+                    }
+                  },
+                  {
+                    "id": "sources",
+                    "component": "Text",
+                    "text": {
+                      "path": "/sources"
+                    },
+                    "variant": "caption"
+                  }
+                ]
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateDataModel": {
+                "surfaceId": "travel-preview-85e2be10-78ef-47b7-8361-b69bc8d73717",
+                "path": "/",
+                "value": {
+                  "title": "延吉出行计划",
+                  "summary": "以延吉市区为核心，避开长白山、防川等长途线路，三天分别围绕“市井早餐与朝鲜族民俗园”“博物馆、帽儿山轻徒步与河畔慢行”“校园文化、老建筑与恐龙博物馆”展开，并把冷面、包饭、参鸡汤、打糕、烧烤等朝鲜族风味穿插其中。三次政府来源查询均未得到可读页面，改用工具允许的腾讯新闻、搜狐公开文章核实；票价、营业时间、演出场次和预约要求均需出行前向官方复核。",
+                  "checklist": "1. 第1天 市井早餐、朝鲜族民俗园与双语夜景：07:00—08:30 到水上市场吃早餐，尝试现场制作的打糕、米肠、泡菜、江米鸡或明月汤饭。文章称市场约清晨5点至8点营业（另一篇写6点至8点），建议7点前到达；空着肚子少量多样尝试。；09:00—10:30 步行或短途打车到西市场，逛一楼食品特产区，了解泡菜、米酒、明太鱼、辣椒酱等朝鲜族食材，可作后续伴手礼踩点。此处比早市营业时间长，适合轻松慢逛。；14:00—17:00 游中国朝鲜族民俗园：看传统民居、水车稻田，体验朝鲜族服饰拍照；文章提到园内有农乐舞、长鼓舞表演，建议提前确认当日场次。下午斜射光线较适合拍照；文章称门票30元，仅作参考，需核实。；19:00—20:30 到延边大学门口看双语招牌“网红弹幕墙”，夜间亮灯后适合拍照；最佳机位在马路对面，注意来往车辆。晚餐可就近选冷面或包饭，首餐不必安排过重。\n2. 第2天 博物馆、帽儿山轻徒步与河畔慢行：09:00—10:30 先到延边博物馆了解朝鲜族历史与民俗，作为后续街区体验的背景补充。页面读者评论称可预约、带身份证现场预约即可，但这不是官方说明，开放时间与预约规则须以馆方公告为准。；11:00—12:30 午餐选一碗延吉冷面：文章推荐荞麦面冰碗冷面，配苹果片、牛肉和泡菜，酸甜辣口味；也可改吃包饭，用苏子叶或白菜叶包五花肉、米饭、蒜片和辣酱。；14:00—16:00 帽儿山轻徒步，山不高、绿树成荫，按轻松节奏上下山并在山顶俯瞰延吉市区。该点来自页面读者补充，入口、步道开放情况及往返交通需现场或官方渠道确认。；17:00—19:30 傍晚在布尔哈通河边散步，随后体验延吉烧烤或啤酒屋，选黄牛肉、明太鱼等少量多样，搭配朝鲜族酱料。河边散步同样来自读者补充，建议根据天色和体力缩短或取消。\n3. 第3天 校园文化、老教堂与恐龙博物馆：09:00—10:30 慢逛延边大学校园外围及双语路牌一带，感受校园与朝鲜族元素；校园能否对访客开放、需否预约并不确定，若不能入校则改为外围街区散步与拍照。；11:00—12:00 步行或短途打车到延吉天主教堂看外观。文章称教堂建于1911年，日落时光线最适合拍照；上午前往也能安静看建筑，内部是否开放需现场确认。；12:30—14:00 午餐安排参鸡汤或朝鲜打糕：参鸡汤鸡腹填糯米、红枣、人参，先喝汤再拆鸡肉；打糕现场捶打，豆粉香甜、口感软糯。按2人分量点单，避免浪费。；14:30—16:30 参观延吉恐龙博物馆，文章称其为东北较大的恐龙化石馆、有巨型延吉龙骨架；适合轻松室内游览，也便于雨天备选。闭馆日、票务与入馆要求需核实后再定。",
+                  "sources": "S-8e76f448fb22, S-b59fe6bb6092",
+                  "revision": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "text": "已提交延吉三日游计划，行程以市区为主，不安排长白山、防川等长途往返。\n\n## 三天安排\n\n**第1天：市井早餐、朝鲜族民俗园与双语夜景**\n- 07:00 水上市场吃早餐：打糕、米肠、泡菜、江米鸡、明月汤饭。建议7点前到。\n- 09:00 西市场逛朝鲜族食材和特产。\n- 14:00 中国朝鲜族民俗园：看传统民居、水车稻田，体验朝鲜族服饰；表演场次待核实。\n- 19:00 延边大学门口看双语招牌“网红弹幕墙”。\n\n**第2天：博物馆、帽儿山轻徒步与河畔慢行**\n- 上午延边博物馆，了解朝鲜族历史民俗。\n- 午餐延吉冷面或包饭。\n- 下午帽儿山轻徒步，山顶俯瞰市区。\n- 傍晚布尔哈通河边散步，晚餐烤肉或啤酒屋。\n\n**第3天：校园文化、老教堂与恐龙博物馆**\n- 上午延边大学校园外围及双语路牌一带。\n- 延吉天主教堂看外观。\n- 午餐参鸡汤或朝鲜打糕。\n- 下午延吉恐龙博物馆，作为轻松室内行程及雨天备选。\n\n## 说明与预算\n- 默认2人、中等舒适型、市区住宿2晚；不含往返大交通。\n- 按来源文章每人每天约300—400元估算，2人3天约1800—2400元；不是实时价格，住宿是否包含原文未说明。\n- 政府来源三次查询未获得可读页面，改用腾讯新闻、搜狐文章核实。票价、开放时间、预约及演出场次均需出发前向官方复核。\n\n## 来源\n- [腾讯新闻：去吉林的延吉玩了几天](https://news.qq.com/rain/a/20260503A06UCZ00)\n- [搜狐：延边必打卡的10个景点](https://www.sohu.com/a/952599442_122517634)\n\n## 网页实际加载图片\n图注仅为“图片”，不能确认具体对应景点：\n- https://inews.gtimg.com/news_bt/O8QScZ1t5QqHPn5KrATcojLPrnVxTKjV7REmw9-02toGkAA/641\n- https://inews.gtimg.com/news_bt/OXOdldzE1BNdCSZnLs6-Qi99ifdrBgRyCp5v2wqRSoh5AAA/641\n- https://inews.gtimg.com/news_bt/OlSTaBZGcFaajkDoKAF2ebJxuHS5GXgm07fhNi7PCSFg4AA/641",
+      "screenshot": "operations-travel-ui.png",
+      "screenshotSha256": "d0af4fc4837f4175260631a6d8872bcf1fad898c3ddd646851346999541083c5"
+    }
+  ],
+  "remainingBrowserProcesses": []
+}

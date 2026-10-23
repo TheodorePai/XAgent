@@ -1,0 +1,194 @@
+{
+  "runId": "20261023T023953-707900",
+  "sourceCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+  "mode": "deepseek",
+  "suite": "agent-api",
+  "startedAt": "2026-10-23T02:39:54.224861+00:00",
+  "passed": true,
+  "uiVerified": false,
+  "limitations": [
+    "API verification does not verify Studio browser chat.",
+    "Events and note libraries are synthetic; no real phone or notification."
+  ],
+  "checks": [
+    {
+      "type": "agent-api",
+      "mode": "deepseek",
+      "requestedCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+      "startedAt": "2026-10-23T02:39:54.347Z",
+      "configuredModel": "deepseek-flash",
+      "passed": true,
+      "uiVerified": false,
+      "syntheticInputs": true,
+      "checks": [
+        {
+          "agentId": "meeting-prep",
+          "elapsedMs": 6426,
+          "usage": {
+            "inputTokens": 4248,
+            "outputTokens": 874,
+            "totalTokens": 5122,
+            "reasoningTokens": 11,
+            "cachedInputTokens": 2304,
+            "raw": {
+              "inputTokens": {
+                "total": 2418,
+                "noCache": 1522,
+                "cacheRead": 896
+              },
+              "outputTokens": {
+                "total": 393,
+                "text": 393,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 2418,
+                "completion_tokens": 393,
+                "total_tokens": 2811,
+                "prompt_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 896,
+                "prompt_cache_miss_tokens": 1522
+              }
+            }
+          },
+          "tools": [
+            {
+              "name": "searchMeetingNotes",
+              "error": false
+            },
+            {
+              "name": "submitBrief",
+              "accepted": true,
+              "error": false
+            }
+          ],
+          "artifact": {
+            "output": {
+              "summary": "本次“发布评审会议”（2026-11-03 10:00）议程为核对移动端工具上线风险、负责人及回滚预案。据授权资料 release-042：负责人为林舟；移动端工具回传超时阈值为 15 秒，超过则停止本轮操作；发布前必须准备回滚开关。会前建议：请林舟确认 15 秒超时判定与“超时即停止本轮操作”的触发链路已实现且有验证记录，明确超时监测与停手动作的执行人；同时确认回滚开关的开启条件、决策人、操作步骤与生效验证方式，形成可现场演示或可查证的材料，以便会上直接完成风险与预案的闭环确认。目前仅有 1 条资料，未提供版本号、灰度范围、监控指标与演练结果等其他事实，会上如需可请相关同事补充。",
+              "checklist": [
+                "准备移动端工具回传超时逻辑说明：15 秒阈值判定方式、超时即停止本轮操作的实现与测试证据（来源 release-042）",
+                "确认并书面记录上线负责人为林舟，明确超时监测、停止操作的执行人与值班安排",
+                "准备回滚开关方案：开启条件、决策人、操作步骤、生效验证与预计耗时",
+                "整理本次上线风险清单（含超时误判、回传丢失等场景）及对应缓解措施，会前发出",
+                "如已有灰度范围、监控指标或演练结果，一并带到会上补充说明"
+              ],
+              "sourceIds": [
+                "release-042"
+              ]
+            },
+            "view": {
+              "publishedRevision": 1,
+              "surfaceId": "meeting-prep-preview-e962b627-1059-49a4-bae9-3847f0893494",
+              "protocol": "v0.9.1",
+              "messages": [
+                {
+                  "version": "v0.9.1",
+                  "createSurface": {
+                    "surfaceId": "meeting-prep-preview-e962b627-1059-49a4-bae9-3847f0893494",
+                    "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateComponents": {
+                    "surfaceId": "meeting-prep-preview-e962b627-1059-49a4-bae9-3847f0893494",
+                    "components": [
+                      {
+                        "id": "root",
+                        "component": "Column",
+                        "children": [
+                          "title",
+                          "summary",
+                          "checklist",
+                          "sources"
+                        ]
+                      },
+                      {
+                        "id": "title",
+                        "component": "Text",
+                        "text": {
+                          "path": "/title"
+                        },
+                        "variant": "h2"
+                      },
+                      {
+                        "id": "summary",
+                        "component": "Text",
+                        "text": {
+                          "path": "/summary"
+                        }
+                      },
+                      {
+                        "id": "checklist",
+                        "component": "Text",
+                        "text": {
+                          "path": "/checklist"
+                        }
+                      },
+                      {
+                        "id": "sources",
+                        "component": "Text",
+                        "text": {
+                          "path": "/sources"
+                        },
+                        "variant": "caption"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateDataModel": {
+                    "surfaceId": "meeting-prep-preview-e962b627-1059-49a4-bae9-3847f0893494",
+                    "path": "/",
+                    "value": {
+                      "title": "发布评审会议",
+                      "summary": "本次“发布评审会议”（2026-11-03 10:00）议程为核对移动端工具上线风险、负责人及回滚预案。据授权资料 release-042：负责人为林舟；移动端工具回传超时阈值为 15 秒，超过则停止本轮操作；发布前必须准备回滚开关。会前建议：请林舟确认 15 秒超时判定与“超时即停止本轮操作”的触发链路已实现且有验证记录，明确超时监测与停手动作的执行人；同时确认回滚开关的开启条件、决策人、操作步骤与生效验证方式，形成可现场演示或可查证的材料，以便会上直接完成风险与预案的闭环确认。目前仅有 1 条资料，未提供版本号、灰度范围、监控指标与演练结果等其他事实，会上如需可请相关同事补充。",
+                      "checklist": "1. 准备移动端工具回传超时逻辑说明：15 秒阈值判定方式、超时即停止本轮操作的实现与测试证据（来源 release-042）\n2. 确认并书面记录上线负责人为林舟，明确超时监测、停止操作的执行人与值班安排\n3. 准备回滚开关方案：开启条件、决策人、操作步骤、生效验证与预计耗时\n4. 整理本次上线风险清单（含超时误判、回传丢失等场景）及对应缓解措施，会前发出\n5. 如已有灰度范围、监控指标或演练结果，一并带到会上补充说明",
+                      "sources": "release-042",
+                      "revision": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "text": "我将先检索本次会议的授权资料。已检索到授权资料 release-042，现提交简报草稿。简报已提交并发布（版本 revision 1）。\n\n## 发布评审会议 · 会前简报\n**时间**：2026-11-03 10:00｜**议程**：核对移动端工具上线风险、负责人及回滚预案\n\n**核心事实（来源 release-042）**\n- 上线负责人：**林舟**\n- 移动端工具回传**超时阈值为 15 秒**，超过则**停止本轮操作**\n- 发布前**必须准备回滚开关**\n\n**会前建议**：请林舟确认 15 秒超时的判定方式与“超时即停止本轮操作”的触发链路已实现且有验证记录，并明确监测与停手动作的执行人；同时把回滚开关的开启条件、决策人、操作步骤与生效验证整理为可查证或可演示的材料，争取会上直接闭环。\n\n## 准备清单\n1. 准备移动端工具回传超时逻辑说明：15 秒阈值判定方式、超时即停止本轮操作的实现与测试证据（release-042）\n2. 确认并书面记录上线负责人为林舟，明确超时监测、停止操作的执行人与值班安排\n3. 准备回滚开关方案：开启条件、决策人、操作步骤、生效验证与预计耗时\n4. 整理本次上线风险清单（含超时误判、回传丢失等场景）及缓解措施，会前发出\n5. 如已有灰度范围、监控指标或演练结果，一并带到会上补充\n\n## 来源编号\n- release-042（唯一检索到的授权资料，来源：provided-reference-library）\n\n⚠️ 说明：本次仅检索到 1 条资料，未提供版本号、灰度范围、监控指标与演练结果等事实，以上未涉及的内容不作推断，建议会上请相关同事补充。"
+        }
+      ],
+      "service": {
+        "service": "xagent-studio",
+        "build": {
+          "commit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+          "release": "a45533207a79-20261023T023255",
+          "runtimeDigest": "557766d78eb8a098a94a07e4e41fda8d04a5bef621eabee77530832d60dca0de"
+        },
+        "draining": false,
+        "activeRuns": 0,
+        "deepseekConfigured": true
+      },
+      "remainingBrowserPids": [],
+      "finishedAt": "2026-10-23T02:40:00.819Z"
+    }
+  ],
+  "cleanup": {},
+  "repositoryCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+  "service": {
+    "service": "xagent-studio",
+    "build": {
+      "commit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+      "release": "a45533207a79-20261023T023255",
+      "runtimeDigest": "557766d78eb8a098a94a07e4e41fda8d04a5bef621eabee77530832d60dca0de"
+    },
+    "draining": false,
+    "activeRuns": 0,
+    "deepseekConfigured": true
+  },
+  "productionDataUnchanged": true,
+  "elapsedSeconds": 6.668
+}

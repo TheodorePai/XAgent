@@ -1,0 +1,76 @@
+{
+  "sourceCommit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+  "runtimeDigest": "557766d78eb8a098a94a07e4e41fda8d04a5bef621eabee77530832d60dca0de",
+  "passed": true,
+  "priorMessageCount": 6,
+  "allPriorMessagesUnchanged": true,
+  "databaseIntegrity": "ok",
+  "operations": [
+    {
+      "passed": true,
+      "current": {
+        "release": "bed9b0757d65-20261023T015642",
+        "image": "sha256:327651128ff58d2782778d8154e4add82dbd6a3fb3f22f353235b7c913e27fc8",
+        "commit": "bed9b0757d65a936795d8ad73169dbbaf52716c2"
+      },
+      "legacyMaintenance": true,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T020813095977.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T020813095977",
+      "productionDataUnchanged": true
+    },
+    {
+      "passed": true,
+      "current": {
+        "release": "b06ab3dd12a9-20261023T021357",
+        "image": "sha256:3f48b9ccc5afec014cac5c9c4444c32f46af14255fed3207055fc724d41149a7",
+        "commit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+        "runtimeDigest": "a92fab287a7d711de09675daebab454d62c8f396e30a6ed80cf236447db6eb13"
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T021821147615.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T021821147615",
+      "productionDataUnchanged": true
+    },
+    {
+      "passed": true,
+      "current": {
+        "release": "a45533207a79-20261023T023255",
+        "image": "sha256:57ccb665f7f7471e45cd148acd064fe4f0f79be6507ebaf8c410ce71ab22a973",
+        "commit": "a45533207a79e6bcfed71a2a8cb0a918ddf6c996",
+        "runtimeDigest": "557766d78eb8a098a94a07e4e41fda8d04a5bef621eabee77530832d60dca0de"
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T023307914254.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T023307914254",
+      "productionDataUnchanged": true
+    },
+    {
+      "passed": true,
+      "current": {
+        "release": "bed9b0757d65-20261023T015642",
+        "image": "sha256:327651128ff58d2782778d8154e4add82dbd6a3fb3f22f353235b7c913e27fc8",
+        "commit": "bed9b0757d65a936795d8ad73169dbbaf52716c2",
+        "runtimeDigest": null
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T022022967269.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T022022967269",
+      "productionDataUnchanged": true
+    },
+    {
+      "passed": true,
+      "current": {
+        "release": "b06ab3dd12a9-20261023T021357",
+        "image": "sha256:3f48b9ccc5afec014cac5c9c4444c32f46af14255fed3207055fc724d41149a7",
+        "commit": "b06ab3dd12a9a7ea233d390809790309ca9637d4",
+        "runtimeDigest": "a92fab287a7d711de09675daebab454d62c8f396e30a6ed80cf236447db6eb13"
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T022200377777.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T022200377777",
+      "productionDataUnchanged": true
+    }
+  ],
+  "activeRuns": 0,
+  "draining": false
+}
