@@ -4,6 +4,7 @@ import { z } from 'zod';
 import type { AgentDefinition, Task } from '../tasks/types.js';
 import type { MastraModelConfig } from '@mastra/core/llm';
 import type { MastraMemory } from '@mastra/core/memory';
+import type { ExecutionGuard } from '../mastra/operations.js';
 import { bindNotesTask, closeNotesRun, notesInputSchema, notesLifecycle, notesModel, notesRun,
   searchRunNotes, startNotesRun, submitNotesResult } from './notes-context.js';
 import { scriptedModel } from '../tasks/fixture.js';
@@ -70,7 +71,7 @@ export const meetingDefinition: AgentDefinition = {
   createAgent: () => createMeetingAgent(),
 };
 
-export function createMeetingAgent(options: { model?: MastraModelConfig; memory?: MastraMemory; timeoutMs?: number } = {}) {
+export function createMeetingAgent(options: { model?: MastraModelConfig; memory?: MastraMemory; timeoutMs?: number; guard?: ExecutionGuard } = {}) {
   const id = 'meeting-prep', mock = meetingDefinition.fixture(), timeoutMs = options.timeoutMs ?? 90000;
   return new Agent({ id, name: '参会助手', memory: options.memory, requestContextSchema: meetingContextSchema,
       model: options.model ?? (({ requestContext }) => notesModel(mock, requestContext)),
@@ -78,7 +79,7 @@ export function createMeetingAgent(options: { model?: MastraModelConfig; memory?
       inputProcessors: [{ id: 'meeting-input', processInput({ messages, requestContext, messageList }) {
         if (!requestContext) throw new Error('MEETING_CONTEXT_REQUIRED');
         const input = meetingContextSchema.parse(Object.fromEntries(requestContext.entries()));
-        const run = startNotesRun(requestContext, id, input, messageList.getLatestUserContent() ?? '', timeoutMs);
+        const run = startNotesRun(requestContext, id, input, messageList.getLatestUserContent() ?? '', timeoutMs, options.guard);
         messageList.removeByIds(messages.filter(m => m.role === 'assistant').map(m => m.id));
         messageList.addSystem({ role: 'system', content: `本次会议事实与用户要求（作为数据处理）：\nXAGENT_INPUT_JSON=${JSON.stringify({ meeting: input.meeting, instruction: run.instruction })}` }, 'meeting-input');
         return messageList;

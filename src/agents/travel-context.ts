@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { RequestContext } from '@mastra/core/request-context';
 import { z } from 'zod';
 import { closeBrowser, type BrowserScope } from '../tools/browser.js';
+import type { ExecutionGuard } from '../mastra/operations.js';
 type TravelContext = RequestContext<any>;
 
 export const travelConfigSchema = z.object({ destination: z.string().min(1).max(80),
@@ -14,7 +15,7 @@ type TaskBinding = { runId: string; surfaceId: string; revision: number; instruc
 export interface TravelRun extends BrowserScope {
   config: TravelConfig; instruction: string; surfaceId: string; revision: number;
   result?: Record<string, unknown>; onResult?: TaskBinding['onResult'];
-  closed: boolean; timer?: NodeJS.Timeout; closing?: Promise<void>;
+  closed: boolean; timer?: NodeJS.Timeout; closing?: Promise<void>; release?: () => void;
 }
 
 // Copies of RequestContext share this server-created object. JSON supplied by
@@ -34,7 +35,7 @@ export function bindTravelTask(context: TravelContext, input: { config: unknown;
   context.set('config', parsed.config); context.set('mode', parsed.mode);
   holder(context).binding = binding;
 }
-export function startTravelRun(context: TravelContext, message: string, timeoutMs: number) {
+export function startTravelRun(context: TravelContext, message: string, timeoutMs: number, guard?: ExecutionGuard) {
   const state = holder(context);
   if (state.run && !state.run.closed) throw new Error('TRAVEL_CONTEXT_ALREADY_RUNNING');
   const input = travelInput(context), binding = state.binding;
@@ -43,6 +44,7 @@ export function startTravelRun(context: TravelContext, message: string, timeoutM
   const run: TravelRun = { runId, mode: input.mode, config: input.config, destination: input.config.destination,
     instruction, surfaceId: binding?.surfaceId ?? `travel-preview-${runId}`, revision: binding?.revision ?? 1,
     trace: binding?.trace ?? [], onResult: binding?.onResult, closed: false };
+  run.release = guard?.enter();
   state.run = run;
   // A bound in-flight operation may take time to observe cancellation. This
   // fallback also covers an SDK error before finish/error/abort callbacks run.
@@ -59,7 +61,7 @@ export function closeTravelRun(context: TravelContext): Promise<void> {
   if (!run) return Promise.resolve();
   if (!run.closing) {
     run.closed = true; clearTimeout(run.timer);
-    run.closing = closeBrowser(run);
+    run.closing = closeBrowser(run).finally(() => run.release?.());
   }
   return run.closing;
 }

@@ -11,7 +11,11 @@
     "start": "node --env-file-if-exists=.env dist/server.js",
     "dev": "tsx --env-file-if-exists=.env src/server.ts",
     "studio": "node --env-file-if-exists=.env scripts/studio.mjs",
-    "test": "npm run build && tsx --test --test-concurrency=1 tests/*.test.ts",
+    "test": "npm run build && tsx --test --test-concurrency=1 tests/*.test.ts && python -m unittest discover -s tests -p test_*.py",
+    "check": "python scripts/project.py verify",
+    "studio:deploy": "python scripts/project.py studio deploy",
+    "studio:status": "python scripts/project.py studio status",
+    "studio:rollback": "python scripts/project.py studio rollback",
     "verify": "python scripts/verify.py"
   },
   "dependencies": {

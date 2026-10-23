@@ -1,6 +1,7 @@
 import { Agent } from '@mastra/core/agent';
 import type { MastraModelConfig } from '@mastra/core/llm';
 import type { MastraMemory } from '@mastra/core/memory';
+import type { ExecutionGuard } from '../mastra/operations.js';
 import { createTool } from '@mastra/core/tools';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
@@ -74,7 +75,7 @@ export const travelDefinition: AgentDefinition = {
 };
 
 /** One native Mastra Agent factory, shared by Studio and the persisted task adapter. */
-export function createTravelAgent(options: { model?: MastraModelConfig; memory?: MastraMemory; timeoutMs?: number } = {}) {
+export function createTravelAgent(options: { model?: MastraModelConfig; memory?: MastraMemory; timeoutMs?: number; guard?: ExecutionGuard } = {}) {
   const mock = travelDefinition.fixture(), timeoutMs = options.timeoutMs ?? 150000;
   return new Agent({ id: 'travel-assistant', name: '出行助手',
       memory: options.memory,
@@ -91,7 +92,7 @@ export function createTravelAgent(options: { model?: MastraModelConfig; memory?:
       defaultOptions: ({ requestContext }) => travelLifecycle(requestContext, timeoutMs),
       inputProcessors: [{ id: 'travel-input', processInput({ messages, requestContext, messageList }) {
         if (!requestContext) throw new Error('TRAVEL_CONTEXT_REQUIRED');
-        const run = startTravelRun(requestContext, messageList.getLatestUserContent() ?? '', timeoutMs);
+        const run = startTravelRun(requestContext, messageList.getLatestUserContent() ?? '', timeoutMs, options.guard);
         const input = JSON.stringify({ ...run.config, instruction: run.instruction, today: new Date().toISOString().slice(0, 10) });
         // Keep the original user message/signal for Studio history. Previous
         // assistant tool results are not evidence for this fresh execution.

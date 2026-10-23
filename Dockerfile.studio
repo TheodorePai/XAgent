@@ -1,0 +1,30 @@
+FROM node:24-bookworm-slim@sha256:91acba91b842bec0bf7ea6f5e09c644c7ccad72c4996ed9616d861d1c7cd60d4 AS build
+WORKDIR /app
+ENV NODE_OPTIONS=--max-old-space-size=768 MASTRA_TELEMETRY_DISABLED=1 MASTRA_BUILD_SKIP_INSTALL=true DO_NOT_TRACK=1
+COPY package.json package-lock.json tsconfig.json ./
+RUN npm ci --ignore-scripts --no-audit --no-fund
+COPY src ./src
+COPY docs/vendor ./docs/vendor
+COPY studio-presets.json ./
+RUN npm run build && node node_modules/mastra/dist/index.js build --studio
+
+FROM node:24-bookworm-slim@sha256:91acba91b842bec0bf7ea6f5e09c644c7ccad72c4996ed9616d861d1c7cd60d4
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends chromium && rm -rf /var/lib/apt/lists/*
+ENV NODE_ENV=production NODE_OPTIONS=--max-old-space-size=768 MASTRA_TELEMETRY_DISABLED=1 DO_NOT_TRACK=1 \
+    CHROMIUM_PATH=/usr/bin/chromium XDG_CONFIG_HOME=/tmp/xagent-config XDG_CACHE_HOME=/tmp/xagent-cache \
+    STUDIO_PORT=4411 STUDIO_DATA_DIR=/app/data MASTRA_DEV=true MASTRA_STUDIO_PATH=.mastra/output/studio \
+    STUDIO_BUILD_INFO=/app/build-info.json STUDIO_DRAIN_FILE=/app/control/draining
+ARG SOURCE_COMMIT
+ARG RELEASE_ID
+LABEL io.xagent.role=studio io.xagent.commit=$SOURCE_COMMIT io.xagent.release=$RELEASE_ID
+COPY --from=build --chown=node:node /app/node_modules ./node_modules
+COPY --from=build --chown=node:node /app/.mastra/output ./.mastra/output
+COPY --from=build --chown=node:node /app/dist ./dist
+COPY --chown=node:node docs/vendor ./docs/vendor
+COPY --chown=node:node scripts ./scripts
+COPY --chown=node:node package.json studio-presets.json ./
+RUN node -e "require('fs').writeFileSync('build-info.json',JSON.stringify({commit:process.env.SOURCE_COMMIT,release:process.env.RELEASE_ID}))"
+USER node
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s CMD node -e "fetch('http://127.0.0.1:'+process.env.STUDIO_PORT+'/xagent/status').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+CMD ["node", ".mastra/output/index.mjs"]

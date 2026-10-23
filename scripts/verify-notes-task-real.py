@@ -11,11 +11,12 @@ p.add_argument('--base',default='http://127.0.0.1:4491')
 p.add_argument('--data',required=True)
 p.add_argument('--output',required=True)
 p.add_argument('--source-commit',help='Commit of the service being verified')
+p.add_argument('--mode',choices=['mock','deepseek'],default='deepseek')
 a=p.parse_args()
 assert a.base=='http://127.0.0.1:4491', 'Use the isolated verification endpoint'
 users=json.loads((Path(a.data)/'meeting-lab-identities.json').read_text())
 token=users[0]['token']
-report={'mode':'deepseek','sourceCommit':a.source_commit,'inputs':'synthetic events and notes','notificationsSent':False,'passed':False,'checks':[]}
+report={'mode':a.mode,'sourceCommit':a.source_commit,'inputs':'synthetic events and notes','notificationsSent':False,'passed':False,'checks':[]}
 created=[]
 def api(path,body=None,auth=token):
     req=urllib.request.Request(a.base+path,data=None if body is None else json.dumps(body).encode(),
@@ -28,8 +29,10 @@ def wait(task,revision):
         assert not value.get('error'), 'Agent generation failed'
         if value['publishedRevision']==revision:
             assert value['runs'][-1]['status']=='completed'
-            assert value['runs'][-1]['usage']['totalTokens']>0
-            assert '[MOCK]' not in json.dumps(value['output'])
+            if a.mode=='deepseek':
+                assert value['runs'][-1]['usage']['totalTokens']>0
+                assert '[MOCK]' not in json.dumps(value['output'])
+            else: assert '[MOCK]' in json.dumps(value['output'])
             view=api('/v1/tasks/'+task['id']+'/view')
             assert len(view['messages'])==3
             report['checks'].append({'agentId':value['agentId'],'revision':revision,'output':value['output'],
@@ -46,7 +49,7 @@ def emit(task,sequence,content):
 started=time.monotonic()
 try:
     for agent in ['meeting-prep','information-watch']:
-        result=api('/v1/tasks',{'name':'Studio改造后的任务兼容验收','agentId':agent,'mode':'deepseek',
+        result=api('/v1/tasks',{'name':'Studio改造后的任务兼容验收','agentId':agent,'mode':a.mode,
             'instruction':'关注延期与回滚，摘要保留资料编号RULE-731。仅严重变更建议提醒。',
             'config':{'sourceId':'release-status'} if agent=='information-watch' else {},
             'notes':[{'id':'RULE-731','text':'合成规则RULE-731：负责人林舟；延期超过30分钟或出现阻断项建议提醒；回滚前应停止新设备调用。'}]})
@@ -62,7 +65,13 @@ try:
             assert output['change']=='changed' and output['notification']=='notify'
     report['passed']=True
 finally:
-    for task in created: api('/v1/tasks/'+task['id']+'/pause',{})
+    report['cleanupErrors']=[]
+    for task in created:
+        try: api('/v1/tasks/'+task['id']+'/pause',{})
+        except Exception as error: report['cleanupErrors'].append(type(error).__name__)
+    if report['cleanupErrors']: report['passed']=False
     report['elapsedSeconds']=round(time.monotonic()-started,3)
     Path(a.output).write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
-    print(json.dumps({'passed':report['passed'],'realRuns':len(report['checks']),'elapsedSeconds':report['elapsedSeconds']}))
+    print(json.dumps({'passed':report['passed'],'runs':len(report['checks']),
+        'realRuns':len(report['checks']) if a.mode=='deepseek' else 0,'elapsedSeconds':report['elapsedSeconds']}))
+    if report['cleanupErrors']: raise RuntimeError('Failed to pause verification tasks')
