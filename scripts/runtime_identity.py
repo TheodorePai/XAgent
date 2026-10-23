@@ -8,7 +8,7 @@ def digest(entries):
     return hashlib.sha256(''.join(f'{path}\0{blob}\n' for path,blob in sorted(entries)).encode()).hexdigest()
 
 def from_git(root):
-    output=subprocess.check_output(['git','ls-tree','-rz','--full-tree','HEAD','--',*PATHS],cwd=root,text=True)
+    output=subprocess.check_output(['git','ls-tree','-rz','--full-tree','HEAD','--',*PATHS],cwd=root,text=True,encoding='utf-8')
     entries=[]
     for line in filter(None,output.split('\0')):
         metadata,path=line.split('\t',1)

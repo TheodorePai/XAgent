@@ -11,6 +11,15 @@ spec=importlib.util.spec_from_file_location('verify_server',Path(__file__).resol
 verifier=importlib.util.module_from_spec(spec); spec.loader.exec_module(verifier)
 
 class OperationsTest(unittest.TestCase):
+    def test_all_suite_preserves_chinese_utf8_report_when_merging_local_evidence(self):
+        with tempfile.TemporaryDirectory() as path:
+            output=Path(path)/'report.json'
+            def remote(args,commit): output.write_text(json.dumps({'passed':True,'text':'中文验收证据'},ensure_ascii=False),encoding='utf-8')
+            with patch.object(sys,'argv',['project.py','verify','--suite','all','--output',str(output)]),\
+                patch.object(project,'revision',return_value='a'*40),patch.object(project,'command'),patch.object(project,'verify_remote',side_effect=remote):
+                project.main()
+            report=json.loads(output.read_text(encoding='utf-8'))
+            self.assertEqual(report['text'],'中文验收证据'); self.assertTrue(report['local']['passed'])
     def test_unreachable_verification_cannot_reuse_a_previous_success_report(self):
         with tempfile.TemporaryDirectory() as path:
             root=Path(path); (root/'.cache').mkdir(); output=root/'report.json'; output.write_text('{"passed":true}')

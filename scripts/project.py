@@ -7,7 +7,7 @@ REPO=Path(__file__).resolve().parent.parent
 REMOTE='/home/ubuntu/xagent-studio'
 
 def command(args,timeout=1200,capture=False):
-    result=subprocess.run([str(x) for x in args],cwd=REPO,text=True,stdout=subprocess.PIPE if capture else None,
+    result=subprocess.run([str(x) for x in args],cwd=REPO,text=True,encoding='utf-8',stdout=subprocess.PIPE if capture else None,
         stderr=subprocess.PIPE if capture else None,timeout=timeout)
     if result.returncode: raise RuntimeError(f'{args[0]} exited {result.returncode}')
     return result.stdout.strip() if capture else None
@@ -24,7 +24,7 @@ def verify_remote(args,commit):
     request={'suite':args.suite,'mode':args.mode,'agents':args.agents,'commit':commit,'runtimeDigest':from_git(REPO)}
     run_id=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S')+'-'+str(time.time_ns())[-6:]
     target=REPO/'.cache'/f'verify-{run_id}.json'; target.parent.mkdir(exist_ok=True)
-    target.write_text(json.dumps(request)); destination=REMOTE+'/requests/'+run_id+'.json'
+    target.write_text(json.dumps(request),encoding='utf-8'); destination=REMOTE+'/requests/'+run_id+'.json'
     fallback={'passed':False,'uiVerified':False,'runId':run_id,'requestedCommit':commit,'suite':args.suite,'mode':args.mode,'checks':[]}
     try:
         remote(args.host,['mkdir','-p',REMOTE+'/requests'])
@@ -37,7 +37,7 @@ def verify_remote(args,commit):
         # A failing verification still leaves a report. Do not hide the original exit code.
         saved=subprocess.run(['scp',args.host+':'+REMOTE+'/reports/'+run_id+'/report.json',str(args.output)],cwd=REPO,capture_output=True)
         if saved.returncode:
-            Path(args.output).write_text(json.dumps(fallback,ensure_ascii=False,indent=2)+'\n')
+            Path(args.output).write_text(json.dumps(fallback,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
             print('No remote report could be retrieved; inspect the verification host.',file=sys.stderr)
 
 def main():
@@ -59,12 +59,12 @@ def main():
                 command(['npm.cmd' if os.name=='nt' else 'npm','test']); passed=True
             finally:
                 local={'type':'local','passed':passed,'elapsedSeconds':round(time.monotonic()-started,3),'realModelCalled':False,'uiVerified':False}
-                output.write_text(json.dumps(local,indent=2)+'\n')
+                output.write_text(json.dumps(local,indent=2)+'\n',encoding='utf-8')
             if a.suite=='local': return
         try: verify_remote(a,commit)
         finally:
             if a.suite=='all':
-                result=json.loads(output.read_text()); result['local']=local; output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+                result=json.loads(output.read_text(encoding='utf-8')); result['local']=local; output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         return
     if a.operation=='status':
         remote(a.host,['python3',REMOTE+'/controller/studioctl.py','status']); return
