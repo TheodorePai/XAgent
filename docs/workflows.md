@@ -32,6 +32,8 @@ Workflow 返回 `{ accepted, artifact: { output, view }, text, usage, mode }`，
 
 mode 可以省略，继承服务默认；离线测试在 input 中显式添加 `"mode": "mock"`。DeepSeek key 保留在服务器。重点核对三个步骤成功、最终 accepted、artifact、中文 text 和来源编号 release-042。
 
+Studio 当前 Workflow 编辑器会拒绝示例中的 `+08:00` 日期表示，因此页面输入样例统一使用 UTC：`2026-11-03T02:00:00Z` 等于北京时间 10:00。服务端 Schema 和 SDK 仍支持带时区偏移的合法 ISO 日期；这是页面输入的兼容约定。
+
 Workflow 列表与 Agent 列表是不同入口。全局注册 Workflow 后会出现在 Studio 的 Workflows；Agent 列表的 Workflows 列统计该 Agent 显式挂载的工作流，本示例未给现有 Agent 挂载 Workflow。
 
 ## SDK 调用
