@@ -92,6 +92,22 @@ class OperationsTest(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError,'unknown container'): ctl.switch('new-image','new-release',adopt=True)
                 run.assert_not_called()
 
+    def test_readiness_supports_old_release_without_workflow_capabilities(self):
+        responses={'/xagent/status':{'service':'xagent-studio','build':{'release':'old'},'draining':False},
+            '/api/agents':{'meeting-prep':{},'information-watch':{},'travel-assistant':{}}}
+        with patch.object(ctl,'request',side_effect=lambda path='/xagent/status':responses[path]):
+            self.assertEqual(ctl.wait_ready('old')['build']['release'],'old')
+
+    def test_readiness_checks_declared_workflow_registration(self):
+        service={'service':'xagent-studio','build':{'release':'new'},'draining':False,
+            'capabilities':{'agents':['reference-summary'],'workflows':['meeting-brief']}}
+        responses={'/xagent/status':service,'/api/agents':{'reference-summary':{}},'/api/workflows':{}}
+        with patch.object(ctl,'request',side_effect=lambda path='/xagent/status':responses[path]),patch.object(ctl.time,'monotonic',side_effect=[0,0,2]),patch.object(ctl.time,'sleep'):
+            with self.assertRaisesRegex(RuntimeError,'readiness'): ctl.wait_ready('new',seconds=1)
+        responses['/api/workflows']={'meeting-brief':{}}
+        with patch.object(ctl,'request',side_effect=lambda path='/xagent/status':responses[path]):
+            self.assertEqual(ctl.wait_ready('new')['build']['release'],'new')
+
     def test_version_mismatch_leaves_failed_report_without_model_request(self):
         with tempfile.TemporaryDirectory() as path:
             with patch.object(verifier,'ROOT',Path(path)),patch.object(verifier,'production_snapshot',return_value={'tasks':'same'}),\

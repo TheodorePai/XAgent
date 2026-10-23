@@ -22,7 +22,7 @@ export type Brief = z.infer<typeof briefSchema>;
 type Legacy = Task & { brief?: Brief; briefMeeting?: MeetingEvent['meeting'] };
 export const meetingContextSchema = notesInputSchema.extend({ meeting: eventSchema.shape.meeting }).passthrough();
 type MeetingInput = z.infer<typeof meetingContextSchema>;
-function validateBrief(notes: { id: string }[], input: unknown) {
+export function validateBrief(notes: { id: string }[], input: unknown) {
   const brief = briefSchema.parse(input), allowed = new Set(notes.map(n => n.id));
   if (brief.sourceIds.some(id => !allowed.has(id)) || (allowed.size > 0 && !brief.sourceIds.length)) throw new Error('INVALID_BRIEF_SOURCES');
   return brief;

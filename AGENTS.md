@@ -12,6 +12,7 @@ XAgent 验证使用 Mastra 低成本开发多种专用 Agent 的服务端能力�
 | --- | --- |
 | 环境、启动、现有能力 | [README.md](README.md)、[package.json](package.json) |
 | 服务边界、多用户与任务设计 | [docs/architecture.md](docs/architecture.md) |
+| 新增 Agent / Workflow、最小模板 | [docs/development.md](docs/development.md)、[docs/workflows.md](docs/workflows.md) |
 | Studio、原生 Agent、服务器调试 | [docs/studio.md](docs/studio.md)、[docs/notes-studio.md](docs/notes-studio.md) |
 | 统一验证、Studio 发布/状态/回退 | [docs/operations.md](docs/operations.md) |
 | 浏览器与出行资料证据 | [docs/travel-assistant.md](docs/travel-assistant.md)、[src/tools/browser.ts](src/tools/browser.ts) |
@@ -38,6 +39,7 @@ XAgent 验证使用 Mastra 低成本开发多种专用 Agent 的服务端能力�
 | `src/mastra/index.ts` | Studio 的标准 Mastra 入口、Agent 登记和独立 Memory / 存储 |
 | `src/tasks/` | 任务 API、身份与归属、事实、事件去重、调度、取消、版本发布和运行记录 |
 | `src/tools/` | 可复用外部工具适配与执行资源 |
+| `src/workflows/` | 原生 Workflow 工厂、步骤契约及流程生命周期；与任务调度器分开适配 |
 | `src/engine.ts`、`src/store.ts` | 原设备调用实验的工具账本及暂停恢复链路 |
 | `src/meeting/` | 既有会议接口的兼容入口；修改公共任务代码时保持兼容 |
 
@@ -57,6 +59,8 @@ XAgent 验证使用 Mastra 低成本开发多种专用 Agent 的服务端能力�
 5. 提交工具返回可检查的 `accepted` 和 `artifact`；只有来源、业务输出和展示 JSON 都通过校验才接受。模型随后用中文给出与 artifact 一致的易读回复，不能只显示“已完成”而不返回结果。
 6. 在 `src/mastra/index.ts` 注册以便 Studio 调试，提供 `studio-presets.json` 示例。需要持续任务时再实现定义、`prepareContext()`、事件/基线规则，并在 registry 登记；不要为单次请求强行创建设备订阅。
 7. 按第 7 节完成验证并更新入口说明。新 Agent 不默认添加浏览器、手机或通知工具，只启用业务所需能力。
+
+原生 Agent 最小模板为 `src/agents/reference.ts`，Workflow 示例为 `src/workflows/meeting-brief.ts`。新 Workflow 在 Studio 注入 guard，沿用 WorkflowLifecycle 跨步骤计数，传播 abortSignal；成功、失败、取消均须释放，不能因步骤切换让部署误判为空闲。原生 Workflow 的注册不自动接入 `/v1/tasks`；增加持久任务适配、挂起恢复或外部副作用时，补相应隔离、幂等和恢复验证。
 
 ## 5. 编码、数据和依赖规范
 
@@ -113,7 +117,7 @@ npm.cmd run studio
 
 按改动选择相关测试文件；`npm test` 已包含构建，不必紧接着重复构建。测试使用临时数据，先检查测试/脚本的路径和副作用；真实服务、数据恢复或重启脚本不能当作无副作用单元测试运行。仓库尚无独立 lint 命令，不宣称已执行不存在的检查。
 
-优先使用 `npm run check -- --suite <local|agent-api|task-api|all> --mode <mock|deepseek>` 统一验证，及 `npm run studio:deploy` / `studio:status` / `studio:rollback` 管理 Studio。默认 local / mock；远端验证要求干净提交且运行输入摘要匹配，报告注明实际构建提交。`all` 不包含 UI，页面验收仍须实际发送消息。首次接管、锁、排空、备份和回退限制见 `docs/operations.md`。
+优先使用 `npm run check -- --suite <local|agent-api|workflow-api|task-api|all> --mode <mock|deepseek>` 统一验证，及 `npm run studio:deploy` / `studio:status` / `studio:rollback` 管理 Studio。默认 local / mock；远端验证要求干净提交且运行输入摘要匹配，报告注明实际构建提交。`all` 不包含 UI，页面验收仍须实际发送消息。新增业务同时登记对应验证场景，文件位置见开发指南。首次接管、锁、排空、备份和回退限制见 `docs/operations.md`。
 
 以下底层脚本按职责选择，不需要全部运行：
 

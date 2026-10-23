@@ -5,7 +5,7 @@ COPY package.json package-lock.json tsconfig.json ./
 RUN npm ci --ignore-scripts --no-audit --no-fund
 COPY src ./src
 COPY docs/vendor ./docs/vendor
-COPY studio-presets.json ./
+COPY studio-presets.json workflow-inputs.json ./
 RUN npm run build && node node_modules/mastra/dist/index.js build --studio
 
 FROM node:24-bookworm-slim@sha256:91acba91b842bec0bf7ea6f5e09c644c7ccad72c4996ed9616d861d1c7cd60d4
@@ -24,7 +24,7 @@ COPY --from=build --chown=node:node /app/.mastra/output ./.mastra/output
 COPY --from=build --chown=node:node /app/dist ./dist
 COPY --chown=node:node docs/vendor ./docs/vendor
 COPY --chown=node:node scripts ./scripts
-COPY --chown=node:node package.json studio-presets.json ./
+COPY --chown=node:node package.json studio-presets.json workflow-inputs.json ./
 RUN node -e "require('fs').writeFileSync('build-info.json',JSON.stringify({commit:process.env.SOURCE_COMMIT,release:process.env.RELEASE_ID,runtimeDigest:process.env.RUNTIME_DIGEST}))"
 USER node
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s CMD node -e "fetch('http://127.0.0.1:'+process.env.STUDIO_PORT+'/xagent/status').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"

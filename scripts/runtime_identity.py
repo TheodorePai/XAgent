@@ -2,7 +2,7 @@
 import hashlib,subprocess
 from pathlib import Path
 
-PATHS=['src','scripts','package.json','package-lock.json','tsconfig.json','studio-presets.json','Dockerfile.studio','docs/vendor']
+PATHS=['src','scripts','package.json','package-lock.json','tsconfig.json','studio-presets.json','workflow-inputs.json','Dockerfile.studio','docs/vendor']
 
 def digest(entries):
     return hashlib.sha256(''.join(f'{path}\0{blob}\n' for path,blob in sorted(entries)).encode()).hexdigest()

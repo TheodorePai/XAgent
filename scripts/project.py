@@ -42,9 +42,9 @@ def verify_remote(args,commit):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__); sub=p.add_subparsers(dest='action',required=True)
-    v=sub.add_parser('verify'); v.add_argument('--suite',choices=['local','agent-api','task-api','all'],default='local')
+    v=sub.add_parser('verify'); v.add_argument('--suite',choices=['local','agent-api','workflow-api','task-api','all'],default='local')
     v.add_argument('--mode',choices=['mock','deepseek'],default='mock')
-    v.add_argument('--agents',default='meeting-prep,information-watch,travel-assistant')
+    v.add_argument('--agents',default='meeting-prep,information-watch,travel-assistant,reference-summary')
     v.add_argument('--host',default='tencent-server'); v.add_argument('--output',default='.cache/verification-latest.json')
     d=sub.add_parser('studio'); d.add_argument('operation',choices=['deploy','status','rollback']); d.add_argument('--host',default='tencent-server')
     d.add_argument('--adopt-legacy',action='store_true')

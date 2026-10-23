@@ -18,14 +18,17 @@ npm.cmd run check -- --suite agent-api --agents meeting-prep,information-watch
 # 显式启用真实 DeepSeek，只验证所选 Agent，每个 Agent 一轮，不自动重试
 npm.cmd run check -- --suite agent-api --mode deepseek --agents meeting-prep
 
+# 原生参会 Workflow：输入 → 现有 Agent → 来源及产物校验
+npm.cmd run check -- --suite workflow-api --mode deepseek
+
 # 独立 4491 服务：参会一轮、巡检初始/变更两轮，结束时暂停任务并移除容器
 npm.cmd run check -- --suite task-api --mode deepseek
 
-# 本地回归 + 全部三个 Agent API + 隔离任务 API
+# 本地回归 + 全部四个 Agent API + Workflow API + 隔离任务 API
 npm.cmd run check -- --suite all --mode deepseek
 ```
 
-Linux 使用 `npm`。CLI 默认报告为 `.cache/verification-latest.json`，可用 `--output docs/<name>.json` 保存所需证据；服务器报告在 `/home/ubuntu/xagent-studio/reports/<run-id>/`，包含子报告、隔离任务数据和清理结果。任务 API 场景固定为两种事件 Agent，`--agents` 仅控制 Agent API 场景；出行的用户请求型任务仍由原回归测试覆盖。
+Linux 使用 `npm`。CLI 默认报告为 `.cache/verification-latest.json`，可用 `--output docs/<name>.json` 保存所需证据；服务器报告在 `/home/ubuntu/xagent-studio/reports/<run-id>/`，包含子报告、隔离任务数据和清理结果。任务 API 场景固定为两种事件 Agent，`--agents` 仅控制 Agent API 场景；出行的用户请求型任务仍由原回归测试覆盖。Workflow API 当前仅验证 meeting-brief；原生资料摘要模板可用 `--suite agent-api --agents reference-summary` 单独验证。
 
 远端验证要求本地工作区干净且运行输入摘要与实际 Studio 镜像一致；不一致时在发出模型请求前失败。摘要覆盖 `src/`、`scripts/`、依赖及锁文件、构建配置、预设和 A2UI vendor，使用 Git blob 内容计算并与归档源码独立比对。纯报告、普通文档或测试文件提交不会迫使重新部署；报告分别记录仓库提交和实际构建提交，不把两者混为一谈。首次部署前不可对未受管的旧 Studio 运行新远端验收。验证和发布共用服务器操作锁；不并行运行两套验证或在发布中发起 CLI 验收。
 
@@ -57,7 +60,7 @@ npm.cmd run studio:deploy -- --adopt-legacy
 2. 在服务器新 release 目录构建 `Dockerfile.studio`，按锁文件安装 Linux 依赖并打包 Studio，构建成功前不停止当前服务。镜像带源码 SHA 和 release 标签，运行目录内含 build-info。
 3. 写只读挂载控制文件，让 Studio 输入处理器拒绝新运行；等待已有运行归零并保持两秒。排空超时清除标志，保留原服务，不强制中断。
 4. 停止旧 Studio，用 SQLite backup 保存完整聊天库，保留旧容器，然后单实例启动新镜像。数据库继续使用独立共享数据目录，不连接正式任务库。
-5. 核对状态端点、源码版本和三个 Agent 登记，执行两种笔记 Agent 的 mock API smoke。失败则停止新容器并恢复旧容器；成功更新 current / previous 状态。
+5. 核对状态端点、源码版本及 capabilities 声明的 Agent / Workflow 登记，执行参会、巡检、模板 Agent 和 Workflow 的 mock API smoke。回退旧镜像时按其能力选择 smoke，兼容没有 Workflow 的旧版本。失败则停止新容器并恢复旧容器；成功更新 current / previous 状态。
 6. 再按改动范围显式运行真实验收和页面验收。部署后的 mock smoke 不等于真实业务验收；真实验收失败需定位或使用 rollback。
 
 回退使用不可变镜像 ID，同样排空当前运行、备份聊天库并保留当前数据，不用旧数据库覆盖新增聊天。仅适用于数据库契约向后兼容的版本；涉及存储或依赖导致的不兼容 Schema 变更时必须另行提供迁移与恢复方案，不能盲目使用此回退流程。已保留镜像、容器、备份不会自动删除，应在确认不再需要回退后另行清理。
@@ -77,7 +80,7 @@ npm.cmd run studio:deploy -- --adopt-legacy
 
 `GET /xagent/status` 仅返回服务名称、源码/release、是否排空、活跃运行数及是否配置 key，不返回 key。`studio:status` 同时读取容器实际镜像与服务信息；镜像标签、清单和接口都不一致时不得宣布版本已部署。
 
-Studio 的 `defaultMode` 同时由状态接口返回，入口默认 `deepseek`，可在服务器现有环境文件中用 `XAGENT_DEFAULT_MODE=mock` 覆盖。请求中的显式模式优先；持久任务继续使用已保存的 `task.mode`，测试脚本继续显式传入 mock / deepseek。三个 Agent 的输入 Schema、模型元数据及实际执行共用 `src/agents/model.ts`，缺少 key 的真实模式直接报错。浏览器旧上下文中的显式 mock 不会自动修改，删除 `mode` 后 Save 即采用服务默认。纯模型元数据查询不发出付费请求。
+Studio 的 `defaultMode` 同时由状态接口返回，入口默认 `deepseek`，可在服务器现有环境文件中用 `XAGENT_DEFAULT_MODE=mock` 覆盖。请求中的显式模式优先；持久任务继续使用已保存的 `task.mode`，测试脚本继续显式传入 mock / deepseek。Agent 的输入 Schema、模型元数据及实际执行共用 `src/agents/model.ts`，缺少 key 的真实模式直接报错。浏览器旧上下文中的显式 mock 不会自动修改，删除 `mode` 后 Save 即采用服务默认。纯模型元数据查询不发出付费请求。capabilities 返回当前注册的 Agent 和 Workflow 标识；activeRuns 包含整条 Workflow 的运行票据，取消时保留到实际执行清理完毕。
 
 Studio 继续只监听服务器回环 4411。建立本机访问通道：
 

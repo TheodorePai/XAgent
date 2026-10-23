@@ -78,7 +78,9 @@ def wait_ready(release,seconds=50):
             result=request()
             if result.get('service')=='xagent-studio' and result['build']['release']==release and not result['draining']:
                 agents=request('/api/agents')
-                if {'travel-assistant','meeting-prep','information-watch'}<=set(agents): return result
+                capabilities=result.get('capabilities',{'agents':['travel-assistant','meeting-prep','information-watch'],'workflows':[]})
+                workflows=request('/api/workflows') if capabilities.get('workflows') else {}
+                if set(capabilities['agents'])<=set(agents) and set(capabilities.get('workflows',[]))<=set(workflows): return result
         except (OSError,KeyError,ValueError): pass
         time.sleep(1)
     raise RuntimeError('New Studio failed readiness or version check')
@@ -132,9 +134,15 @@ def switch(image,release,adopt=False,smoke=True):
         start(image,release); result=wait_ready(release)
         if smoke:
             report=ROOT/'reports'/f'{release}-smoke.json'; report.parent.mkdir(exist_ok=True)
+            agent_ids='meeting-prep,information-watch'
+            if 'reference-summary' in result.get('capabilities',{}).get('agents',[]): agent_ids+=',reference-summary'
             run(['docker','exec',NAME,'node','scripts/verify-agent-api.mjs','--mode','mock',
-                '--agents','meeting-prep,information-watch','--output','/app/data/deploy-smoke.json'])
+                '--agents',agent_ids,'--output','/app/data/deploy-smoke.json'])
             run(['docker','cp',NAME+':/app/data/deploy-smoke.json',str(report)])
+            if 'meeting-brief' in result.get('capabilities',{}).get('workflows',[]):
+                run(['docker','exec',NAME,'node','scripts/verify-workflow-api.mjs','--mode','mock',
+                    '--output','/app/data/deploy-workflow-smoke.json'])
+                run(['docker','cp',NAME+':/app/data/deploy-workflow-smoke.json',str(ROOT/'reports'/f'{release}-workflow-smoke.json')])
         record={'release':release,'image':inspect()['image'],'commit':result['build']['commit'],
             'runtimeDigest':result['build'].get('runtimeDigest')}
         save(ROOT/'state.json',{'current':record,'previous':current.get('current'),

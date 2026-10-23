@@ -11,6 +11,9 @@ assert.ok(['127.0.0.1', 'localhost'].includes(base.hostname) && !base.username &
 assert.ok(['mock', 'deepseek'].includes(values.mode)); assert.ok(values.output, '--output is required');
 const presets = JSON.parse(readFileSync(new URL('../studio-presets.json', import.meta.url), 'utf8'));
 const definitions = {
+  'reference-summary': { context: presets['资料摘要（服务默认模型）'], tool: 'submitSummary',
+    prompt: 'TEMPLATE-101：总结负责人、15秒超时规则和回滚要求，保留来源编号reference-101。',
+    tools: ['searchReferenceNotes', 'submitSummary'] },
   'meeting-prep': { context: presets['参会准备（DeepSeek，合成会议资料）'], tool: 'submitBrief',
     prompt: '为发布评审生成简报和清单，关注15秒超时、负责人和回滚，保留来源编号release-042。',
     tools: ['searchMeetingNotes', 'submitBrief'] },
@@ -22,7 +25,7 @@ const definitions = {
     tools: ['browserSearch', 'browserRead', 'browserImages', 'submitTripPlan'] },
 };
 const agents = values.agents.split(',');
-assert.ok(agents.length <= 3 && new Set(agents).size === agents.length && agents.every(a => definitions[a]));
+assert.ok(agents.length <= Object.keys(definitions).length && new Set(agents).size === agents.length && agents.every(a => definitions[a]));
 const report = { type: 'agent-api', mode: values.mode, requestedCommit: values.commit, startedAt: new Date().toISOString(),
   configuredModel: values.mode === 'deepseek' ? process.env.DEEPSEEK_MODEL || 'deepseek-flash' : 'scripted-fixtures',
   passed: false, uiVerified: false, syntheticInputs: true, checks: [] };
@@ -58,6 +61,7 @@ try {
       assert.ok(result.usage?.totalTokens > 0); assert.ok(!JSON.stringify(output).includes('[MOCK]'));
     } else assert.match(JSON.stringify(output), /\[MOCK\]/);
     if (id === 'meeting-prep') assert.ok(output.sourceIds.includes('release-042') && /15/.test(output.summary));
+    if (id === 'reference-summary') assert.ok(output.sourceIds.includes('reference-101') && /15/.test(output.summary));
     if (id === 'information-watch') { assert.equal(output.change, 'changed'); assert.equal(output.notification, 'notify'); }
     if (id === 'travel-assistant') {
       assert.equal(output.days.length, 3); assert.ok(output.sources.filter(s => s.kind === 'page').length >= 2);

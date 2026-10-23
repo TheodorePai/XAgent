@@ -6,9 +6,11 @@ import { StudioGate } from '../src/mastra/operations.js';
 import { createMeetingAgent } from '../src/agents/meeting.js';
 import { createInspectionAgent } from '../src/agents/inspection.js';
 import { createTravelAgent } from '../src/agents/travel.js';
+import { createReferenceAgent } from '../src/agents/reference.js';
 import { MastraLanguageModelV2Mock } from '@mastra/core/test-utils/llm-mock';
 
 const fixtures = [
+  { factory: createReferenceAgent, input: { mode: 'mock', notes: [{ id: 'test', text: '资料' }] } },
   { factory: createMeetingAgent, input: { mode: 'mock', meeting: { title: '发布评审', agenda: '回滚', startAt: '2026-11-03T10:00:00+08:00' }, notes: [] } },
   { factory: createInspectionAgent, input: { mode: 'mock', observation: { sourceId: 's', title: '发布', content: '内容' }, notes: [] } },
   { factory: createTravelAgent, input: { mode: 'mock', config: { destination: '延吉', days: 3 } } },

@@ -2,7 +2,11 @@
 
 开发验证使用 `npm run check`；Studio 独立发布、查询和回退使用 `npm run studio:deploy` / `studio:status` / `studio:rollback`。真实模型须显式指定 `--mode deepseek`。命令、首次接管和页面验收要求见 [运维与统一验证](docs/operations.md)。
 
-最新验收：59 项自动测试通过，统一 CLI、真实 API、三个 Studio 页面、聊天保留及版本回退已验证；失败修复、报告和限制见 [运维验收](docs/operations-validation.md)。
+新开发者从 [Agent / Workflow 扩展开发指南](docs/development.md) 开始；规则见 [AGENTS.md](AGENTS.md)。可运行最小模板为「资料摘要助手」`src/agents/reference.ts`，原生 [参会简报 Workflow](docs/workflows.md) 复用现有参会 Agent。当前 Studio 注册四个 Agent 和一个 Workflow，持久任务 registry 仍有三个业务 Agent；Workflow 尚未适配 `/v1/tasks`。
+
+Studio 默认 DeepSeek，省略 mode 即采用服务默认；显式 mock 仍有效，详情见 [默认模型与真实验收](docs/default-mode-validation.md)。统一 CLI 增加 `--suite workflow-api`，all 同时包含 Workflow API，页面验收仍单独执行。
+
+以下为各阶段历史验收，测试数量和部署目录以对应报告日期为准：[统一验证、部署与回退](docs/operations-validation.md)。
 
 当前 Studio 已接入出行、参会和信息巡检三个 Agent：[启动与调试](docs/studio.md)、[参会与巡检接入及真实验收](docs/notes-studio.md)。本轮 45 项自动测试通过，并完成 5 次真实 DeepSeek 运行（3 次隔离任务 API、2 次 Studio 页面调用）；设备事件与会议资料为合成测试数据。
 

@@ -3,13 +3,13 @@ import argparse,datetime,json,re,subprocess,time
 from pathlib import Path
 from studioctl import ROOT,NAME,ENV,BASE,lock,inspect,request,run,save,state,production_snapshot
 
-AGENTS={'meeting-prep','information-watch','travel-assistant'}
+AGENTS={'meeting-prep','information-watch','travel-assistant','reference-summary'}
 
 def verify(spec,run_id):
     if not re.fullmatch('[0-9]{8}T[0-9]{6}-[0-9]{6}',run_id): raise ValueError('Invalid verification ID')
     agents=spec['agents'].split(',')
-    if spec['suite'] not in ['agent-api','task-api','all'] or spec['mode'] not in ['mock','deepseek']: raise ValueError('Invalid suite or mode')
-    if not agents or len(agents)>3 or len(set(agents))!=len(agents) or not set(agents)<=AGENTS: raise ValueError('Invalid agent selection')
+    if spec['suite'] not in ['agent-api','workflow-api','task-api','all'] or spec['mode'] not in ['mock','deepseek']: raise ValueError('Invalid suite or mode')
+    if not agents or len(agents)>len(AGENTS) or len(set(agents))!=len(agents) or not set(agents)<=AGENTS: raise ValueError('Invalid agent selection')
     before=production_snapshot(); started=time.monotonic(); directory=ROOT/'reports'/run_id; directory.mkdir(parents=True)
     report={'runId':run_id,'sourceCommit':spec['commit'],'mode':spec['mode'],'suite':spec['suite'],
         'startedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'passed':False,'uiVerified':False,
@@ -37,6 +37,15 @@ def verify(spec,run_id):
                 copied=subprocess.run(['docker','cp',NAME+':'+location,str(directory/'agent-api.json')],capture_output=True)
                 if not copied.returncode: report['checks'].append(json.loads((directory/'agent-api.json').read_text()))
             if not report['checks'][-1]['passed']: raise RuntimeError('Agent API verification failed')
+        if spec['suite'] in ['workflow-api','all']:
+            location='/app/data/workflow-'+run_id+'.json'
+            try:
+                run(['docker','exec',NAME,'node','scripts/verify-workflow-api.mjs','--mode',spec['mode'],
+                    '--commit',service['build']['commit'],'--output',location],timeout=180)
+            finally:
+                copied=subprocess.run(['docker','cp',NAME+':'+location,str(directory/'workflow-api.json')],capture_output=True)
+                if not copied.returncode: report['checks'].append(json.loads((directory/'workflow-api.json').read_text()))
+            if not report['checks'][-1]['passed']: raise RuntimeError('Workflow API verification failed')
         if spec['suite'] in ['task-api','all']:
             data=directory/'task-data'; data.mkdir(mode=0o700)
             existing=subprocess.run(['ss','-H','-ltn','sport = :4491'],capture_output=True,text=True)
