@@ -1,0 +1,270 @@
+{
+  "runId": "20261023T035225-833800",
+  "sourceCommit": "c26552c94a14f98742c9312f9adea305bb5107d8",
+  "mode": "deepseek",
+  "suite": "task-api",
+  "startedAt": "2026-10-23T03:52:26.310757+00:00",
+  "passed": true,
+  "uiVerified": false,
+  "limitations": [
+    "API verification does not verify Studio browser chat.",
+    "Events and note libraries are synthetic; no real phone or notification."
+  ],
+  "checks": [
+    {
+      "mode": "deepseek",
+      "sourceCommit": "c26552c94a14f98742c9312f9adea305bb5107d8",
+      "inputs": "synthetic events and notes",
+      "notificationsSent": false,
+      "passed": true,
+      "checks": [
+        {
+          "agentId": "meeting-prep",
+          "revision": 1,
+          "output": {
+            "summary": "会议「发布评审」定于2026-11-03 10:00（+08:00）召开，最新议程为：计划18:00上线、当前无阻断项、本次评审重点是回滚方案。按用户关注点（延期与回滚）结合资料 RULE-731：该规则明确负责人为林舟，且\"延期超过30分钟或出现阻断项\"才建议提醒，同时要求回滚前停止新设备调用。据此判断：议程声明无阻断项，也未出现延期信息（会议10:00开始与18:00上线时点为不同事项，不构成延期证据），因此本次不需要发出严重变更提醒，仅按规则把\"30分钟延期/阻断项\"作为会中触发条件、把\"回滚前先停止新设备调用\"作为回滚评审的硬性前置条件写入关注清单。目前检索到的唯一资料为 RULE-731，缺少具体回滚步骤、验证与决策人分工等细节，建议在会前补充材料，会议事实以议程为准，不对资料外内容作推断。",
+            "checklist": [
+              "会前确认上线时间窗口：明确18:00上线计划是否变动，若延期超过30分钟按 RULE-731 触发提醒",
+              "确认是否存在阻断项状态更新，仅有阻断项或超30分钟延期时才升级提醒，避免对非严重变更反复提醒",
+              "回滚方案评审时逐项确认：回滚前先停止新设备调用（RULE-731硬性前置条件），再执行回滚",
+              "确认规则负责人林舟到场或授权代决，明确回滚决策人与对外通知路径",
+              "补齐资料缺口：准备具体回滚步骤、回滚验证指标与判定阈值、预计回滚耗时清单",
+              "准备会中记录模板：记录是否触发提醒条件（延期时长/阻断项）、回滚结论与后续动作"
+            ],
+            "sourceIds": [
+              "RULE-731"
+            ]
+          },
+          "trace": [
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "searchMeetingNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "submitBrief",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            }
+          ],
+          "usage": {
+            "inputTokens": 7346,
+            "outputTokens": 1662,
+            "totalTokens": 9008,
+            "reasoningTokens": 594,
+            "cachedInputTokens": 4992,
+            "raw": {
+              "inputTokens": {
+                "total": 3551,
+                "noCache": 1759,
+                "cacheRead": 1792
+              },
+              "outputTokens": {
+                "total": 421,
+                "text": 421,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 3551,
+                "completion_tokens": 421,
+                "total_tokens": 3972,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1792
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1792,
+                "prompt_cache_miss_tokens": 1759
+              }
+            }
+          },
+          "a2uiMessages": 3
+        },
+        {
+          "agentId": "information-watch",
+          "revision": 1,
+          "output": {
+            "summary": "首次建立发布状态基线：计划18:00上线、暂无阻断项、正在评审回滚方案（sourceId: release-status）。依据资料 RULE-731（负责人林舟：延期超过30分钟或出现阻断项建议提醒；回滚前应停止新设备调用）。当前无延期与无阻断项，属初次基线，不建议提醒。",
+            "change": "initial",
+            "notification": "quiet",
+            "findings": [
+              "本次无上次已发布观察，工具判定 change=initial，按规则必须 quiet，仅建立基线。",
+              "当前内容：计划18:00上线，无阻断项，评审回滚方案；未出现延期，也未出现阻断项。",
+              "RULE-731 阈值：延期超过30分钟或出现阻断项才建议提醒；现状均未触发，故仅严重变更才提醒的要求与规则一致。",
+              "RULE-731 另要求回滚前停止新设备调用，后续若进入实际回滚需核对是否执行该前置动作。",
+              "建议：继续盯 18:00 上线时间点与评审结论，若延期超30分钟或新增阻断项再提醒（负责人林舟）。"
+            ],
+            "sourceIds": [
+              "release-status",
+              "RULE-731"
+            ]
+          },
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "release-status",
+                "RULE-731"
+              ]
+            }
+          ],
+          "usage": {
+            "inputTokens": 4666,
+            "outputTokens": 788,
+            "totalTokens": 5454,
+            "reasoningTokens": 17,
+            "cachedInputTokens": 3070,
+            "raw": {
+              "inputTokens": {
+                "total": 2427,
+                "noCache": 1275,
+                "cacheRead": 1152
+              },
+              "outputTokens": {
+                "total": 360,
+                "text": 360,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 2427,
+                "completion_tokens": 360,
+                "total_tokens": 2787,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1152
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1152,
+                "prompt_cache_miss_tokens": 1275
+              }
+            }
+          },
+          "a2uiMessages": 3
+        },
+        {
+          "agentId": "information-watch",
+          "revision": 2,
+          "output": {
+            "summary": "发布状态由“计划18:00上线、无阻断项、评审回滚方案”变为“上线推迟到20:00，新增阻断项：设备结果回传超时”。延期2小时且新增阻断项，属严重变更；依据 RULE-731（延期超过30分钟或出现阻断项建议提醒，负责人林舟）建议提醒，并注意回滚前须停止新设备调用。",
+            "change": "changed",
+            "notification": "notify",
+            "findings": [
+              "确定性比较结果：changed；上次内容为“计划18:00上线，无阻断项；评审回滚方案”。",
+              "延期幅度：18:00→20:00，共120分钟，超过 RULE-731 的30分钟阈值。",
+              "新增阻断项“设备结果回传超时”，此前明确为“无阻断项”，构成严重度提升。",
+              "RULE-731 要求：延期超过30分钟或出现阻断项建议提醒，责任人林舟。",
+              "回滚关注点：RULE-731 指出回滚前应停止新设备调用，需与回传超时问题一并核查。",
+              "故判定为严重变更，notification 仅为建议提醒，未发送任何通知。"
+            ],
+            "sourceIds": [
+              "release-status",
+              "RULE-731"
+            ]
+          },
+          "trace": [
+            {
+              "tool": "readPreviousObservation"
+            },
+            {
+              "tool": "searchReferenceNotes",
+              "sourceIds": [
+                "RULE-731"
+              ]
+            },
+            {
+              "tool": "submitInspection",
+              "sourceIds": [
+                "release-status",
+                "RULE-731"
+              ]
+            }
+          ],
+          "usage": {
+            "inputTokens": 4940,
+            "outputTokens": 807,
+            "totalTokens": 5747,
+            "reasoningTokens": 112,
+            "cachedInputTokens": 3072,
+            "raw": {
+              "inputTokens": {
+                "total": 2626,
+                "noCache": 1474,
+                "cacheRead": 1152
+              },
+              "outputTokens": {
+                "total": 258,
+                "text": 258,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 2626,
+                "completion_tokens": 258,
+                "total_tokens": 2884,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1152
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 1152,
+                "prompt_cache_miss_tokens": 1474
+              }
+            }
+          },
+          "a2uiMessages": 3
+        }
+      ],
+      "cleanupErrors": [],
+      "elapsedSeconds": 23.876
+    }
+  ],
+  "cleanup": {
+    "taskContainerRemoved": true
+  },
+  "repositoryCommit": "c26552c94a14f98742c9312f9adea305bb5107d8",
+  "service": {
+    "service": "xagent-studio",
+    "build": {
+      "commit": "c26552c94a14f98742c9312f9adea305bb5107d8",
+      "release": "c26552c94a14-20261023T034730",
+      "runtimeDigest": "0ee46044c1ee76f29dda84cba82748da1f2e6c8093641513f5d011af98df8699"
+    },
+    "draining": false,
+    "activeRuns": 0,
+    "defaultMode": "deepseek",
+    "deepseekConfigured": true
+  },
+  "productionDataUnchanged": true,
+  "elapsedSeconds": 28.209
+}

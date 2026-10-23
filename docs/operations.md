@@ -4,6 +4,8 @@
 
 首次实际构建、版本切换、回退及真实 API / 页面验证见 [验收记录](operations-validation.md)。
 
+2026-10-23 默认真实模型调整的部署、任务 API 和三个助手页面验收见 [默认模式验收](default-mode-validation.md)。
+
 ## 统一验证
 
 ```powershell

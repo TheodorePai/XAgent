@@ -1,0 +1,11 @@
+{
+  "type": "local",
+  "passed": true,
+  "elapsedSeconds": 73.485,
+  "realModelCalled": false,
+  "uiVerified": false,
+  "sourceCommit": "c26552c94a14f98742c9312f9adea305bb5107d8",
+  "environmentDefaultMode": "deepseek",
+  "typescriptTestsPassed": 53,
+  "pythonTestsPassed": 10
+}
