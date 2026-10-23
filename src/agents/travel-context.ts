@@ -3,12 +3,13 @@ import type { RequestContext } from '@mastra/core/request-context';
 import { z } from 'zod';
 import { closeBrowser, type BrowserScope } from '../tools/browser.js';
 import type { ExecutionGuard } from '../mastra/operations.js';
+import { executionModeSchema } from './model.js';
 type TravelContext = RequestContext<any>;
 
 export const travelConfigSchema = z.object({ destination: z.string().min(1).max(80),
   days: z.number().int().min(1).max(7).default(3) }).strict();
 export const travelContextSchema = z.object({ config: travelConfigSchema,
-  mode: z.enum(['mock', 'deepseek']).default('mock') }).passthrough();
+  mode: executionModeSchema }).passthrough();
 type TravelConfig = z.infer<typeof travelConfigSchema>;
 type TaskBinding = { runId: string; surfaceId: string; revision: number; instruction: string;
   trace: BrowserScope['trace']; onResult: (output: Record<string, unknown>) => void };

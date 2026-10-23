@@ -6,6 +6,8 @@
 
 本地运行 `npm run studio`，在 Request context 中选择对应预设并 Save。服务器已部署的 Studio 通过本机 SSH 转发访问 [Agent 列表](http://127.0.0.1:4411/agents)。构建后的服务器页面没有 CLI 预设选择器时，把 `studio-presets.json` 中对应条目的值粘贴进 Request context，再 Save。密钥只在服务端环境变量中配置。
 
+Studio 默认 DeepSeek，三个助手均可使用「服务默认模型」预设，省略 `mode`。下面保留的显式 `mode: deepseek` 示例也有效。已有会话若保存 `mode: mock`，需删除该字段并 Save 才会采用服务默认；服务器可用 `XAGENT_DEFAULT_MODE=mock` 显式切换离线默认值。会议、观察及资料等必需业务参数仍须提供。
+
 参会助手上下文：
 
 ```json

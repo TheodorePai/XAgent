@@ -5,9 +5,10 @@ import type { AgentDefinition, Task } from '../tasks/types.js';
 import type { MastraModelConfig } from '@mastra/core/llm';
 import type { MastraMemory } from '@mastra/core/memory';
 import type { ExecutionGuard } from '../mastra/operations.js';
-import { bindNotesTask, closeNotesRun, notesInputSchema, notesLifecycle, notesModel, notesRun,
+import { bindNotesTask, closeNotesRun, notesInputSchema, notesLifecycle, notesRun,
   searchRunNotes, startNotesRun, submitNotesResult } from './notes-context.js';
 import { scriptedModel } from '../tasks/fixture.js';
+import { resolveModel } from './model.js';
 
 export const briefSchema = z.object({ summary: z.string().min(1).max(2000),
   checklist: z.array(z.string().min(1).max(500)).min(1).max(8),
@@ -74,7 +75,7 @@ export const meetingDefinition: AgentDefinition = {
 export function createMeetingAgent(options: { model?: MastraModelConfig; memory?: MastraMemory; timeoutMs?: number; guard?: ExecutionGuard } = {}) {
   const id = 'meeting-prep', mock = meetingDefinition.fixture(), timeoutMs = options.timeoutMs ?? 90000;
   return new Agent({ id, name: '参会助手', memory: options.memory, requestContextSchema: meetingContextSchema,
-      model: options.model ?? (({ requestContext }) => notesModel(mock, requestContext)),
+      model: options.model ?? (({ requestContext }) => resolveModel(mock, requestContext)),
       defaultOptions: ({ requestContext }) => notesLifecycle(requestContext, id, timeoutMs),
       inputProcessors: [{ id: 'meeting-input', processInput({ messages, requestContext, messageList }) {
         if (!requestContext) throw new Error('MEETING_CONTEXT_REQUIRED');

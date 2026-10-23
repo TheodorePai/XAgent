@@ -75,6 +75,8 @@ npm.cmd run studio:deploy -- --adopt-legacy
 
 `GET /xagent/status` 仅返回服务名称、源码/release、是否排空、活跃运行数及是否配置 key，不返回 key。`studio:status` 同时读取容器实际镜像与服务信息；镜像标签、清单和接口都不一致时不得宣布版本已部署。
 
+Studio 的 `defaultMode` 同时由状态接口返回，入口默认 `deepseek`，可在服务器现有环境文件中用 `XAGENT_DEFAULT_MODE=mock` 覆盖。请求中的显式模式优先；持久任务继续使用已保存的 `task.mode`，测试脚本继续显式传入 mock / deepseek。三个 Agent 的输入 Schema、模型元数据及实际执行共用 `src/agents/model.ts`，缺少 key 的真实模式直接报错。浏览器旧上下文中的显式 mock 不会自动修改，删除 `mode` 后 Save 即采用服务默认。纯模型元数据查询不发出付费请求。
+
 Studio 继续只监听服务器回环 4411。建立本机访问通道：
 
 ```powershell

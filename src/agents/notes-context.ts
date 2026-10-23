@@ -1,11 +1,11 @@
 import { randomUUID } from 'node:crypto';
 import type { RequestContext } from '@mastra/core/request-context';
-import type { MastraModelConfig } from '@mastra/core/llm';
 import { z } from 'zod';
 import { displayView } from '../tasks/view.js';
 import type { ExecutionGuard } from '../mastra/operations.js';
+import { executionModeSchema } from './model.js';
 
-export const notesInputSchema = z.object({ mode: z.enum(['mock', 'deepseek']).default('mock'),
+export const notesInputSchema = z.object({ mode: executionModeSchema,
   notes: z.array(z.object({ id: z.string().min(1).max(80), text: z.string().min(1).max(4000) }).strict()).max(20).default([]) });
 export type NotesInput = z.infer<typeof notesInputSchema>;
 type Binding = { runId: string; surfaceId: string; revision: number; instruction: string;
@@ -52,12 +52,6 @@ export function notesLifecycle(context: RequestContext<any>, id: string, timeout
   holder(context, id);
   return { maxSteps: 8, modelSettings: { maxRetries: 0 }, abortSignal: AbortSignal.timeout(timeoutMs),
     onFinish: () => closeNotesRun(context, id), onError: () => closeNotesRun(context, id), onAbort: () => closeNotesRun(context, id) };
-}
-export function notesModel(mock: MastraModelConfig, context: RequestContext<any>): MastraModelConfig {
-  if (z.enum(['mock', 'deepseek']).default('mock').parse(context.get('mode')) === 'mock') return mock;
-  if (!process.env.DEEPSEEK_API_KEY?.trim()) throw new Error('DEEPSEEK_KEY_NOT_CONFIGURED');
-  return { id: `deepseek/${process.env.DEEPSEEK_MODEL || 'deepseek-flash'}` as `${string}/${string}`,
-    apiKey: process.env.DEEPSEEK_API_KEY, api: 'chat', url: process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1' };
 }
 export function searchRunNotes(run: NotesRun, query: string, tool: string) {
   run.searched = true;

@@ -5,10 +5,11 @@ import type { AgentDefinition, Task } from '../tasks/types.js';
 import type { MastraModelConfig } from '@mastra/core/llm';
 import type { MastraMemory } from '@mastra/core/memory';
 import type { ExecutionGuard } from '../mastra/operations.js';
-import { bindNotesTask, closeNotesRun, notesInputSchema, notesLifecycle, notesModel, notesRun,
+import { bindNotesTask, closeNotesRun, notesInputSchema, notesLifecycle, notesRun,
   searchRunNotes, startNotesRun, submitNotesResult } from './notes-context.js';
 import { scriptedModel } from '../tasks/fixture.js';
 import { LabError } from '../store.js';
+import { resolveModel } from './model.js';
 
 const observationSchema = z.object({ sourceId: z.string().min(1).max(80), title: z.string().min(1).max(200),
   content: z.string().min(1).max(2000) }).strict();
@@ -88,7 +89,7 @@ export const inspectionDefinition: AgentDefinition = {
 export function createInspectionAgent(options: { model?: MastraModelConfig; memory?: MastraMemory; timeoutMs?: number; guard?: ExecutionGuard } = {}) {
   const id = 'information-watch', mock = inspectionDefinition.fixture(), timeoutMs = options.timeoutMs ?? 90000;
   return new Agent({ id, name: '信息巡检助手', memory: options.memory, requestContextSchema: inspectionContextSchema,
-      model: options.model ?? (({ requestContext }) => notesModel(mock, requestContext)),
+      model: options.model ?? (({ requestContext }) => resolveModel(mock, requestContext)),
       defaultOptions: ({ requestContext }) => notesLifecycle(requestContext, id, timeoutMs),
       inputProcessors: [{ id: 'inspection-input', processInput({ messages, requestContext, messageList }) {
         if (!requestContext) throw new Error('INSPECTION_CONTEXT_REQUIRED');

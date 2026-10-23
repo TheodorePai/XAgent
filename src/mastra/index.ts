@@ -8,8 +8,11 @@ import { createMeetingAgent } from '../agents/meeting.js';
 import { createInspectionAgent } from '../agents/inspection.js';
 import { registerApiRoute } from '@mastra/core/server';
 import { StudioGate, studioBuildInfo } from './operations.js';
+import { resolveMode } from '../agents/model.js';
 
 // Studio has its own storage and never starts TaskRuntime or opens the task DB.
+process.env.XAGENT_DEFAULT_MODE ??= 'deepseek';
+const defaultMode = resolveMode();
 const directory = resolve(process.env.STUDIO_DATA_DIR || './data/studio');
 mkdirSync(directory, { recursive: true });
 function memory() { return new Memory({ options: {
@@ -23,6 +26,6 @@ export const mastra = new Mastra({
   storage: new LibSQLStore({ id: 'studio-storage', url: 'file:' + join(directory, 'mastra.db').replaceAll('\\', '/') }),
   server: { host: '127.0.0.1', port: Number(process.env.STUDIO_PORT || 4111), apiRoutes: [
     registerApiRoute('/xagent/status', { method: 'GET', handler: c => c.json({ service: 'xagent-studio', build,
-      ...guard.status(), deepseekConfigured: !!process.env.DEEPSEEK_API_KEY?.trim() }) }),
+      ...guard.status(), defaultMode, deepseekConfigured: !!process.env.DEEPSEEK_API_KEY?.trim() }) }),
   ] },
 });

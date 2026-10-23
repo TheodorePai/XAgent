@@ -6,6 +6,8 @@
 
 ## 启动和查看
 
+Studio 省略请求 `mode` 时默认使用 DeepSeek，需先在运行 Studio 的服务器配置 `DEEPSEEK_API_KEY`。服务端可用 `XAGENT_DEFAULT_MODE=mock` 启动离线调试；请求显式的 `mode` 优先于环境默认值。列表 Provider 与实际请求采用同一套默认解析，查询列表不会调用模型 API。旧浏览器中保存的显式 `mode: mock` 仍然有效，可删除该字段并 Save 以使用服务默认值。
+
 需要 Node.js 24+。在项目根目录执行：
 
 ```powershell
@@ -43,7 +45,7 @@ Studio 使用 `data/studio/mastra.db` 保存调试会话，可刷新页面查看
 
 ## 每次执行与历史
 
-在 Request context 中明确指定 `config.destination`、`config.days` 和 `mode`。每轮使用最新用户消息作为规划要求；目的地和天数不会从自然语言自动提取。修改目的地或天数时，先修改上下文并 Save。历史对话保留用于查看，但每次规划重新收集来源，不把上一轮的工具结果当成本轮证据。
+在 Request context 中明确指定 `config.destination` 和 `config.days`；`mode` 可省略以使用服务默认模型，对应「服务默认模型」预设。每轮使用最新用户消息作为规划要求；目的地和天数不会从自然语言自动提取。修改目的地或天数时，先修改上下文并 Save。历史对话保留用于查看，但每次规划重新收集来源，不把上一轮的工具结果当成本轮证据。
 
 普通 SDK 调用使用新建的 RequestContext。任务系统每次都创建新的上下文。模型选择不依赖任务运行表；没有配置也可列出 Agent，真正执行时必须通过配置校验。
 

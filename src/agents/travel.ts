@@ -9,6 +9,7 @@ import type { AgentDefinition } from '../tasks/types.js';
 import { scriptedModel } from '../tasks/fixture.js';
 import { browserSearch, browserRead, browserImages, webEvidence } from '../tools/browser.js';
 import { displayView } from '../tasks/view.js';
+import { resolveModel } from './model.js';
 import { bindTravelTask, closeTravelRun, startTravelRun, travelConfigSchema, travelContextSchema,
   travelLifecycle, travelRun } from './travel-context.js';
 
@@ -80,15 +81,8 @@ export function createTravelAgent(options: { model?: MastraModelConfig; memory?:
   return new Agent({ id: 'travel-assistant', name: '出行助手',
       memory: options.memory,
       requestContextSchema: travelContextSchema,
-      model: options.model ?? (({ requestContext }) => {
-        // Studio also resolves models while listing Agents, before task config
-        // exists. Only model selection belongs here; config is validated at execution.
-        if (z.enum(['mock', 'deepseek']).default('mock').parse(requestContext.get('mode')) === 'mock') return mock;
-        if (!process.env.DEEPSEEK_API_KEY?.trim()) throw new Error('DEEPSEEK_KEY_NOT_CONFIGURED');
-        return { id: `deepseek/${process.env.DEEPSEEK_MODEL || 'deepseek-flash'}` as `${string}/${string}`,
-          apiKey: process.env.DEEPSEEK_API_KEY, api: 'chat' as const,
-          url: process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1' };
-      }),
+      // Listing resolves only the model; business config is validated at execution.
+      model: options.model ?? (({ requestContext }) => resolveModel(mock, requestContext)),
       defaultOptions: ({ requestContext }) => travelLifecycle(requestContext, timeoutMs),
       inputProcessors: [{ id: 'travel-input', processInput({ messages, requestContext, messageList }) {
         if (!requestContext) throw new Error('TRAVEL_CONTEXT_REQUIRED');
