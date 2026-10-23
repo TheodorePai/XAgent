@@ -1,0 +1,211 @@
+{
+  "runId": "20261023T074349-932600",
+  "sourceCommit": "149789eee57a9751b04244ee77c2dfd98a322383",
+  "mode": "deepseek",
+  "suite": "agent-api",
+  "startedAt": "2026-10-23T07:43:52.652863+00:00",
+  "passed": true,
+  "uiVerified": false,
+  "limitations": [
+    "API verification does not verify Studio browser chat.",
+    "Events and note libraries are synthetic; no real phone or notification."
+  ],
+  "checks": [
+    {
+      "type": "agent-api",
+      "mode": "deepseek",
+      "requestedCommit": "149789eee57a9751b04244ee77c2dfd98a322383",
+      "startedAt": "2026-10-23T07:43:52.778Z",
+      "configuredModel": "deepseek-flash",
+      "passed": true,
+      "uiVerified": false,
+      "syntheticInputs": true,
+      "checks": [
+        {
+          "agentId": "reference-summary",
+          "elapsedMs": 3837,
+          "usage": {
+            "inputTokens": 2932,
+            "outputTokens": 343,
+            "totalTokens": 3275,
+            "reasoningTokens": 62,
+            "cachedInputTokens": 1920,
+            "raw": {
+              "inputTokens": {
+                "total": 1463,
+                "noCache": 695,
+                "cacheRead": 768
+              },
+              "outputTokens": {
+                "total": 102,
+                "text": 102,
+                "reasoning": 0
+              },
+              "raw": {
+                "prompt_tokens": 1463,
+                "completion_tokens": 102,
+                "total_tokens": 1565,
+                "prompt_tokens_details": {
+                  "cached_tokens": 768
+                },
+                "completion_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "prompt_cache_hit_tokens": 768,
+                "prompt_cache_miss_tokens": 695
+              }
+            }
+          },
+          "tools": [
+            {
+              "name": "searchReferenceNotes",
+              "error": false
+            },
+            {
+              "name": "submitSummary",
+              "accepted": true,
+              "error": false
+            }
+          ],
+          "artifact": {
+            "output": {
+              "summary": "TEMPLATE-101 要点：①负责人为林舟；②工具回传超时阈值为15秒；③上线前需准备回滚开关。资料仅提供上述三条要点的概述，未说明超时后的具体处置流程、回滚触发条件与操作步骤，建议补充细节。",
+              "sourceIds": [
+                "reference-101"
+              ]
+            },
+            "view": {
+              "publishedRevision": 1,
+              "surfaceId": "reference-summary-preview-db05a5d3-b88b-4303-8303-e950271e75d5",
+              "protocol": "v0.9.1",
+              "messages": [
+                {
+                  "version": "v0.9.1",
+                  "createSurface": {
+                    "surfaceId": "reference-summary-preview-db05a5d3-b88b-4303-8303-e950271e75d5",
+                    "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateComponents": {
+                    "surfaceId": "reference-summary-preview-db05a5d3-b88b-4303-8303-e950271e75d5",
+                    "components": [
+                      {
+                        "id": "root",
+                        "component": "Column",
+                        "children": [
+                          "title",
+                          "summary",
+                          "checklist",
+                          "sources"
+                        ]
+                      },
+                      {
+                        "id": "title",
+                        "component": "Text",
+                        "text": {
+                          "path": "/title"
+                        },
+                        "variant": "h2"
+                      },
+                      {
+                        "id": "summary",
+                        "component": "Text",
+                        "text": {
+                          "path": "/summary"
+                        }
+                      },
+                      {
+                        "id": "checklist",
+                        "component": "Text",
+                        "text": {
+                          "path": "/checklist"
+                        }
+                      },
+                      {
+                        "id": "sources",
+                        "component": "Text",
+                        "text": {
+                          "path": "/sources"
+                        },
+                        "variant": "caption"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "version": "v0.9.1",
+                  "updateDataModel": {
+                    "surfaceId": "reference-summary-preview-db05a5d3-b88b-4303-8303-e950271e75d5",
+                    "path": "/",
+                    "value": {
+                      "title": "资料摘要",
+                      "summary": "TEMPLATE-101 要点：①负责人为林舟；②工具回传超时阈值为15秒；③上线前需准备回滚开关。资料仅提供上述三条要点的概述，未说明超时后的具体处置流程、回滚触发条件与操作步骤，建议补充细节。",
+                      "checklist": "",
+                      "sources": "reference-101",
+                      "revision": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "text": "**摘要（TEMPLATE-101）**\n\n- **负责人**：林舟\n- **超时规则**：工具回传的超时阈值为 **15秒**\n- **回滚要求**：上线前需要准备好**回滚开关**\n\n**资料缺口**：现有资料只给出上述三条概述，没有说明超过 15 秒后如何处理、在什么条件下触发回滚，以及回滚的具体操作步骤；建议补充这些细节。\n\n**来源**：reference-101"
+        }
+      ],
+      "service": {
+        "service": "xagent-studio",
+        "build": {
+          "commit": "149789eee57a9751b04244ee77c2dfd98a322383",
+          "release": "149789eee57a-20261023T074036",
+          "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11"
+        },
+        "draining": false,
+        "activeRuns": 0,
+        "defaultMode": "deepseek",
+        "capabilities": {
+          "agents": [
+            "travel-assistant",
+            "meeting-prep",
+            "information-watch",
+            "reference-summary"
+          ],
+          "workflows": [
+            "meeting-brief"
+          ]
+        },
+        "deepseekConfigured": true
+      },
+      "remainingBrowserPids": [],
+      "finishedAt": "2026-10-23T07:43:56.671Z"
+    }
+  ],
+  "cleanup": {},
+  "repositoryCommit": "149789eee57a9751b04244ee77c2dfd98a322383",
+  "service": {
+    "service": "xagent-studio",
+    "build": {
+      "commit": "149789eee57a9751b04244ee77c2dfd98a322383",
+      "release": "149789eee57a-20261023T074036",
+      "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11"
+    },
+    "draining": false,
+    "activeRuns": 0,
+    "defaultMode": "deepseek",
+    "capabilities": {
+      "agents": [
+        "travel-assistant",
+        "meeting-prep",
+        "information-watch",
+        "reference-summary"
+      ],
+      "workflows": [
+        "meeting-brief"
+      ]
+    },
+    "deepseekConfigured": true
+  },
+  "productionDataUnchanged": true,
+  "elapsedSeconds": 4.086
+}

@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "operations": [
+    {
+      "passed": true,
+      "current": {
+        "release": "83b7761c545e-20261023T072550",
+        "image": "sha256:41c1f8254a9528d199c9042aaec8b4f9dd5a0ef6c93fd8a7a2c703a2205c2217",
+        "commit": "83b7761c545e671ea5f55192f3625c38f1abfc30",
+        "runtimeDigest": "2dba24afdfdbaf8c0bc559aafb69396ecc3e184531b6af0de18b38617601ce26"
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T072820855957.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T072820855957",
+      "productionDataUnchanged": true,
+      "operation": "deploy"
+    },
+    {
+      "passed": true,
+      "current": {
+        "release": "149789eee57a-20261023T074036",
+        "image": "sha256:1e89ef668e0cbfed64bb31dde65eeec7ae94b657dfe6849bc834c9760b8b10a9",
+        "commit": "149789eee57a9751b04244ee77c2dfd98a322383",
+        "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11"
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T074259164831.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T074259164831",
+      "productionDataUnchanged": true,
+      "operation": "deploy"
+    },
+    {
+      "passed": true,
+      "current": {
+        "release": "83b7761c545e-20261023T072550",
+        "image": "sha256:41c1f8254a9528d199c9042aaec8b4f9dd5a0ef6c93fd8a7a2c703a2205c2217",
+        "commit": "83b7761c545e671ea5f55192f3625c38f1abfc30",
+        "runtimeDigest": "2dba24afdfdbaf8c0bc559aafb69396ecc3e184531b6af0de18b38617601ce26"
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T080331741389.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T080331741389",
+      "productionDataUnchanged": true,
+      "operation": "rollback"
+    },
+    {
+      "passed": true,
+      "current": {
+        "release": "149789eee57a-20261023T074036",
+        "image": "sha256:1e89ef668e0cbfed64bb31dde65eeec7ae94b657dfe6849bc834c9760b8b10a9",
+        "commit": "149789eee57a9751b04244ee77c2dfd98a322383",
+        "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11"
+      },
+      "legacyMaintenance": false,
+      "backup": "/home/ubuntu/xagent-studio/backups/20261023T080343604104.sqlite",
+      "archivedContainer": "xagent-studio-saved-20261023T080343604104",
+      "productionDataUnchanged": true,
+      "operation": "rollback"
+    }
+  ],
+  "originalTaskDataUnchanged": true
+}

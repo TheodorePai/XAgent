@@ -6,6 +6,8 @@
 
 Studio 默认 DeepSeek，省略 mode 即采用服务默认；显式 mock 仍有效，详情见 [默认模型与真实验收](docs/default-mode-validation.md)。统一 CLI 增加 `--suite workflow-api`，all 同时包含 Workflow API，页面验收仍单独执行。
 
+本轮开发入口、原生 Workflow、77 项本地测试、真实 API / 页面和回退切换的证据见 [Workflow 与模板验收](docs/workflow-validation.md)。
+
 以下为各阶段历史验收，测试数量和部署目录以对应报告日期为准：[统一验证、部署与回退](docs/operations-validation.md)。
 
 当前 Studio 已接入出行、参会和信息巡检三个 Agent：[启动与调试](docs/studio.md)、[参会与巡检接入及真实验收](docs/notes-studio.md)。本轮 45 项自动测试通过，并完成 5 次真实 DeepSeek 运行（3 次隔离任务 API、2 次 Studio 页面调用）；设备事件与会议资料为合成测试数据。

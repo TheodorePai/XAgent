@@ -2,6 +2,8 @@
 
 适用于仓库锁定的 Node 24 / Mastra 版本。先读根目录 [AGENTS.md](../AGENTS.md) 的边界与验收规则；本指南说明具体开发路径。[运维入口](operations.md)负责启动、统一验证和服务器发布。
 
+本文模板与 Workflow 的真实 API、Studio 页面及部署回退结果见 [验收记录](workflow-validation.md)。
+
 ## 1. 先选择扩展类型
 
 | 需求 | 入口 | 需要编写的内容 |

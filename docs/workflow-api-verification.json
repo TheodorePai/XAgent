@@ -1,0 +1,200 @@
+{
+  "runId": "20261023T074335-827100",
+  "sourceCommit": "149789eee57a9751b04244ee77c2dfd98a322383",
+  "mode": "deepseek",
+  "suite": "workflow-api",
+  "startedAt": "2026-10-23T07:43:38.575319+00:00",
+  "passed": true,
+  "uiVerified": false,
+  "limitations": [
+    "API verification does not verify Studio browser chat.",
+    "Events and note libraries are synthetic; no real phone or notification."
+  ],
+  "checks": [
+    {
+      "type": "workflow-api",
+      "workflowId": "meeting-brief",
+      "mode": "deepseek",
+      "passed": true,
+      "uiVerified": false,
+      "syntheticInputs": true,
+      "startedAt": "2026-10-23T07:43:38.699Z",
+      "service": {
+        "service": "xagent-studio",
+        "build": {
+          "commit": "149789eee57a9751b04244ee77c2dfd98a322383",
+          "release": "149789eee57a-20261023T074036",
+          "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11"
+        },
+        "draining": false,
+        "activeRuns": 0,
+        "defaultMode": "deepseek",
+        "capabilities": {
+          "agents": [
+            "travel-assistant",
+            "meeting-prep",
+            "information-watch",
+            "reference-summary"
+          ],
+          "workflows": [
+            "meeting-brief"
+          ]
+        },
+        "deepseekConfigured": true
+      },
+      "input": {
+        "meeting": {
+          "title": "发布评审会议",
+          "agenda": "核对移动端工具上线风险、负责人及回滚预案",
+          "startAt": "2026-11-03T02:00:00Z"
+        },
+        "notes": [
+          {
+            "id": "release-042",
+            "text": "合成验收资料：负责人林舟；移动端工具回传超时阈值为15秒，超过则停止本轮操作；发布前必须准备回滚开关。"
+          }
+        ],
+        "instruction": "WORKFLOW-731：生成中文会前简报和检查清单，关注15秒超时、负责人及回滚，保留来源编号release-042。",
+        "mode": "deepseek"
+      },
+      "runId": "903c061e-f426-4e01-8b19-c36f5e4c91ae",
+      "status": "success",
+      "steps": {
+        "prepare-meeting": "success",
+        "draft-with-agent": "success",
+        "validate-brief": "success"
+      },
+      "result": {
+        "accepted": true,
+        "artifact": {
+          "output": {
+            "summary": "【发布评审会议 会前简报】会议时间：2026-11-03 02:00 UTC，议程为核对移动端工具上线风险、负责人及回滚预案。检索仅命中一份资料（release-042，合成验收资料），其中确认三点关键事实：①移动端工具回传超时阈值为 15 秒，超过即停止本轮操作；②负责人为林舟；③发布前必须准备回滚开关。建议会前据此把议程收敛为三块：15 秒超时阈值的判定与监控口径、林舟为唯一责任人的分工与决策授权、回滚开关的准备状态与触发条件。需注意：现有资料未提供风险清单、时间线、依赖方与其他备选负责人，除上述条目外的风险项需在会上现场补充确认，本次不编造外部信息。",
+            "checklist": [
+              "会前与林舟确认其为本次移动端工具上线责任人，并明确其决策授权范围与backup",
+              "准备 15 秒回传超时阈值的监控指标定义：判定口径、告警方式、超时后“停止本轮操作”的具体执行步骤",
+              "确认超时触发后的用户/业务影响说明与通知话术",
+              "核对回滚开关的准备状态：是否已具备、开关粒度、验证方式、回滚执行人与决策人",
+              "梳理回滚决策的触发条件（如超时率阈值）与执行时限，形成一页决策卡",
+              "补充资料未覆盖的风险清单、依赖方与发布时间线，会上逐项确认",
+              "会后整理结论与责任人/时间点，形成发布评审纪要并留档（引用来源 release-042）"
+            ],
+            "sourceIds": [
+              "release-042"
+            ]
+          },
+          "view": {
+            "publishedRevision": 1,
+            "surfaceId": "workflow-903c061e-f426-4e01-8b19-c36f5e4c91ae",
+            "protocol": "v0.9.1",
+            "messages": [
+              {
+                "version": "v0.9.1",
+                "createSurface": {
+                  "surfaceId": "workflow-903c061e-f426-4e01-8b19-c36f5e4c91ae",
+                  "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+                }
+              },
+              {
+                "version": "v0.9.1",
+                "updateComponents": {
+                  "surfaceId": "workflow-903c061e-f426-4e01-8b19-c36f5e4c91ae",
+                  "components": [
+                    {
+                      "id": "root",
+                      "component": "Column",
+                      "children": [
+                        "title",
+                        "summary",
+                        "checklist",
+                        "sources"
+                      ]
+                    },
+                    {
+                      "id": "title",
+                      "component": "Text",
+                      "text": {
+                        "path": "/title"
+                      },
+                      "variant": "h2"
+                    },
+                    {
+                      "id": "summary",
+                      "component": "Text",
+                      "text": {
+                        "path": "/summary"
+                      }
+                    },
+                    {
+                      "id": "checklist",
+                      "component": "Text",
+                      "text": {
+                        "path": "/checklist"
+                      }
+                    },
+                    {
+                      "id": "sources",
+                      "component": "Text",
+                      "text": {
+                        "path": "/sources"
+                      },
+                      "variant": "caption"
+                    }
+                  ]
+                }
+              },
+              {
+                "version": "v0.9.1",
+                "updateDataModel": {
+                  "surfaceId": "workflow-903c061e-f426-4e01-8b19-c36f5e4c91ae",
+                  "path": "/",
+                  "value": {
+                    "title": "发布评审会议",
+                    "summary": "【发布评审会议 会前简报】会议时间：2026-11-03 02:00 UTC，议程为核对移动端工具上线风险、负责人及回滚预案。检索仅命中一份资料（release-042，合成验收资料），其中确认三点关键事实：①移动端工具回传超时阈值为 15 秒，超过即停止本轮操作；②负责人为林舟；③发布前必须准备回滚开关。建议会前据此把议程收敛为三块：15 秒超时阈值的判定与监控口径、林舟为唯一责任人的分工与决策授权、回滚开关的准备状态与触发条件。需注意：现有资料未提供风险清单、时间线、依赖方与其他备选负责人，除上述条目外的风险项需在会上现场补充确认，本次不编造外部信息。",
+                    "checklist": "1. 会前与林舟确认其为本次移动端工具上线责任人，并明确其决策授权范围与backup\n2. 准备 15 秒回传超时阈值的监控指标定义：判定口径、告警方式、超时后“停止本轮操作”的具体执行步骤\n3. 确认超时触发后的用户/业务影响说明与通知话术\n4. 核对回滚开关的准备状态：是否已具备、开关粒度、验证方式、回滚执行人与决策人\n5. 梳理回滚决策的触发条件（如超时率阈值）与执行时限，形成一页决策卡\n6. 补充资料未覆盖的风险清单、依赖方与发布时间线，会上逐项确认\n7. 会后整理结论与责任人/时间点，形成发布评审纪要并留档（引用来源 release-042）",
+                    "sources": "release-042",
+                    "revision": 1
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "text": "简报已提交成功（publishedRevision 1）。\n\n## 一、会前简报（发布评审会议）\n\n**时间**：2026-11-03 02:00 UTC\n**议程**：核对移动端工具上线风险、负责人及回滚预案\n\n本次检索只命中 **1 份资料**（release-042，合成验收资料），其中确认三项关键事实：\n\n1. **15 秒超时**：移动端工具回传超时阈值为 15 秒，超过即**停止本轮操作**；\n2. **负责人**：林舟；\n3. **回滚**：发布前**必须准备回滚开关**。\n\n**建议**：将议程收敛为三块——① 15 秒超时阈值的判定与监控口径；② 明确林舟为责任人时的分工与决策授权；③ 回滚开关的准备状态与触发条件。\n\n**需说明的缺口**：现有资料未提供风险清单、发布时间线、依赖方及备选负责人，这些内容需在会上现场补充确认，本次未做任何外推或编造。\n\n## 二、准备清单\n\n1. 会前与林舟确认其为本次移动端工具上线责任人，明确决策授权范围与备份人；\n2. 准备 15 秒超时阈值的监控定义：判定口径、告警方式、超时后“停止本轮操作”的具体执行步骤；\n3. 确认超时触发后的用户/业务影响说明与通知话术；\n4. 核对回滚开关准备状态：是否已具备、开关粒度、验证方式、回滚执行人与决策人；\n5. 梳理回滚触发条件（如超时率阈值）与执行时限，形成一页决策卡；\n6. 补充资料未覆盖的风险清单、依赖方与发布时间线，会上逐项确认；\n7. 会后整理结论、责任人与时间点，形成评审纪要并留档。\n\n## 三、来源编号\n\n- `release-042`（合成验收资料：负责人林舟；15 秒回传超时阈值，超时停止本轮操作；发布前须备回滚开关）",
+        "usage": {
+          "inputTokens": 4476,
+          "outputTokens": 1056,
+          "totalTokens": 5532
+        },
+        "mode": "deepseek"
+      },
+      "finishedAt": "2026-10-23T07:43:47.128Z"
+    }
+  ],
+  "cleanup": {},
+  "repositoryCommit": "149789eee57a9751b04244ee77c2dfd98a322383",
+  "service": {
+    "service": "xagent-studio",
+    "build": {
+      "commit": "149789eee57a9751b04244ee77c2dfd98a322383",
+      "release": "149789eee57a-20261023T074036",
+      "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11"
+    },
+    "draining": false,
+    "activeRuns": 0,
+    "defaultMode": "deepseek",
+    "capabilities": {
+      "agents": [
+        "travel-assistant",
+        "meeting-prep",
+        "information-watch",
+        "reference-summary"
+      ],
+      "workflows": [
+        "meeting-brief"
+      ]
+    },
+    "deepseekConfigured": true
+  },
+  "productionDataUnchanged": true,
+  "elapsedSeconds": 8.586
+}

@@ -1,0 +1,282 @@
+{
+  "passed": true,
+  "uiVerified": true,
+  "sourceCommit": "149789eee57a9751b04244ee77c2dfd98a322383",
+  "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11",
+  "verifiedAt": "2026-10-23T08:06:26.291167+00:00",
+  "entry": "Actual Studio Workflow JSON input and Run; Agent context Save and Send. Outputs expanded and final texts observed.",
+  "service": {
+    "service": "xagent-studio",
+    "build": {
+      "commit": "149789eee57a9751b04244ee77c2dfd98a322383",
+      "release": "149789eee57a-20261023T074036",
+      "runtimeDigest": "619eb3f8b4ebbbcb5d9773c6529ccdaa6071120d1a1fdee172f74cd10d54ff11"
+    },
+    "draining": false,
+    "activeRuns": 0,
+    "defaultMode": "deepseek",
+    "capabilities": {
+      "agents": [
+        "travel-assistant",
+        "meeting-prep",
+        "information-watch",
+        "reference-summary"
+      ],
+      "workflows": [
+        "meeting-brief"
+      ]
+    },
+    "deepseekConfigured": true
+  },
+  "previousMessagesPreserved": 18,
+  "productionDataUnchanged": true,
+  "totalMessages": 20,
+  "workflow": {
+    "runId": "4b91aeaf-5f11-4832-9057-78602e5d8d40",
+    "status": "success",
+    "modeOmittedInUI": true,
+    "steps": {
+      "prepare-meeting": "success",
+      "draft-with-agent": "success",
+      "validate-brief": "success"
+    },
+    "payload": {
+      "meeting": {
+        "title": "发布评审会议",
+        "agenda": "核对移动端工具上线风险、负责人及回滚预案",
+        "startAt": "2026-11-03T02:00:00Z"
+      },
+      "notes": [
+        {
+          "id": "release-042",
+          "text": "合成验收资料：负责人林舟；移动端工具回传超时阈值为15秒，超过则停止本轮操作；发布前必须准备回滚开关。"
+        }
+      ],
+      "mode": "deepseek",
+      "instruction": "UI-WORKFLOW-20261023：生成中文会前简报和检查清单，关注15秒超时、负责人及回滚，保留来源编号release-042。"
+    },
+    "result": {
+      "accepted": true,
+      "artifact": {
+        "output": {
+          "summary": "【会前简报】会议：发布评审会议（2026-11-03 02:00 UTC）。议程：核对移动端工具上线风险、负责人及回滚预案。本次检索仅获得一份授权资料（release-042），要点如下：移动端工具回传超时阈值为 15 秒，超过该阈值即停止本轮操作；本轮事项负责人为林舟；发布前必须准备回滚开关。建议会议按“风险—负责人—回滚”三条主线逐项确认：先由负责人林舟说明 15 秒超时阈值的判定逻辑与超时后的停止行为，再确认回滚开关的准备状态与触发条件，最后对超时、停止、回滚三个环节明确决策结论和遗留风险。除上述资料外未检索到其他会议资料，相关细节以会上确认结论为准，不作外部事实补充。",
+          "checklist": [
+            "确认负责人林舟到会，并准备移动端工具上线风险评估说明",
+            "核对回传超时阈值 15 秒的技术实现与超过阈值后停止本轮操作的判定逻辑",
+            "准备回滚开关方案：开关状态、触发条件、操作人与生效时间",
+            "确认回滚演练或验证记录是否已完成",
+            "梳理待决策事项与遗留风险，会后形成结论与责任人分工"
+          ],
+          "sourceIds": [
+            "release-042"
+          ]
+        },
+        "view": {
+          "publishedRevision": 1,
+          "surfaceId": "workflow-4b91aeaf-5f11-4832-9057-78602e5d8d40",
+          "protocol": "v0.9.1",
+          "messages": [
+            {
+              "version": "v0.9.1",
+              "createSurface": {
+                "surfaceId": "workflow-4b91aeaf-5f11-4832-9057-78602e5d8d40",
+                "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateComponents": {
+                "surfaceId": "workflow-4b91aeaf-5f11-4832-9057-78602e5d8d40",
+                "components": [
+                  {
+                    "id": "root",
+                    "component": "Column",
+                    "children": [
+                      "title",
+                      "summary",
+                      "checklist",
+                      "sources"
+                    ]
+                  },
+                  {
+                    "id": "title",
+                    "component": "Text",
+                    "text": {
+                      "path": "/title"
+                    },
+                    "variant": "h2"
+                  },
+                  {
+                    "id": "summary",
+                    "component": "Text",
+                    "text": {
+                      "path": "/summary"
+                    }
+                  },
+                  {
+                    "id": "checklist",
+                    "component": "Text",
+                    "text": {
+                      "path": "/checklist"
+                    }
+                  },
+                  {
+                    "id": "sources",
+                    "component": "Text",
+                    "text": {
+                      "path": "/sources"
+                    },
+                    "variant": "caption"
+                  }
+                ]
+              }
+            },
+            {
+              "version": "v0.9.1",
+              "updateDataModel": {
+                "surfaceId": "workflow-4b91aeaf-5f11-4832-9057-78602e5d8d40",
+                "path": "/",
+                "value": {
+                  "title": "发布评审会议",
+                  "summary": "【会前简报】会议：发布评审会议（2026-11-03 02:00 UTC）。议程：核对移动端工具上线风险、负责人及回滚预案。本次检索仅获得一份授权资料（release-042），要点如下：移动端工具回传超时阈值为 15 秒，超过该阈值即停止本轮操作；本轮事项负责人为林舟；发布前必须准备回滚开关。建议会议按“风险—负责人—回滚”三条主线逐项确认：先由负责人林舟说明 15 秒超时阈值的判定逻辑与超时后的停止行为，再确认回滚开关的准备状态与触发条件，最后对超时、停止、回滚三个环节明确决策结论和遗留风险。除上述资料外未检索到其他会议资料，相关细节以会上确认结论为准，不作外部事实补充。",
+                  "checklist": "1. 确认负责人林舟到会，并准备移动端工具上线风险评估说明\n2. 核对回传超时阈值 15 秒的技术实现与超过阈值后停止本轮操作的判定逻辑\n3. 准备回滚开关方案：开关状态、触发条件、操作人与生效时间\n4. 确认回滚演练或验证记录是否已完成\n5. 梳理待决策事项与遗留风险，会后形成结论与责任人分工",
+                  "sources": "release-042",
+                  "revision": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "text": "我会先搜索本次会议的授权资料。简报已提交并发布（版本 revision 1）。\n\n## 一、会前简报（中文）\n\n**会议**：发布评审会议（2026-11-03 02:00 UTC）\n**议程**：核对移动端工具上线风险、负责人及回滚预案\n\n**资料要点**（仅检索到一份授权资料）：\n- 移动端工具的回传超时阈值为 **15 秒**，一旦超过该阈值，就立即停止本轮操作\n- 本轮事项负责人为**林舟**\n- 发布前**必须准备回滚开关**\n\n**建议**：请按“风险—负责人—回滚”三条主线逐项确认。先由负责人林舟说明 15 秒超时阈值的判定逻辑，以及超时后的停止行为；再确认回滚开关的准备状态与触发条件；最后对超时、停止、回滚三个环节明确决策结论和遗留风险。除上述资料外，没有检索到其他会议资料，细节以会上确认的结论为准。\n\n## 二、准备清单\n\n1. 确认负责人林舟到会，并准备移动端工具上线风险评估说明。\n2. 核对回传超时阈值 15 秒的技术实现，以及超过阈值后停止本轮操作的判定逻辑。\n3. 准备回滚开关方案，其中包含开关状态、触发条件、操作人与生效时间。\n4. 确认回滚演练或验证记录是否已完成。\n5. 梳理待决策事项与遗留风险，并在会后形成结论与责任人分工。\n\n## 三、来源编号\n\n- `release-042`（唯一使用的资料来源；其余资料未检索到，未作外部补充）",
+      "usage": {
+        "inputTokens": 4173,
+        "outputTokens": 785,
+        "totalTokens": 4958
+      },
+      "mode": "deepseek"
+    },
+    "resultHash": "5fb5306beeb102469770b675012bcae0011ae025bb17f3b2c34a64e03d152db8"
+  },
+  "agent": {
+    "agentId": "reference-summary",
+    "threadId": "7ec1c104-f06c-443e-bd6c-e7f5b4f21252",
+    "modeOmittedInUI": true,
+    "model": {
+      "modelId": "deepseek-flash",
+      "provider": "deepseek"
+    },
+    "tools": [
+      {
+        "name": "searchReferenceNotes",
+        "accepted": null
+      },
+      {
+        "name": "searchReferenceNotes",
+        "accepted": null
+      },
+      {
+        "name": "submitSummary",
+        "accepted": true
+      }
+    ],
+    "artifact": {
+      "output": {
+        "summary": "关于 UI-TEMPLATE-20261023，资料（reference-101）仅给出三点要点：①负责人为林舟；②工具回传超时阈值为 15 秒；③上线前需准备回滚开关。\n\n资料缺口说明：该来源为简短合成资料，未说明 15 秒超时在触发后的具体动作（如重试、降级或报错）、超时是否可按工具类型调整；回滚要求也只提到\"上线前准备回滚开关\"，缺少回滚触发条件、执行步骤、决策人与验证方式；亦无适用范围、生效时间和版本信息。如需完整总结，建议补充对应的规范全文或补充说明。",
+        "sourceIds": [
+          "reference-101"
+        ]
+      },
+      "view": {
+        "publishedRevision": 1,
+        "surfaceId": "reference-summary-preview-25043680-132a-4fdf-8615-0aca8367972e",
+        "protocol": "v0.9.1",
+        "messages": [
+          {
+            "version": "v0.9.1",
+            "createSurface": {
+              "surfaceId": "reference-summary-preview-25043680-132a-4fdf-8615-0aca8367972e",
+              "catalogId": "https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json"
+            }
+          },
+          {
+            "version": "v0.9.1",
+            "updateComponents": {
+              "surfaceId": "reference-summary-preview-25043680-132a-4fdf-8615-0aca8367972e",
+              "components": [
+                {
+                  "id": "root",
+                  "component": "Column",
+                  "children": [
+                    "title",
+                    "summary",
+                    "checklist",
+                    "sources"
+                  ]
+                },
+                {
+                  "id": "title",
+                  "component": "Text",
+                  "text": {
+                    "path": "/title"
+                  },
+                  "variant": "h2"
+                },
+                {
+                  "id": "summary",
+                  "component": "Text",
+                  "text": {
+                    "path": "/summary"
+                  }
+                },
+                {
+                  "id": "checklist",
+                  "component": "Text",
+                  "text": {
+                    "path": "/checklist"
+                  }
+                },
+                {
+                  "id": "sources",
+                  "component": "Text",
+                  "text": {
+                    "path": "/sources"
+                  },
+                  "variant": "caption"
+                }
+              ]
+            }
+          },
+          {
+            "version": "v0.9.1",
+            "updateDataModel": {
+              "surfaceId": "reference-summary-preview-25043680-132a-4fdf-8615-0aca8367972e",
+              "path": "/",
+              "value": {
+                "title": "资料摘要",
+                "summary": "关于 UI-TEMPLATE-20261023，资料（reference-101）仅给出三点要点：①负责人为林舟；②工具回传超时阈值为 15 秒；③上线前需准备回滚开关。\n\n资料缺口说明：该来源为简短合成资料，未说明 15 秒超时在触发后的具体动作（如重试、降级或报错）、超时是否可按工具类型调整；回滚要求也只提到\"上线前准备回滚开关\"，缺少回滚触发条件、执行步骤、决策人与验证方式；亦无适用范围、生效时间和版本信息。如需完整总结，建议补充对应的规范全文或补充说明。",
+                "checklist": "",
+                "sources": "reference-101",
+                "revision": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    "text": "我先在本次授权的资料中查找相关材料。\n资料检索已完成，我现在提交摘要。\n## 资料摘要（UI-TEMPLATE-20261023）\n\n根据本次检索到的资料，仅有一份来源 **reference-101**，其中包含三点要点：\n\n| 项目 | 内容 |\n|---|---|\n| 负责人 | 林舟 |\n| 超时规则 | 工具回传超时阈值为 15 秒 |\n| 回滚要求 | 上线前准备回滚开关 |\n\n**资料缺口说明：**\n- 未说明 15 秒超时触发后的具体动作（重试、降级、报错等），也未说明该阈值是否可按工具类型调整。\n- 回滚仅提到“上线前准备回滚开关”，缺少触发条件、执行步骤、决策人与验证方式。\n- 无适用范围、生效时间与版本信息。\n\n如需更完整的规范说明，建议补充该模板对应的全文资料。\n\n**来源编号：** reference-101"
+  },
+  "limitations": [
+    "Inputs and notes are synthetic; no real phone or notification.",
+    "Native Workflow has no /v1/tasks adapter; suspend/resume and crash recovery are outside this example.",
+    "UI run usage is available for Workflow; no token usage inferred for the Agent chat."
+  ],
+  "rollbackAndReturnVerified": true,
+  "remainingBrowserProcesses": 0,
+  "screenshots": {
+    "workflow-studio-graph.png": "850573ec2ce48f56c56fb2bd2ebb75364668ca273f41a6f367c07c0d280314f2",
+    "workflow-studio-output.png": "baf463b75c67f0f6cc9545e0c7d5ae0d77faeb61348370edf46577b250ab63ca",
+    "reference-studio-real.png": "bedc482448ddde55038b3d808b962295e39695670e19ed974361f2562492b93e"
+  },
+  "workflowBrowserReloadAfterRollbackVerified": true
+}

@@ -6,6 +6,8 @@ Workflow 用明确步骤控制执行顺序、数据交接、分支和并行；Ag
 
 `meeting-brief` 注册于 `src/mastra/index.ts`：
 
+已完成的本地、真实 API、页面和回退验收见 [验证记录](workflow-validation.md)。
+
 ```mermaid
 flowchart LR
   A[会议、授权资料、用户要求] --> B[prepare-meeting 校验输入]
