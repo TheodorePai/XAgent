@@ -111,7 +111,7 @@ npm.cmd run studio
 
 按改动选择相关测试文件；`npm test` 已包含构建，不必紧接着重复构建。测试使用临时数据，先检查测试/脚本的路径和副作用；真实服务、数据恢复或重启脚本不能当作无副作用单元测试运行。仓库尚无独立 lint 命令，不宣称已执行不存在的检查。
 
-优先使用 `npm run check -- --suite <local|agent-api|task-api|all> --mode <mock|deepseek>` 统一验证，及 `npm run studio:deploy` / `studio:status` / `studio:rollback` 管理 Studio。默认 local / mock；远端验证要求干净提交与运行版本相同。`all` 不包含 UI，页面验收仍须实际发送消息。首次接管、锁、排空、备份和回退限制见 `docs/operations.md`。
+优先使用 `npm run check -- --suite <local|agent-api|task-api|all> --mode <mock|deepseek>` 统一验证，及 `npm run studio:deploy` / `studio:status` / `studio:rollback` 管理 Studio。默认 local / mock；远端验证要求干净提交且运行输入摘要匹配，报告注明实际构建提交。`all` 不包含 UI，页面验收仍须实际发送消息。首次接管、锁、排空、备份和回退限制见 `docs/operations.md`。
 
 以下底层脚本按职责选择，不需要全部运行：
 

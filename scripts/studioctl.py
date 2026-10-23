@@ -4,6 +4,7 @@ Run as the existing non-root deployment user; all state lives under ROOT.
 """
 import argparse,contextlib,datetime,hashlib,json,os,re,sqlite3,subprocess,time,urllib.request
 from pathlib import Path
+from runtime_identity import from_directory
 
 ROOT=Path('/home/ubuntu/xagent-studio')
 NAME='xagent-studio'
@@ -134,7 +135,8 @@ def switch(image,release,adopt=False,smoke=True):
             run(['docker','exec',NAME,'node','scripts/verify-agent-api.mjs','--mode','mock',
                 '--agents','meeting-prep,information-watch','--output','/app/data/deploy-smoke.json'])
             run(['docker','cp',NAME+':/app/data/deploy-smoke.json',str(report)])
-        record={'release':release,'image':inspect()['image'],'commit':result['build']['commit']}
+        record={'release':release,'image':inspect()['image'],'commit':result['build']['commit'],
+            'runtimeDigest':result['build'].get('runtimeDigest')}
         save(ROOT/'state.json',{'current':record,'previous':current.get('current'),
             'legacyContainer':archived if adopt else current.get('legacyContainer')})
         return {'passed':True,'current':record,'legacyMaintenance':bool(previous and adopt),
@@ -163,7 +165,8 @@ def deploy(archive,commit,adopt=False):
     log=ROOT/'reports'/f'{release}-build.log'; log.parent.mkdir(exist_ok=True)
     with log.open('w') as output:
         result=subprocess.run(['docker','build','-f',str(directory/'Dockerfile.studio'),
-            '--build-arg','SOURCE_COMMIT='+commit,'--build-arg','RELEASE_ID='+release,'-t',image,str(directory)],
+            '--build-arg','SOURCE_COMMIT='+commit,'--build-arg','RELEASE_ID='+release,
+            '--build-arg','RUNTIME_DIGEST='+from_directory(directory),'-t',image,str(directory)],
             stdout=output,stderr=subprocess.STDOUT,timeout=1200)
     if result.returncode: raise RuntimeError('Studio image build failed; see '+str(log))
     return switch(image,release,adopt)

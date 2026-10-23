@@ -1,6 +1,7 @@
 """Unified local checks, isolated server verification, and Studio release commands."""
 import argparse,datetime,json,os,re,shlex,subprocess,sys,time
 from pathlib import Path
+from runtime_identity import from_git
 
 REPO=Path(__file__).resolve().parent.parent
 REMOTE='/home/ubuntu/xagent-studio'
@@ -20,18 +21,24 @@ def remote(host,args,timeout=1200,capture=False):
     return command(['ssh','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes',host,shlex.join([str(x) for x in args])],timeout,capture)
 
 def verify_remote(args,commit):
-    request={'suite':args.suite,'mode':args.mode,'agents':args.agents,'commit':commit}
+    request={'suite':args.suite,'mode':args.mode,'agents':args.agents,'commit':commit,'runtimeDigest':from_git(REPO)}
     run_id=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S')+'-'+str(time.time_ns())[-6:]
     target=REPO/'.cache'/f'verify-{run_id}.json'; target.parent.mkdir(exist_ok=True)
     target.write_text(json.dumps(request)); destination=REMOTE+'/requests/'+run_id+'.json'
-    remote(args.host,['mkdir','-p',REMOTE+'/requests'])
-    command(['scp',str(target),args.host+':'+destination])
+    fallback={'passed':False,'uiVerified':False,'runId':run_id,'requestedCommit':commit,'suite':args.suite,'mode':args.mode,'checks':[]}
     try:
+        remote(args.host,['mkdir','-p',REMOTE+'/requests'])
+        command(['scp',str(target),args.host+':'+destination])
         remote(args.host,['python3',REMOTE+'/controller/verify-server.py','--request',destination,'--run-id',run_id],timeout=900)
+    except Exception as error:
+        fallback['error']={'type':type(error).__name__,'message':str(error)}
+        raise
     finally:
         # A failing verification still leaves a report. Do not hide the original exit code.
         saved=subprocess.run(['scp',args.host+':'+REMOTE+'/reports/'+run_id+'/report.json',str(args.output)],cwd=REPO,capture_output=True)
-        if saved.returncode: print('No remote report could be retrieved; inspect the verification host.',file=sys.stderr)
+        if saved.returncode:
+            Path(args.output).write_text(json.dumps(fallback,ensure_ascii=False,indent=2)+'\n')
+            print('No remote report could be retrieved; inspect the verification host.',file=sys.stderr)
 
 def main():
     p=argparse.ArgumentParser(description=__doc__); sub=p.add_subparsers(dest='action',required=True)
@@ -54,9 +61,10 @@ def main():
                 local={'type':'local','passed':passed,'elapsedSeconds':round(time.monotonic()-started,3),'realModelCalled':False,'uiVerified':False}
                 output.write_text(json.dumps(local,indent=2)+'\n')
             if a.suite=='local': return
-        verify_remote(a,commit)
-        if a.suite=='all':
-            result=json.loads(output.read_text()); result['local']=local; output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+        try: verify_remote(a,commit)
+        finally:
+            if a.suite=='all':
+                result=json.loads(output.read_text()); result['local']=local; output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
         return
     if a.operation=='status':
         remote(a.host,['python3',REMOTE+'/controller/studioctl.py','status']); return
@@ -64,10 +72,10 @@ def main():
         remote(a.host,['python3',REMOTE+'/controller/studioctl.py','rollback']); return
     commit=revision(); release=commit[:12]+'-'+str(time.time_ns())
     archive=REPO/'.cache'/f'studio-{release}.tgz'; archive.parent.mkdir(exist_ok=True)
-    command(['git','archive','--format=tar.gz','-o',str(archive),commit])
+    command(['git','-c','core.autocrlf=false','archive','--format=tar.gz','-o',str(archive),commit])
     # Controller tools are source from exactly the archived commit, uploaded separately for bootstrap.
     remote(a.host,['mkdir','-p',REMOTE+'/controller',REMOTE+'/incoming'])
-    for name in ['studioctl.py','verify-server.py']:
+    for name in ['studioctl.py','verify-server.py','runtime_identity.py']:
         command(['scp',str(REPO/'scripts'/name),a.host+':'+REMOTE+'/controller/'+name])
     destination=REMOTE+'/incoming/'+release+'.tgz'
     command(['scp',str(archive),a.host+':'+destination])

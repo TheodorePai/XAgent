@@ -1,11 +1,36 @@
-import contextlib,json,sqlite3,sys,tarfile,tempfile,unittest
+import contextlib,importlib.util,json,sqlite3,subprocess,sys,tarfile,tempfile,unittest
+from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'scripts'))
 import studioctl as ctl
+import project
+from runtime_identity import from_git,from_directory
+spec=importlib.util.spec_from_file_location('verify_server',Path(__file__).resolve().parent.parent/'scripts/verify-server.py')
+verifier=importlib.util.module_from_spec(spec); spec.loader.exec_module(verifier)
 
 class OperationsTest(unittest.TestCase):
+    def test_unreachable_verification_cannot_reuse_a_previous_success_report(self):
+        with tempfile.TemporaryDirectory() as path:
+            root=Path(path); (root/'.cache').mkdir(); output=root/'report.json'; output.write_text('{"passed":true}')
+            args=SimpleNamespace(suite='agent-api',mode='deepseek',agents='meeting-prep',host='tencent-server',output=output)
+            with patch.object(project,'REPO',root),patch.object(project,'from_git',return_value='digest'),\
+                patch.object(project,'remote',side_effect=RuntimeError('SSH unavailable')),\
+                patch.object(project.subprocess,'run',return_value=SimpleNamespace(returncode=1)):
+                with self.assertRaisesRegex(RuntimeError,'SSH unavailable'): project.verify_remote(args,'a'*40)
+            report=json.loads(output.read_text()); self.assertFalse(report['passed']); self.assertIn('SSH unavailable',report['error']['message'])
+    def test_runtime_identity_matches_git_archive_and_ignores_only_non_runtime_docs(self):
+        repository=Path(__file__).resolve().parent.parent
+        with tempfile.TemporaryDirectory() as path:
+            archive=Path(path)/'source.tgz'; root=Path(path)/'source'; root.mkdir()
+            subprocess.run(['git','-c','core.autocrlf=false','archive','--format=tar.gz','-o',str(archive),'HEAD'],cwd=repository,check=True)
+            with tarfile.open(archive) as tar: tar.extractall(root,filter='data')
+            original=from_git(repository); self.assertEqual(from_directory(root),original)
+            (root/'README.md').write_text('documentation-only update')
+            self.assertEqual(from_directory(root),original)
+            with (root/'src/server.ts').open('a') as source: source.write('\n// runtime input changed\n')
+            self.assertNotEqual(from_directory(root),original)
     def test_backup_includes_live_wal_and_refuses_overwrite(self):
         with tempfile.TemporaryDirectory() as path:
             source,target=Path(path)/'source.db',Path(path)/'backup.db'
@@ -57,5 +82,35 @@ class OperationsTest(unittest.TestCase):
                 patch.object(ctl,'state',return_value={}),patch.object(ctl,'run') as run:
                 with self.assertRaisesRegex(RuntimeError,'unknown container'): ctl.switch('new-image','new-release',adopt=True)
                 run.assert_not_called()
+
+    def test_version_mismatch_leaves_failed_report_without_model_request(self):
+        with tempfile.TemporaryDirectory() as path:
+            with patch.object(verifier,'ROOT',Path(path)),patch.object(verifier,'production_snapshot',return_value={'tasks':'same'}),\
+                patch.object(verifier,'inspect',return_value={'labels':{'io.xagent.managed':'true'}}),\
+                patch.object(verifier,'request',return_value={'build':{'commit':'old'}}),patch.object(verifier,'run') as run:
+                report=verifier.verify({'suite':'agent-api','mode':'deepseek','agents':'meeting-prep','commit':'new'},'20261023T010203-123456')
+                self.assertFalse(report['passed']); self.assertIn('source differs',report['error']['message'])
+                run.assert_not_called(); self.assertEqual(report['checks'],[])
+                self.assertTrue((Path(path)/'reports/20261023T010203-123456/report.json').is_file())
+
+    def test_failed_task_verification_removes_only_its_container_and_retains_report(self):
+        with tempfile.TemporaryDirectory() as path:
+            calls=[]
+            def run(args,*rest,**kwargs):
+                calls.append(args)
+                if args[0]=='python3':
+                    Path(args[-1]).write_text(json.dumps({'passed':False,'checks':[]}))
+                    raise RuntimeError('expected model failure')
+                return ''
+            with patch.object(verifier,'ROOT',Path(path)),patch.object(verifier,'production_snapshot',return_value={'tasks':'same'}),\
+                patch.object(verifier,'inspect',return_value={'labels':{'io.xagent.managed':'true'},'image':'sha256:test'}),\
+                patch.object(verifier,'request',return_value={'build':{'commit':'new'},'draining':False,'activeRuns':0}),\
+                patch.object(verifier,'run',side_effect=run),patch.object(verifier.subprocess,'run',return_value=SimpleNamespace(returncode=0,stdout='')),\
+                patch('urllib.request.urlopen',return_value=contextlib.nullcontext()):
+                report=verifier.verify({'suite':'task-api','mode':'mock','agents':'meeting-prep','commit':'new'},'20261023T010204-123456')
+            self.assertFalse(report['passed']); self.assertTrue(report['cleanup']['taskContainerRemoved'])
+            self.assertTrue(report['productionDataUnchanged'])
+            self.assertIn(['docker','rm','xagent-verify-20261023t010204-123456'],calls)
+            self.assertFalse(any(ctl.NAME in c for c in calls))
 
 if __name__=='__main__': unittest.main()

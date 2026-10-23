@@ -24,6 +24,7 @@ const definitions = {
 const agents = values.agents.split(',');
 assert.ok(agents.length <= 3 && new Set(agents).size === agents.length && agents.every(a => definitions[a]));
 const report = { type: 'agent-api', mode: values.mode, requestedCommit: values.commit, startedAt: new Date().toISOString(),
+  configuredModel: values.mode === 'deepseek' ? process.env.DEEPSEEK_MODEL || 'deepseek-flash' : 'scripted-fixtures',
   passed: false, uiVerified: false, syntheticInputs: true, checks: [] };
 function browsers() {
   return readdirSync('/proc').filter(n => /^\d+$/.test(n)).flatMap(n => {

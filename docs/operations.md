@@ -23,7 +23,7 @@ npm.cmd run check -- --suite all --mode deepseek
 
 Linux 使用 `npm`。CLI 默认报告为 `.cache/verification-latest.json`，可用 `--output docs/<name>.json` 保存所需证据；服务器报告在 `/home/ubuntu/xagent-studio/reports/<run-id>/`，包含子报告、隔离任务数据和清理结果。任务 API 场景固定为两种事件 Agent，`--agents` 仅控制 Agent API 场景；出行的用户请求型任务仍由原回归测试覆盖。
 
-远端验证要求本地工作区干净且提交版本与实际 Studio 镜像版本一致；不一致时在发出模型请求前失败。首次部署前不可对未受管的旧 Studio 运行新远端验收。验证和发布共用服务器操作锁；不并行运行两套验证或在发布中发起 CLI 验收。
+远端验证要求本地工作区干净且运行输入摘要与实际 Studio 镜像一致；不一致时在发出模型请求前失败。摘要覆盖 `src/`、`scripts/`、依赖及锁文件、构建配置、预设和 A2UI vendor，使用 Git blob 内容计算并与归档源码独立比对。纯报告、普通文档或测试文件提交不会迫使重新部署；报告分别记录仓库提交和实际构建提交，不把两者混为一谈。首次部署前不可对未受管的旧 Studio 运行新远端验收。验证和发布共用服务器操作锁；不并行运行两套验证或在发布中发起 CLI 验收。
 
 `all` 仅包含上述 CLI 场景，默认不代表页面验收。所有 CLI 报告明确写 `uiVerified: false`。涉及 Studio 改动时，还必须在页面中手工或通过浏览器工具发送消息、检查提交工具的 `accepted` / artifact 和最终回复；若涉及历史，刷新确认保留，并保存截图及对应会话、版本。页面验收结果另记，不能将 HTTP API 的通过结果改写为已测 UI。
 

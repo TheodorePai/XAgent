@@ -19,5 +19,5 @@ export function studioBuildInfo() {
   if (!existsSync(path)) return { commit: 'development', release: 'development' };
   const value = JSON.parse(readFileSync(path, 'utf8'));
   if (typeof value.commit !== 'string' || typeof value.release !== 'string') throw new Error('INVALID_BUILD_INFO');
-  return { commit: value.commit, release: value.release };
+  return { commit: value.commit, release: value.release, runtimeDigest: typeof value.runtimeDigest === 'string' ? value.runtimeDigest : undefined };
 }

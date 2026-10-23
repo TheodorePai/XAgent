@@ -19,7 +19,11 @@ def verify(spec,run_id):
     try:
         service=request(); container=inspect()
         if not container or container['labels'].get('io.xagent.managed')!='true': raise RuntimeError('Use a managed Studio release')
-        if service['build']['commit']!=spec['commit']: raise RuntimeError('Running source differs from requested commit')
+        expected=spec.get('runtimeDigest')
+        if expected:
+            if service['build'].get('runtimeDigest')!=expected: raise RuntimeError('Running source differs from requested runtime inputs')
+        elif service['build']['commit']!=spec['commit']: raise RuntimeError('Running source differs from requested commit')
+        report['repositoryCommit']=spec['commit']; report['sourceCommit']=service['build']['commit']
         if service['draining'] or service['activeRuns']: raise RuntimeError('Studio is draining or already running; no model request sent')
         report['service']=service
         if spec['mode']=='deepseek' and not service['deepseekConfigured']: raise RuntimeError('Server DeepSeek key is missing')
@@ -27,7 +31,7 @@ def verify(spec,run_id):
             location='/app/data/verify-'+run_id+'.json'
             try:
                 run(['docker','exec',NAME,'node','scripts/verify-agent-api.mjs','--mode',spec['mode'],
-                    '--agents',','.join(agents),'--commit',spec['commit'],'--output',location],timeout=600)
+                    '--agents',','.join(agents),'--commit',service['build']['commit'],'--output',location],timeout=600)
             finally:
                 # Copy only the explicit sanitized report, never logs or environment.
                 copied=subprocess.run(['docker','cp',NAME+':'+location,str(directory/'agent-api.json')],capture_output=True)
@@ -55,7 +59,7 @@ def verify(spec,run_id):
             task_report=directory/'task-api.json'
             try:
                 run(['python3',str(verifier),'--data',str(data),'--mode',spec['mode'],
-                    '--source-commit',spec['commit'],'--output',str(task_report)],timeout=400)
+                    '--source-commit',service['build']['commit'],'--output',str(task_report)],timeout=400)
             finally:
                 if task_report.exists(): report['checks'].append(json.loads(task_report.read_text()))
             if not report['checks'][-1]['passed']: raise RuntimeError('Task API verification failed')
