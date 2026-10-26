@@ -33,7 +33,7 @@ $env:XAGENT_DEFAULT_MODE = 'mock'
 npm.cmd run studio
 ```
 
-仓库是私有仓库，clone 需要相应 GitHub 访问权限。已有工作区可跳过 clone / cd。Linux 的离线启动命令是 `XAGENT_DEFAULT_MODE=mock npm run studio`。
+仓库已公开，可直接 clone。已有工作区可跳过 clone / cd。Linux 的离线启动命令是 `XAGENT_DEFAULT_MODE=mock npm run studio`。
 
 打开 [本地 Studio](http://127.0.0.1:4111/agents)，选择「资料摘要助手（模板）」，在 **Request context** 选择「资料摘要（服务默认模型）」并 **Save**，发送「提取负责人、超时规则和回滚要求」。展开 `SubmitSummary`，核对 `accepted: true`、`artifact.output`、`artifact.view` 和最终回复。固定的脚本模型会标记 `[MOCK]`；它验证执行链路，不评价生成质量。
 
