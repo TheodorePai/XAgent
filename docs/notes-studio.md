@@ -1,12 +1,12 @@
 # 参会与信息巡检的原生 Studio 入口
 
-2026-10-22：`meeting-prep` 与 `information-watch` 已与出行助手一样，使用独立 Mastra Agent 工厂，同时服务 Studio 和持久任务系统。实现提交为 `8cdfff3`。
+首次接入记录（2026-10-22）：`meeting-prep` 与 `information-watch` 已与出行助手一样，使用独立 Mastra Agent 工厂，同时服务 Studio 和持久任务系统。实现提交为 `8cdfff3`。以下输入示例仍用于当前调试；验收数量、线程和迁移前部署均为历史证据。当前入口见 [Studio 指南](studio.md)，后续版本见 [模板与 Workflow 验收](workflow-validation.md)。
 
 ## 从 Studio 调试
 
 本地运行 `npm run studio`，在 Request context 中选择对应预设并 Save。服务器已部署的 Studio 通过本机 SSH 转发访问 [Agent 列表](http://127.0.0.1:4411/agents)。构建后的服务器页面没有 CLI 预设选择器时，把 `studio-presets.json` 中对应条目的值粘贴进 Request context，再 Save。密钥只在服务端环境变量中配置。
 
-Studio 默认 DeepSeek，三个助手均可使用「服务默认模型」预设，省略 `mode`。下面保留的显式 `mode: deepseek` 示例也有效。已有会话若保存 `mode: mock`，需删除该字段并 Save 才会采用服务默认；服务器可用 `XAGENT_DEFAULT_MODE=mock` 显式切换离线默认值。会议、观察及资料等必需业务参数仍须提供。
+Studio 默认 DeepSeek，参会与巡检均可使用「服务默认模型」预设，省略 `mode`。下面保留的显式 `mode: deepseek` 示例也有效。已有会话若保存 `mode: mock`，需删除该字段并 Save 才会采用服务默认；服务器可用 `XAGENT_DEFAULT_MODE=mock` 显式切换离线默认值。会议、观察及资料等必需业务参数仍须提供。
 
 参会助手上下文：
 
@@ -45,15 +45,16 @@ Studio 用于单轮预览，不启动监测订阅，也不会把聊天历史自�
 | --- | --- |
 | `src/agents/meeting.ts` | `createMeetingAgent()`、会议输入 Schema、检索与简报工具、任务适配器 |
 | `src/agents/inspection.ts` | `createInspectionAgent()`、观察与基线 Schema、比较及巡检工具、任务适配器 |
-| `src/agents/notes-context.ts` | 每次运行的可信状态、授权输入资料检索、模型选择、生命周期与校验后 artifact 提交 |
-| `src/mastra/index.ts` | 注册三个独立 Agent，各自启用 Memory，共用 Studio 存储 |
+| `src/agents/notes-context.ts` | 每次运行的可信状态、授权输入资料检索、生命周期与校验后 artifact 提交 |
+| `src/agents/model.ts` | 统一模式选择与模型解析 |
+| `src/mastra/index.ts` | 注册四个独立 Agent 和一个 Workflow，Agent 启用 Memory，共用独立 Studio 存储 |
 | `src/tasks/runtime.ts` | 创建任务上下文、调度、取消、运行记录与版本检查后的发布 |
 
 工具只依赖本次输入和执行状态，不读取完整 Task，也不依赖调度器私有 scope 表。任务适配器传入可信快照与结果回调，只有输出和 A2UI 校验通过才交回调度器；调度器发布前继续检查任务版本和状态。Studio JSON 不能伪造服务端执行状态或发布回调。
 
 新增 Agent 时，在 `src/agents/` 导出独立工厂；在 `src/mastra/index.ts` 注册以供 Studio 调试。需要持久任务时，再实现定义的 `prepareContext()` 和业务校验，在 `src/agents/registry.ts` 注册。事件订阅和用户权限属于任务服务，Agent 工厂负责本轮模型、工具与输出契约。
 
-## 本轮验收
+## 2026-10-22 历史验收
 
 `npm test`：45 项通过，包含原任务 API、重启恢复、暂停、版本竞争、用户隔离，以及新增的两个原生 Agent 的 generate / stream、Studio signal、上下文复用、A2UI 拒绝提交和巡检分类测试。
 

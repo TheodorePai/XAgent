@@ -1,10 +1,12 @@
 # 统一验证和 Studio 发布
 
-这些命令只管理 Studio 和隔离测试服务，不升级或重启原任务服务 4391。需要 Node 24、npm、Python 3.12、Git；服务器需已有 SSH 别名 `tencent-server`、Docker、Python 3.12、`ss`，部署用户 UID 1000。DeepSeek 凭据继续使用服务器原有 `/home/ubuntu/xagent-mastra-lab/.env`，不下载至本机。
+这些命令管理 Studio 和隔离测试服务。本文是本项目 tencent-server 参考环境的操作手册：CLI 当前仅支持该 SSH 别名，远端目录、凭据路径和运行用户已固定，不是任意新服务器的一键安装器。部署 Studio 与原任务服务 4391 分开管理。需要 Node 24+、npm、Python 3.12+（本机 `python` 命令可用）、Git；服务器需已有 SSH 别名 `tencent-server`、Docker、Python 3.12+、`ss`，部署用户 UID 1000。DeepSeek 凭据继续使用服务器原有 `/home/ubuntu/xagent-mastra-lab/.env`，不下载至本机。
 
 首次实际构建、版本切换、回退及真实 API / 页面验证见 [验收记录](operations-validation.md)。
 
 2026-10-23 默认真实模型调整的部署、任务 API 和三个助手页面验收见 [默认模式验收](default-mode-validation.md)。
+
+[模板与 Workflow 的后续验收](workflow-validation.md)包含新增流程的 API、页面及发布回退记录。文中的目录和端口是参考配置，实时容器与构建状态须通过 status 查询。
 
 ## 统一验证
 
@@ -28,7 +30,7 @@ npm.cmd run check -- --suite task-api --mode deepseek
 npm.cmd run check -- --suite all --mode deepseek
 ```
 
-Linux 使用 `npm`。CLI 默认报告为 `.cache/verification-latest.json`，可用 `--output docs/<name>.json` 保存所需证据；服务器报告在 `/home/ubuntu/xagent-studio/reports/<run-id>/`，包含子报告、隔离任务数据和清理结果。任务 API 场景固定为两种事件 Agent，`--agents` 仅控制 Agent API 场景；出行的用户请求型任务仍由原回归测试覆盖。Workflow API 当前仅验证 meeting-brief；原生资料摘要模板可用 `--suite agent-api --agents reference-summary` 单独验证。
+命令均从仓库根目录执行；Linux 使用 `npm`，且需有包脚本调用的 `python`。CLI 默认报告为 `.cache/verification-latest.json`，可用 `--output docs/<name>.json` 保存所需证据；服务器报告在 `/home/ubuntu/xagent-studio/reports/<run-id>/`，包含子报告、隔离任务数据和清理结果。任务 API 场景固定为两种事件 Agent，`--agents` 仅控制 Agent API 场景；出行的用户请求型任务仍由原回归测试覆盖。Workflow API 当前仅验证 meeting-brief；原生资料摘要模板可用 `--suite agent-api --agents reference-summary` 单独验证。
 
 远端验证要求本地工作区干净且运行输入摘要与实际 Studio 镜像一致；不一致时在发出模型请求前失败。摘要覆盖 `src/`、`scripts/`、依赖及锁文件、构建配置、预设和 A2UI vendor，使用 Git blob 内容计算并与归档源码独立比对。纯报告、普通文档或测试文件提交不会迫使重新部署；报告分别记录仓库提交和实际构建提交，不把两者混为一谈。首次部署前不可对未受管的旧 Studio 运行新远端验收。验证和发布共用服务器操作锁；不并行运行两套验证或在发布中发起 CLI 验收。
 
@@ -38,7 +40,7 @@ Linux 使用 `npm`。CLI 默认报告为 `.cache/verification-latest.json`，可
 
 ## 独立 Studio 发布
 
-先通过 `npm run check` 并提交源码，再运行：
+`studio:status` 是只读查询；`studio:deploy` 会构建和切换 Studio，`studio:rollback` 会回退其运行版本。先通过 `npm run check` 并提交源码，再运行：
 
 ```powershell
 npm.cmd run studio:deploy

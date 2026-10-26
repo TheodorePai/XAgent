@@ -40,11 +40,11 @@ Workflow 列表与 Agent 列表是不同入口。全局注册 Workflow 后会出
 
 ## SDK 调用
 
-下面是仓库根目录脚本中的最小调用方式：
+先在仓库根目录创建 `.cache/`，把以下代码保存为 `.cache/workflow-example.ts`，执行 `npx.cmd tsx .cache/workflow-example.ts`（Linux 用 `npx`）。示例显式 mock，无需 key；环境准备见 [快速开始](../README.md#本地快速开始)。
 
 ```ts
 import { Mastra } from '@mastra/core/mastra';
-import { createMeetingBriefWorkflow } from './src/workflows/meeting-brief.js';
+import { createMeetingBriefWorkflow } from '../src/workflows/meeting-brief.js';
 
 const workflow = createMeetingBriefWorkflow();
 new Mastra({ workflows: { 'meeting-brief': workflow }, logger: false });

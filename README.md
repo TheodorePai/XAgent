@@ -1,175 +1,68 @@
-# XAgent · Mastra 手机工具实验
+# XAgent
 
-开发验证使用 `npm run check`；Studio 独立发布、查询和回退使用 `npm run studio:deploy` / `studio:status` / `studio:rollback`。真实模型须显式指定 `--mode deepseek`。命令、首次接管和页面验收要求见 [运维与统一验证](docs/operations.md)。
+基于 Mastra 的专用 Agent 服务端开发实验：复用模型、工具、业务校验与任务运行层，开发不同用途的 Agent 和 Workflow。当前聚焦后台能力；业务结果保留 A2UI Schema 强制校验，客户端渲染由具体产品决定。
 
-新开发者从 [Agent / Workflow 扩展开发指南](docs/development.md) 开始；规则见 [AGENTS.md](AGENTS.md)。可运行最小模板为「资料摘要助手」`src/agents/reference.ts`，原生 [参会简报 Workflow](docs/workflows.md) 复用现有参会 Agent。当前 Studio 注册四个 Agent 和一个 Workflow，持久任务 registry 仍有三个业务 Agent；Workflow 尚未适配 `/v1/tasks`。
+## 已实现的能力
 
-Studio 默认 DeepSeek，省略 mode 即采用服务默认；显式 mock 仍有效，详情见 [默认模型与真实验收](docs/default-mode-validation.md)。统一 CLI 增加 `--suite workflow-api`，all 同时包含 Workflow API，页面验收仍单独执行。
+| 能力 / ID | 原生调用与 Studio | 持久任务 `/v1/tasks` |
+| --- | --- | --- |
+| 出行助手 `travel-assistant` | 行程、网页来源和图片元数据；真实模式使用 Chromium | 用户请求创建后执行，可修改要求重新规划 |
+| 参会助手 `meeting-prep` | 根据输入会议与授权资料生成简报 | 合成日历事件触发、用户刷新 |
+| 信息巡检 `information-watch` | 比较观察和基线，给出提醒决策 | 合成事件触发、基线与结果版本管理 |
+| 资料摘要模板 `reference-summary` | 新 Agent 的最小开发示例 | 尚未提供适配器 |
+| 参会 Workflow `meeting-brief` | 校验输入 → 参会 Agent → 校验产物 | 尚未提供适配器 |
 
-本轮开发入口、原生 Workflow、77 项本地测试、真实 API / 页面和回退切换的证据见 [Workflow 与模板验收](docs/workflow-validation.md)。
+一个 Agent 定义可服务多个用户和任务。Studio 注册、持久任务登记是独立入口；全局注册 Workflow 后从 Studio 的 Workflows 进入。Studio 预览不会创建订阅或发布正式任务结果。
 
-以下为各阶段历史验收，测试数量和部署目录以对应报告日期为准：[统一验证、部署与回退](docs/operations-validation.md)。
+已验证真实 DeepSeek API、Studio 页面调用及发布回退，详见 [2026-10-23 验收](docs/workflow-validation.md)。真实浏览器已用于出行检索；手机、日历事件和测试资料仍为合成输入，巡检的 `notify` 只是决策字段。生产登录与组织权限、多实例、长期负载、Workflow 中途崩溃恢复尚未完成验证。
 
-当前 Studio 已接入出行、参会和信息巡检三个 Agent：[启动与调试](docs/studio.md)、[参会与巡检接入及真实验收](docs/notes-studio.md)。本轮 45 项自动测试通过，并完成 5 次真实 DeepSeek 运行（3 次隔离任务 API、2 次 Studio 页面调用）；设备事件与会议资料为合成测试数据。
+## 本地快速开始
 
-新增：[出行助手与原生浏览器工具](docs/travel-assistant.md)。`travel-assistant` 已通过真实 DeepSeek + `@mastra/agent-browser` + Chromium 运行验证，自动生成[延吉三日计划（含来源图片）](docs/yanji-trip.md)；[结构化运行报告](docs/travel-verification.json)。用户请求型任务创建后直接运行，无需设备监测订阅。当前共 3 种 Agent，本地测试 26 项通过。
-
-最新：[第二种 Agent 与服务端复用验证](docs/second-agent-validation.md)已完成。参会 `meeting-prep` 与信息巡检 `information-watch` 共用 `src/tasks/` 的任务、事件、调度、模型和强制输出校验，业务定义在 `src/agents/`。两用户、四任务，最终一轮 9 次真实 DeepSeek 运行、8 组检查通过；本地测试 24 项通过。新增业务可在 registry 登记，保留原会议接口与数据，无客户端渲染开发。
-
-面向多个专用 Agent 的[架构与方案](docs/architecture.md)，以及原始[参会准备助手验证](docs/meeting-validation.md)。参会模块复用一个 Agent 定义，支持两名测试用户的独立持续任务、模拟设备事件、资料检索与 A2UI JSON 刷新。`src/meeting/` 保留兼容入口，本地验收 `npm.cmd test`。
-
-2026-10-22 参会闭环已在 tencent-server 用真实 DeepSeek 完成 6 组检查、7 次运行，含事件恢复和任务隔离；[验收记录](docs/meeting-verification.json)。设备和资料库仍为合成测试数据，尚未接入真实手机或 A2UI 渲染客户端。
-
-独立验证「Agent 发起手机工具调用 → 设备返回结果 → Agent 继续决策」，以及延迟回传、服务重启和取消时的行为。代码与数据不依赖 taskAI。
-
-当前默认使用**脚本模拟模型 + 模拟手机**。2026-10-22 已在服务器用真实 `deepseek-flash` 完成 4 个场景、5 项检查，包括连续工具调用、结果驱动分支和容器重启后继续；详见 [真实模型记录](docs/deepseek-verification.json)。设备仍为模拟器，未访问真实手机数据。
-
-模拟模式通过 Mastra 的真实 Agent 工具循环执行，但其工具选择规则由测试代码预设，不能据此评价模型智能。`mode=deepseek` 才请求真实模型，key 由服务器外部配置提供。
-
-## 组成
-
-```text
-HTTP API → Mastra Agent → 设备工具网关 → 手机模拟器
-                ↑              ↓
-       Mastra 暂停快照    SQLite 调用记录与结果
-```
-
-- `src/engine.ts`：Agent、三个工具、短等待、持久暂停、恢复与取消。
-- `src/model.ts`：不联网的脚本模型，使用 Mastra 官方 mock model。
-- `src/store.ts`：设备调用账本、结果去重、取消、期限和事件记录。
-- `src/server.ts`：独立 HTTP 接口；默认只接受回环连接，拒绝浏览器 Origin。
-- `scripts/phone-simulator.py`：独立设备轮询器，可供模拟模型或后续 DeepSeek 实验共用。
-- `scripts/verify-deepseek.py`：使用真实模型和合成设备结果的有限验收，包含实际容器重启。
-- `tests/integration.test.ts`：真实启动服务子进程，覆盖工具结果、跨进程恢复和边界场景。
-
-固定版本：`@mastra/core 1.78.0`、`@mastra/libsql 1.26.2`，传递依赖由 `package-lock.json` 锁定。Node 24 Docker 基础镜像固定 SHA-256 digest。
-
-## 本地运行
-
-需要 Node 24 和 npm；Python 3 用于模拟设备和服务器验收。
+需要 Git、Node.js 24+、npm、Python 3.12+。包脚本调用 `python`，请确认该命令可用且版本正确。以下为 Windows PowerShell；Linux 使用 `npm` / `npx`，也需提供 `python` 命令。
 
 ```powershell
+git clone https://github.com/TheodorePai/XAgent.git
+cd XAgent
+node --version
+python --version
 npm.cmd ci --ignore-scripts --no-audit --no-fund
-npm.cmd test
-npm.cmd start
+npm.cmd run check
+
+# 首次离线启动：无需模型 key，也不访问真实浏览器
+$env:XAGENT_DEFAULT_MODE = 'mock'
+npm.cmd run studio
 ```
 
-另一个终端启动模拟设备：
+仓库是私有仓库，clone 需要相应 GitHub 访问权限。已有工作区可跳过 clone / cd。Linux 的离线启动命令是 `XAGENT_DEFAULT_MODE=mock npm run studio`。
+
+打开 [本地 Studio](http://127.0.0.1:4111/agents)，选择「资料摘要助手（模板）」，在 **Request context** 选择「资料摘要（服务默认模型）」并 **Save**，发送「提取负责人、超时规则和回滚要求」。展开 `SubmitSummary`，核对 `accepted: true`、`artifact.output`、`artifact.view` 和最终回复。固定的脚本模型会标记 `[MOCK]`；它验证执行链路，不评价生成质量。
+
+真实模型调试：停止离线 Studio，在本地 `.env` 配置凭据（字段见 [.env.example](.env.example)），再执行以下命令。密钥属于运行服务的机器；服务器的 key 不会自动传到本机。
 
 ```powershell
-python scripts/phone-simulator.py --battery 78 --auto-photo
+$env:XAGENT_DEFAULT_MODE = 'deepseek'
+npm.cmd run studio
 ```
 
-创建运行（PowerShell）：
+已有 Request context 的显式 `mode: mock` 仍会覆盖默认值；删除该字段并 Save，或改为 `deepseek`。真实出行助手还需 Chromium，详见 [Studio 使用说明](docs/studio.md)。
 
-```powershell
-Invoke-RestMethod http://127.0.0.1:4391/runs -Method Post -ContentType application/json -Body '{"mode":"mock","scenario":"plan"}'
-```
+## 入口、模式与数据
 
-返回 `id`，通过 `GET /runs/<id>` 查看结果及完整事件记录。电量低于 20 时，脚本模型建议充电并结束；否则读取日历。`scenario=photo` 请求一张明确标记为模拟内容的照片说明。
+| 入口 | 省略 mode 时 | 默认监听 / 数据 |
+| --- | --- | --- |
+| 本地 Studio：`npm run studio` | DeepSeek；可由 `XAGENT_DEFAULT_MODE` 覆盖 | `127.0.0.1:4111`；`data/studio/mastra.db` |
+| 独立 SDK Agent / Workflow 工厂 | `XAGENT_DEFAULT_MODE`，未配置则 mock | 调用方管理；工厂不自动启用聊天 Memory |
+| 任务服务：`npm run dev`，含 `/v1/tasks` 与原 `/runs` | mock；任务保存自己的 mode | `127.0.0.1:4391`；`data/` |
+| 服务器受管 Studio | 入口默认 DeepSeek，可被服务环境覆盖 | `127.0.0.1:4411`；独立 Studio 库，需 SSH 转发 |
 
-## 服务器
+请求显式模式优先。真实模式缺 key 会报错，不会回退为 mock。不同进程可以运行不同版本；以上是代码默认值和参考端口，实时状态用 `npm run studio:status` 查询。任务服务的 `npm start` 需要先 `npm run build`。
 
-目标：SSH 别名 `tencent-server`。
+## 开发、验证与发布
 
-- 项目：`/home/ubuntu/xagent-mastra-lab`
-- 容器：`xagent-mastra-lab`
-- 接口：`http://127.0.0.1:4391`，仅服务器回环开放
-- 数据：项目内 `data/`，包含设备账本和 Mastra 持久快照
-- 凭据：项目内 `.env`，不提交、不打包上传，权限 0600
-- 容器：非 root，内存上限 768 MB，持久目录以外只读
+- [开发指南](docs/development.md)：新增 Agent 写在哪里，如何注册、调用、测试及接入持续任务。
+- [Workflow 指南](docs/workflows.md)：固定步骤、输入样例、SDK 和 Studio 运行。
+- [架构与实现边界](docs/architecture.md)：Mastra、任务层、设备层及用户隔离分别负责什么。
+- [统一验证与 Studio 发布](docs/operations.md)：`npm run check`、真实 API、部署、查询和回退。
+- [文档索引](docs/README.md)：操作指南、历史验收与原设备实验；开发约束见 [AGENTS.md](AGENTS.md)。
 
-部署与真实容器重启验收：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1
-```
-
-在本机建立访问通道（保持该终端运行）：
-
-```powershell
-ssh -N -L 14391:127.0.0.1:4391 tencent-server
-```
-
-随后访问 `http://127.0.0.1:14391/health`，或给模拟设备增加 `--base http://127.0.0.1:14391`。接口返回 JSON；这一轮没有构建网页控制台。
-
-服务器操作：
-
-```sh
-cd /home/ubuntu/xagent-mastra-lab
-docker compose --project-name xagent-mastra-lab ps
-docker compose --project-name xagent-mastra-lab logs --tail=60
-python3 scripts/verify.py --container xagent-mastra-lab
-docker compose --project-name xagent-mastra-lab stop
-```
-
-`verify.py --container` 会重启本实验容器，建议在没有其他实验进行时运行。只创建 mock 运行，不触发真实模型，也不更改其他服务。
-
-## DeepSeek 配置与真实模型验收
-
-在服务器编辑 `.env`，填写 `DEEPSEEK_API_KEY`。不要把密钥粘贴到聊天、脚本、Git 或命令行参数中。
-
-```sh
-ssh tencent-server
-cd /home/ubuntu/xagent-mastra-lab
-nano .env
-docker compose --project-name xagent-mastra-lab up -d --force-recreate
-```
-
-当前默认 `DEEPSEEK_MODEL=deepseek-flash`，`DEEPSEEK_BASE_URL=https://api.deepseek.com/v1`。可按自己的账户和接入渠道调整。`restart` 不会重新读取 env_file，修改后需 `up -d --force-recreate`。
-
-`GET /health` 只报告是否配置 key，不会显示 key，也不能证明 key 有效。创建 `mode=deepseek` 的运行才实际请求模型；没有 key 返回 412，不会暗中降级为模拟模型。
-
-启动模拟设备后，用下列请求验证真实模型到模拟设备的链路：
-
-```sh
-curl -s http://127.0.0.1:4391/runs \
-  -H 'Content-Type: application/json' \
-  -d '{"mode":"deepseek","scenario":"plan","prompt":"请读取手机电量；低于20%就建议充电，否则查询日历后给出安排。"}'
-```
-
-这仍然只操作模拟设备，不是手机真机验收。真实模型的工具选择、API兼容性、延迟和费用都需单独记录。
-
-真实模型验收（会产生少量 API 用量，创建 4 个真实运行）：
-
-```sh
-python3 scripts/verify-deepseek.py --restart-container xagent-mastra-lab
-```
-
-该命令自行模拟设备回调，不需要同时启动 `phone-simulator.py`。它会重启本实验容器，并在存在其他活跃实验时拒绝运行。输出保存在 `docs/deepseek-verification.json`，包括真实回复、工具调用事件和耗时；不会读取或输出 key。
-
-## 本地 Studio 调试
-
-执行 `npm.cmd run studio`，打开 http://127.0.0.1:4111。当前已接入「出行助手」；选择 Request context 中的延吉 mock 预设并 Save，即可聊天、检查工具结果和经过校验的行程 JSON。调试会话与正式任务数据独立，原有任务 API 保持可用。
-
-启动、真实模型配置、代码边界及验证说明见 [Studio 使用说明](docs/studio.md)。
-
-## 设备协议
-
-| 接口 | 用途 |
-| --- | --- |
-| `POST /runs` | 创建 mock / deepseek 运行，可选 `scenario`、`prompt`、`jobTtlMs` |
-| `GET /runs/:id` | 获取运行、设备作业和事件记录 |
-| `POST /runs/:id/cancel` | 先持久取消，再中断当前执行 |
-| `GET /devices/sim-phone/commands` | 领取待执行的模拟设备命令 |
-| `POST /devices/sim-phone/results/:callId` | 提交结构化设备结果 |
-
-成功结果：`{"status":"succeeded","observedAt":"<ISO时间>","data":{...}}`。失败结果：`{"status":"failed","observedAt":"<ISO时间>","error":"permission_denied"}`，也支持 `device_unavailable` / `user_canceled`。失败不等于成功的空数据。
-
-首次结果校验采集时间、工具字段、数值范围。相同结果重复提交只返回收据；同 callId 内容冲突返回 409；已取消或到期返回 410。取消、到期和完成均为终态。
-
-快速读取最多等待 600ms 后转为 Mastra 持久暂停；照片直接暂停。设备回调先写入账本，再恢复指定的暂停调用。重启时补查已提交但尚未恢复的结果，避免把较早工具的结果误用于当前工具。
-
-## 已验证范围与边界
-
-本地验收及服务器结果见 [实验记录](docs/experiment.md)。
-
-- 验证了正常短调用、工具结果影响下一步、慢调用暂停和跨进程恢复。
-- 验证了回调提交后的恢复、重复/冲突结果、取消后迟到结果、超时和拒绝授权。
-- 普通模型调用进行中进程退出，会记录 `EXECUTION_INTERRUPTED`；没有声称任意执行点都可透明恢复。
-- 目前仅单个可信实验者、一台模拟设备、一个服务实例，无公开鉴权、多租户、多设备安全路由。
-- 只读电量、日历和模拟拍照，不含日历写入、支付、消息发送等真实外部副作用，也未验证这类操作的端到端幂等。
-- 设备账本和 Mastra 快照是两个持久边界，已验证常见窗口，但没有证明跨数据库的原子提交或任意断电恢复。
-- 这是一套选型实验，不是生产设备管理平台。
-
-参考：[工具与客户端工具](https://mastra.ai/docs/agents/tools)、[暂停和重启恢复](https://mastra.ai/docs/agents/human-in-the-loop)、[libSQL存储](https://mastra.ai/integrations/databases/libsql)、[DeepSeek接入](https://api-docs.deepseek.com/guides/search_fetch)。
+依赖版本由 [package.json](package.json) 和锁文件固定。新增能力以当前源码契约为准，历史报告仅证明注明版本与场景；测试数量和临时部署记录保留在对应验收报告中。

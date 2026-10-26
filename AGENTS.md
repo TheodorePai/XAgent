@@ -11,6 +11,7 @@ XAgent 验证使用 Mastra 低成本开发多种专用 Agent 的服务端能力�
 | 任务 | 首选入口 |
 | --- | --- |
 | 环境、启动、现有能力 | [README.md](README.md)、[package.json](package.json) |
+| 文档导航、历史验收 | [docs/README.md](docs/README.md) |
 | 服务边界、多用户与任务设计 | [docs/architecture.md](docs/architecture.md) |
 | 新增 Agent / Workflow、最小模板 | [docs/development.md](docs/development.md)、[docs/workflows.md](docs/workflows.md) |
 | Studio、原生 Agent、服务器调试 | [docs/studio.md](docs/studio.md)、[docs/notes-studio.md](docs/notes-studio.md) |
@@ -137,7 +138,7 @@ npm.cmd run studio
 - 凭据只从服务端环境读取。不得要求用户把 key 发到聊天，不打印 `.env`、全量 `env` 或含凭据的容器 inspect 输出；不把凭据写入参数、提示词、截图、日志、报告、压缩包或 Git。需要判断配置时只检查是否存在，不回显内容。
 - `.env`、`data/`、`node_modules/`、`.mastra/`、`dist/`、缓存及数据库均不提交；`.env.example` 只保留占位说明。依赖审计不得以删除锁文件代替修复。
 - 开发/验证默认使用独立工作目录、容器、端口和数据库；开始前确认目标、活动任务和资源余量。任务 API 与 Studio 的源码、进程及数据可能处于不同版本，分别检查，不凭一个入口推断另一个已升级。
-- 正式实验服务为 `xagent-mastra-lab` / 4391，Studio 为 `xagent-studio` / 4411，本地 Studio 默认 4111；这些是定位线索，不是运行状态证明。当前目录、构建方式及回退记录见 `docs/notes-studio.md`，操作前以实际进程和配置复核。
+- 正式实验服务为 `xagent-mastra-lab` / 4391，Studio 为 `xagent-studio` / 4411，本地 Studio 默认 4111；这些是定位线索，不是运行状态证明。现行目录、构建方式及回退方式见 `docs/operations.md`，历史迁移见 `docs/notes-studio.md`，操作前以实际进程和配置复核。
 - `scripts/deploy.ps1` 会上传源码并调用服务器部署脚本；`deploy-server.sh` 会更新原任务容器并运行可能重启服务的验证。不要用它只为更新 Studio。已有授权覆盖目标服务的部署可继续执行；仅修改代码或文档不自动等于允许重启无关服务。
 - 部署前完成代码检查和对应测试，保留旧构建及一致性数据备份，明确回退路径。切换后检查健康、真实业务结果和数据完整性；失败时回退，避免两个实例同时写同一 Studio 库。
 - 服务器构建与运行分开控制内存；避免同时保留大构建监听器和浏览器运行。Node 堆与容器总预算分别设置，预留原生内存及 Chromium；只有已有完整依赖时才使用 `MASTRA_BUILD_SKIP_INSTALL=true`。既往内存数字不是新版本容量保证。
@@ -148,7 +149,7 @@ npm.cmd run studio
 
 - 本地验证和无副作用检查属于正常工作。代码改动形成可审查的差异，按相关范围暂存；提交前查看 staged diff、执行 `git diff --check` 并检查敏感信息。不得顺带提交用户文件、重写既有历史或推送未授权远端。
 - 明确区分“代码已完成”“本地验证通过”“隔离环境真实验证通过”和“某服务已部署”。交付说明简述改变的行为、证据、部署范围与限制，并给出相关文件或会话链接；不要把临时环境成功说成正式服务已更新。
-- 保持 `README.md` 和相关入口文档与代码一致；新增环境变量说明用途和默认值。持久化能避免重复踩坑的约束，临时 PID、任务数、一次性线程 ID、完整运行日志和历史测试数量留在报告，不堆进本文件。
+- 保持 `README.md` 的能力表和相关入口文档与代码一致；新增文档在 `docs/README.md` 或所属指南链接。操作指南写当前行为，历史验收注明日期和版本，不能用旧数量或部署路径冒充当前状态；新增环境变量说明用途和默认值。持久化能避免重复踩坑的约束，临时 PID、任务数、一次性线程 ID、完整运行日志和历史测试数量留在报告，不堆进本文件。
 - 本文件只保留可执行、稳定且与仓库相关的规则。较长操作手册放 `docs/` 并按需链接；规则变化时去除矛盾和失效条目，不持续叠加重复禁令。
 
 编写依据：[官方 AGENTS.md 指导](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、[官方关于保持仓库指令精简和按需读取的建议](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)。项目特定的架构和验收要求以本文件上述约定为准。

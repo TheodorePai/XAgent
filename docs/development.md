@@ -1,6 +1,6 @@
 # 扩展开发指南：Agent 与 Workflow
 
-适用于仓库锁定的 Node 24 / Mastra 版本。先读根目录 [AGENTS.md](../AGENTS.md) 的边界与验收规则；本指南说明具体开发路径。[运维入口](operations.md)负责启动、统一验证和服务器发布。
+适用于仓库锁定的 Node 24 / Mastra 版本。先读根目录 [AGENTS.md](../AGENTS.md) 的边界与验收规则；本指南说明具体开发路径。首次安装与离线启动见 [快速开始](../README.md#本地快速开始)，统一验证和服务器发布见 [运维入口](operations.md)。
 
 本文模板与 Workflow 的真实 API、Studio 页面及部署回退结果见 [验收记录](workflow-validation.md)。
 
@@ -16,6 +16,8 @@
 用户和任务是数据实例，不为每个用户复制一个 Agent 定义。Workflow 的步骤可以调用普通代码、工具或 Agent；只有需要模型判断的步骤才调用模型。
 
 ## 2. 开发前准备
+
+需要 Node.js 24+、npm、Git 和 Python 3.12+，且 `python` 命令可用。在仓库根目录执行以下命令；Windows 使用 `npm.cmd` / `npx.cmd`，Linux 使用 `npm` / `npx`。
 
 ```powershell
 npm.cmd ci --ignore-scripts --no-audit --no-fund
@@ -75,11 +77,11 @@ npm.cmd run studio
 
 ## 5. 直接 SDK 调用
 
-以下 TypeScript 在仓库根目录的脚本中运行，导入路径按脚本位置调整；本地无 key 时可先用 mock：
+在仓库根目录执行 `New-Item -ItemType Directory -Force .cache`，把下面代码保存为 `.cache/reference-example.ts`，然后运行 `npx.cmd tsx .cache/reference-example.ts`。Linux 用 `mkdir -p .cache` 和 `npx`。示例显式使用 mock，无需 key；`.cache/` 已忽略，不提交临时脚本。
 
 ```ts
 import { RequestContext } from '@mastra/core/request-context';
-import { createReferenceAgent } from './src/agents/reference.js';
+import { createReferenceAgent } from '../src/agents/reference.js';
 
 const agent = createReferenceAgent();
 const requestContext = new RequestContext(Object.entries({
@@ -88,9 +90,10 @@ const requestContext = new RequestContext(Object.entries({
 }));
 const result = await agent.generate('提取负责人和超时规则', { requestContext });
 console.log(result.text);
+if (!result.text.includes('[MOCK]')) throw new Error('Expected mock result');
 ```
 
-原生 Agent 可以独立使用；Studio 使用 Mastra 注册来获得页面、Memory 和服务接口。每轮创建新上下文，或使用已有模块明确支持的上下文复用方式。
+原生 Agent 可以独立使用；Studio 使用 Mastra 注册来获得页面、Memory 和服务接口。工厂直接调用省略 mode 时先读取 `XAGENT_DEFAULT_MODE`，未配置则 mock；Studio 入口会设置自己的 DeepSeek 默认值。SDK 真实调用需先加载凭据环境，例如 `npx.cmd tsx --env-file-if-exists=.env .cache/reference-example.ts`，并把示例 mode 改为 deepseek。每轮创建新上下文，或使用已有模块明确支持的上下文复用方式。
 
 ## 6. 什么时候接入持久任务
 
@@ -135,11 +138,13 @@ npm.cmd run check -- --suite agent-api --agents reference-summary --mode deepsee
 npm.cmd run check -- --suite workflow-api --mode deepseek
 ```
 
-远端命令要求干净提交和运行输入摘要一致。`all` 包含本地、Agent、Workflow 和隔离任务 API，仍不包含页面验收。
+以上远端命令针对已配置的 tencent-server，需要相应 SSH 与部署权限，不能直接作为任意新服务器的初始化脚本。远端命令要求干净提交和运行输入摘要一致。`all` 包含本地、Agent、Workflow 和隔离任务 API，仍不包含页面验收。
 
 新增 Agent 的远端场景需要更新 `scripts/verify-agent-api.mjs` 的 definitions 和业务断言、`scripts/verify-server.py` 的允许 ID，以及 `scripts/project.py` 的默认选择。新增 Workflow 当前需为 `verify-workflow-api.mjs` 添加相应场景；该脚本目前只验证 meeting-brief。这仍是显式代码登记，不是自动插件发现。
 
 报告注明实际构建提交、输入、模式、工具与 artifact、失败、用量和清理情况。涉及 Agent / 工具 / 流程链路的改动完成真实 API；涉及 Studio 同时实际点击页面运行并截图。新部署检查状态与真实结果，保留数据备份和旧镜像。
+
+一个新能力交付前应能回答：输入与权限从哪里来；成功的 artifact 是什么；哪些入口已注册；预算与失败如何收尾；真实 API 和受影响 Studio 页面的证据在哪里。需要持久任务的，再检查事件、归属、基线和版本发布。规则与最低验证以 [AGENTS.md](../AGENTS.md#7-验证要求用户明确要求必须保留) 为准。
 
 ## 9. 团队分工建议
 
